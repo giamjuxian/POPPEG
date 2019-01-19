@@ -9,3 +9,13 @@
     background-color: black;
     font-family: 'Courier New', Courier, monospace
 }
+
+.upload-card {
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    justify-content: space-between;
+    border: solid 1px #dcdcdc;
+}

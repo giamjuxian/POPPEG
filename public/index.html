@@ -34,7 +34,7 @@
 
 
 		  	$('#image-field').on("change", (event) => {
-		  		selectedImage = event.target.files[0];
+				selectedImage = event.target.files[0];
 		  		console.log(selectedImage);
 		  	});
 
@@ -157,7 +157,6 @@
 		    reader.onerror = error => reject(error);
 		  });
 		}
-<<<<<<< HEAD
 
 		function addCard() {
 			let currentIndex = uploads.length - 1;
@@ -165,20 +164,29 @@
 			console.log(htmlArr);
 			if (document.getElementById("empty-container") !== undefined) {
 				$("#empty-container").remove();
+				let newElem = document.createElement("div");
+				newElem.className = "book-name";
+				newElem.innerHTML = "Name of Book: ";
+				let newBook = document.createElement("input")
+				newBook.type = "text";
+				newBook.placeholder = "Insert Book Title.";
+				newElem.appendChild(newBook);
+				htmlArr.appendChild(newElem);
 			} 
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
 			newElement.id = "" + uploads[currentIndex].image.name;
-			newElement.innerHTML += "" + uploads[currentIndex].image.name;
-			// // newElement.className = "image";
+			newElement.innerHTML += uploads[currentIndex].image.name;
+			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
 			console.log(htmlArr);
+			let imageElem = document.getElementById(`${uploads[currentIndex].image.name}`);
+			let vidElem = document.createElement("div");
+			vidElem.id = "" + uploads[currentIndex].video.name;
+			vidElem.innerHTML += uploads[currentIndex].video.name;
+			imageElem.appendChild(vidElem);
 		}
 
-||||||| merged common ancestors
-=======
-
->>>>>>> master
 	</script>
 </head> 
 <body>
@@ -190,21 +198,6 @@
 			Click the Upload button to start creating your Refresh Card
 		</div>
 	</div>
-	<!-- <button id="video-add">Add New Video</button>
-		<button id="picture-add">Add New Image</button> -->
-
-	<!-- <div class="bg-modal">
-		<div class="modal-content">
-			<div class="close">+</div>
-			<form action="">
-				<input type="file">
-				<br />
-				<br />
-				<input type="file">
-				<button id="submit-button">Submit</button>
-			</form>
-		</div>
-	</div> -->
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
