@@ -25,33 +25,40 @@
 		};
 		firebase.initializeApp(config);
 
-		let selectedImage;
-		let selectedVideo;
+		let selectedImage = null;
+		let selectedVideo = null;
 		let uploads = [];
 		let urls = [];
 		// let currIndex = 0;
-
+		
 		$(document).ready(() => {
 
 
 		  	$('#image-field').on("change", (event) => {
 				selectedImage = event.target.files[0];
-		  		console.log(selectedImage);
+				if (selectedVideo !== null) {
+					$('#submitButton').removeAttr("disabled");
+				}
+				document.getElementById('input-image').innerHTML = selectedImage.name;
+				  console.log(selectedImage);
+				//   console.log(document.getElementById("input-image"));
 		  	});
 
 		  	$('#video-field').on("change", (event) => {
-		  		selectedVideo = event.target.files[0];
+				if (selectedImage !== null) {
+					$('#submitButton').removeAttr("disabled");
+				}
+				  selectedVideo = event.target.files[0];
+				  document.getElementById('input-vid').innerHTML = selectedVideo.name;
 		  		console.log(selectedVideo);
 		  	});
-
-		  	$('.submitButton').on("click", (event) => {
-				if (uploads.filter((upload) => upload.image.name === selectedImage.name).length > 1 ) {
-					console.log("EXE")
-					$('.submitButton').attr("disabled", true);
-				}
+			  
+		  	$('#submitButton').on("click", (event) => {
+				
 				$('#uploadModal').modal('toggle');
 				  uploadFile();
-				  addCard();	  
+				  addCard();
+				  $('#submitButton').attr("disabled", "disabled");	  
 		  	});
 
 		  	$('.uploadButton').on("click", (event) => {
@@ -63,10 +70,14 @@
 			// On Click save, push into array.
 			// imageNames.push(selectedImage.name);
 			// videoNames.push(selectedVideo.name);
+			if (selectedImage == null || selectedVideo == null) {
+
+			}
 			let newUpload = {
 				video : selectedVideo,
 				image : selectedImage
 			}
+
 			storageRef = firebase.storage().ref('media/' + newUpload.image.name + '/video');
 			urls.push(storageRef.fullPath);
 			uploads.push(newUpload);
@@ -74,6 +85,13 @@
 
 		function uploadAll() {
 			var storageRef;
+			uploads.forEach(function(upload, index) {
+				uploadImage(upload);
+				uploadVideo(upload);
+				uploadImageToVuforia(upload)
+			});
+			// let progBar = document.getElementById(`${image.name}_prog`);
+			// progBar.className = "hide-prog";
 			var bookName = 
 			addUrlsToDatabase(urls, "helloWorld");
 			// uploads.forEach(function(upload, index) {
@@ -102,11 +120,16 @@
 		function uploadImage(upload) {
 			var image = upload.image;
 			var video = upload.video;
+			let progBar = document.getElementById(`${image.name}_prog`);
+			// progBar.setAttribute("class", "show-prog");
+			// console.log(progBar)
 			storageRef = firebase.storage().ref('media/' + image.name + '/image');
 			var task = storageRef.put(image);
 			task.on('state_changed',
 				function progress(snapshot) {
 					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+					progBar.value = percentage;
+					// progBar.className = "hide-prog";
 					console.log("Uploading Image " + image.name + ": " + percentage + "%");
 				},
 
@@ -115,7 +138,11 @@
 				},
 
 				function complete() {
-					console.log("COMPLETED UPLOAD OF " + image.name);	
+					console.log("COMPLETED UPLOAD OF " + image.name);
+					let doneDiv = document.createElement("div");
+					doneDiv.className = "done-tick"
+					doneDiv.innerHTML = "&#10004";
+					document.getElementById(`${image.name}`).appendChild(doneDiv);
 					return;
 				}
 			)
@@ -138,6 +165,13 @@
 
 				function complete() {
 					console.log("COMPLETED UPLOAD OF " + video.name);	
+					let doneDiv = document.createElement("div");
+					doneDiv.className = "done-tick";
+					doneDiv.innerHTML = "&#10004";
+					document.getElementById('submitButton').attr("disabled", "disabled");
+					document.getElementById(`${video.name}`).appendChild(doneDiv);
+					selectedImage = null;
+					selectedVideo = null;
 					return;
 				}
 			)
@@ -162,7 +196,16 @@
 					        console.log(result);
 					    }
 					});
+					// let list = document.getElementById("upload-container");
+					// list.parentNode.removeChild(list);
+					// let postDownloadDiv = document.createElement("div");
+					// postDownloadDiv.id = "empty-container";
+					// postDownloadDiv.innerHTML = "Add a card and see your stories come alive in your mobile!"
+					// list.appendChild(postDownloadDiv);
+					// uploads = [];
+					// console.log(list);
 				}
+
 			);
 		}
 
@@ -189,22 +232,34 @@
 			let currentIndex = uploads.length - 1;
 			let htmlArr = document.getElementById("upload-container");
 			console.log(htmlArr);
-			if (document.getElementById("empty-container") !== undefined) {
-				$("#empty-container").remove();
-			} 
+			// if (document.getElementById("empty-container") !== undefined) {
+			// 	$("#empty-container").remove();
+			// } 
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
 			newElement.id = "" + uploads[currentIndex].image.name;
 			newElement.innerHTML += uploads[currentIndex].image.name;
 			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
-			console.log(htmlArr);
-			let imageElem = document.getElementById(`${uploads[currentIndex].image.name}`);
+			// let getNewElem = document.getElementById(`${uploads[currentIndex].image.name}`)
+			// let progDiv = document.createElement("div");
+			// // progDiv.className = "";
+			// progDiv.id = uploads[currentIndex].image.name + "_progdiv";
+			// getNewElem.appendChild(progDiv);
+			// let getBar = document.getElementById(progDiv.id);
+			// let progBar = document.createElement("progress");
+			// progBar.id= "" + uploads[currentIndex].image.name + "_prog";
+			// progBar.className= "progress-bar";
+			// progBar.value = 0;
+			// progBar.max = 100;
+			// getBar.appendChild(progBar);
+			// console.log(htmlArr);
+			// let imageElem = document.getElementById(``);
 			let vidElem = document.createElement("div");
 			vidElem.id = "" + uploads[currentIndex].video.name;
 			vidElem.className = "upload-vid";
 			vidElem.innerHTML += uploads[currentIndex].video.name;
-			imageElem.appendChild(vidElem);
+			htmlArr.appendChild(vidElem);
 		}
 
 	</script>
@@ -213,19 +268,21 @@
 	<div class="topnav">
 		<span>RefreshAR</span>
 	</div>
+	<div class="big-container">
+	<div class="background-pic">
 	<div class="book-name">
 		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title" onchange="changeValue(this.value)" />
 	</div>
 	<div id="upload-container">
 		<div id="empty-container">
-			Click the Upload button to start creating your Refresh Card
+			Add a card and see your stories come alive in your mobile!
 		</div>
 		
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add New Gifts</button>
+				<!-- <button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button> -->
 				<div class="modal fade" id="uploadModal" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -235,12 +292,16 @@
 								<div class="modal-body">
 									<form>
 										<div class="form-group">
-											Image:
-											<input type="file" id="image-field" accept="image/*" />
-											Video:
-											<input type="file" id="video-field" accept="video/*" />
+											<div class="file-input">
+												<span id="input-image">Browse Images</span>
+												<input type="file" id="image-field" accept="image/*" />
+											</div>
+											<div class="file-input">
+												<span id="input-vid">Browse Videos</span>
+												<input type="file" id="video-field" accept="video/*" />
+											</div>
 										</div>
-										<input class="btn btn-primary submitButton"/>
+										<input class="btn btn-primary" id='submitButton' disabled="disabled" value="Submit Items"></input>
 									</form>
 								</div>
 								<!-- <div class="modal-footer">
@@ -251,11 +312,16 @@
 					</div>
 				</div>
 			</div>
-			<button class="uploadButton btn btn-primary">Upload Files</button>
-			<progress value="0" max="100" id="fileButton">0%</progress>
+			<div class="buttons-line">
+				<button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button>
+				<button class="uploadButton btn btn-success btn-sm">Upload Files</button>
+			</div>
+			<!-- <progress value="0" max="100" id="fileButton">0%</progress> -->
 		</div>
 	</div>
-	<!-- <script type="text/JavaScript">
+</div>
+</div>
+	<script type="text/JavaScript">
 		// $(document).ready(function () {
 		// 	$("#add-stuff").click(function () {
 		// 		console.log("")
@@ -267,8 +333,14 @@
 
 		// document.querySelector("#add-stuff").addEventListener('click',
 		// () => {console.log("hello")});
-		
-	</script> -->
+		// $(function() {
+		// 	$('.file-input > input').on('change', function() {
+		// 		let inputValue = $(this).val();
+
+		// 		$('.input-value').html(inputValue);
+		// 	})
+		// })
+	</script>
 </body>
 </html>
 
