@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "237013132204",
+    "firebase_url": "https://refreshar-c9d2f.firebaseio.com",
+    "project_id": "refreshar-c9d2f",
+    "storage_bucket": "refreshar-c9d2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237013132204:android:cfa4a1757f48b448",
+        "android_client_info": {
+          "package_name": "com.RefreshAR.RefreshAR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237013132204-d537mdbvga2ebnd1grhm7bk9hfn6h8r7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbWKqKHk-xxWbu1YWqC4oeiHO1NkG5In0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

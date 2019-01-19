@@ -1,22 +1,17 @@
 const functions = require('firebase-functions');
 const express = require('express');
-
-// The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
-admin.initializeApp();
 
-// load module
+admin.initializeApp(functions.config().firebase);
+var db = admin.firestore();
+
 var vuforia = require('vuforiajs');
-
-// init client with valid credentials
 var client = vuforia.client({
     'accessKey': '4734be8d373164570b5ea5f5421c47df2845a64e',
     'secretKey': '7d0ea5b4190bc98dca2ed81f6384b069ae641610',
     'clientAccessKey': '0f207cbf4f3fab96dd48ea99e3a042bc798d9b0c',
     'clientSecretKey': 'f25ae10ca341c69c354e30a9c429b521020fc46e',
 });
-
-// util for base64 encoding and decoding
 var util = vuforia.util();
 
 const app = express();
@@ -38,6 +33,16 @@ app.post('/vuforiaUpload', function(req, res, next) {
 	        res.status(200).json({success: "Image is successfully uploaded"});
 	    }
 	});
+})
+
+app.post('/addUrlsToDatabase', function(req, res, next) {
+	var urls = req.body.urls;
+	var bookName = req.body.bookName;
+	var docRef = db.collection('urls').doc(bookName);
+	var setURLS = docRef.set({
+		urls: urls
+	});
+	res.status(200).json({success: "URLS is successfully added to database"});
 })
 
 exports.app = functions.https.onRequest(app);
