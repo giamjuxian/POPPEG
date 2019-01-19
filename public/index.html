@@ -3,64 +3,102 @@
 <head>
 	<link rel="shortcut icon" href="#" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	
-	<!-- <link rel="stylesheet" type="text/css" href="app.css" /> -->
+	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 	<script>
+		// Initialize Firebase
+		var config = {
+		  	apiKey: "AIzaSyAywhDGO_S_UY6HX_tlPPpjrFU3mkO6bQE",
+		  	authDomain: "refreshar-c9d2f.firebaseapp.com",
+		  	databaseURL: "https://refreshar-c9d2f.firebaseio.com",
+		  	projectId: "refreshar-c9d2f",
+		  	storageBucket: "refreshar-c9d2f.appspot.com",
+		  	messagingSenderId: "237013132204"
+		};
+		firebase.initializeApp(config);
+
 		let selectedImage;
 		let selectedVideo;
-		let video_arr = [];
-		let image_arr = [];
+		let uploads = [];
+
 		$(document).ready(() => {
-			$('#image-field').on("change", (event) => {
-				selectedImage = event.target.files[0];
-				console.log(selectedImage);
-			});
-			$('#video-field').on("change", (event) => {
-				selectedVideo = event.target.files[0];
-				console.log(selectedVideo);
-			});
-		});
+
+
+		  	$('#image-field').on("change", (event) => {
+		  		selectedImage = event.target.files[0];
+		  		console.log(selectedImage);
+		  	});
+
+		  	$('#video-field').on("change", (event) => {
+		  		selectedVideo = event.target.files[0];
+		  		console.log(selectedVideo);
+		  	});
+
+		  	$('.submitButton').on("click", (event) => {
+		  		$('#uploadModal').modal('toggle');
+		  		uploadFile();
+		  	});
+
+		  	$('.uploadButton').on("click", (event) => {
+		  		uploadAll()
+		  	});
+ 		});
+
 		function uploadFile() {
 			// On Click save, push into array.
-			video_arr.push(selectedVideo);
-			image_arr.push(selectedImage);
-
-			//TODO: GET image from database,
-			// create element image and dynamically append upload-container
-			alert(`You have submitted Video: ${selectedVideo.name} and Image: ${selectedImage.name}.`)
-
+			let newUpload = {
+				video : selectedVideo,
+				image : selectedImage
+			}
+			uploads.push(newUpload);
+			console.log(uploads);
 		}
 
 		function uploadAll() {
-			// append form data with images array then video array
-			let data   = new FormData();
+			var storageRef;
+			uploads.forEach(function(upload, index) {
+				var image = upload.image;
+				var video = upload.video;
 
-			image_arr.forEach(function(image, i) {
-				data.append('image_' + i, image);
-			});
+				console.log(image);
+				storageRef = firebase.storage().ref('images/' + image.name)
+				var task = storageRef.put(image);
+				task.on('state_changed',
+					function progress(snapshot) {
+						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+						console.log("Uploading Image " + image.name + ": " + percentage + "%");
+					},
 
-			video_arr.forEach(function(vid, i) {
-				data.append('video_' + i, vid);
-			});
+					function error(err) {
+						if (err) alert(err);
+					},
 
-			$.ajax({
-				// url: , NEED URL TO TEST
-				type: 'post',
-				data: data,
-				contentType: false,
-				processData: false,
-				complete: function(data) {
-					console.log(data);
-					alert.success; // to be editted, should reload and show current uploads.
-				}
+					function complete() {
+						console.log("COMPLETED UPLOAD OF " + image.name);	
+						return;
+					}
+				)
+				console.log(video);
+				storageRef = firebase.storage().ref('videos/' + video.name)
+				var task = storageRef.put(video);
+				task.on('state_changed', 
+					function progress(snapshot) {
+						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+						console.log("Uploading Video " + video.name + ": " + percentage + "%");
+					},
+
+					function error(err) {
+						if (err) alert(err);
+					},
+
+					function complete() {
+						console.log("COMPLETED UPLOAD OF " + video.name);	
+						return;
+					}
+				)
+
 			});
 		}
 	</script>
@@ -68,8 +106,8 @@
 <body>
 	<div id="upload-container"></div>
 	<!-- <button id="video-add">Add New Video</button>
-	<button id="picture-add">Add New Image</button> -->
-	
+		<button id="picture-add">Add New Image</button> -->
+
 	<!-- <div class="bg-modal">
 		<div class="modal-content">
 			<div class="close">+</div>
@@ -93,14 +131,14 @@
 								<button class="close" data-dismiss="modal">&times;</button>
 								<p class="modal-title">Upload</p>
 								<div class="modal-body">
-									<form onsubmit="uploadFile()">
+									<form>
 										<div class="form-group">
 											Image:
 											<input type="file" id="image-field" accept="image/*" />
 											Video:
 											<input type="file" id="video-field" accept="video/*" />
 										</div>
-										<input type="submit" />
+										<input class="btn btn-primary submitButton"/>
 									</form>
 								</div>
 								<!-- <div class="modal-footer">
@@ -111,7 +149,8 @@
 					</div>
 				</div>
 			</div>
-			<button id="final-submit" class="btn btn-primary" onclick="uploadAll()">Upload Files</button>
+			<button class="uploadButton btn btn-primary">Upload Files</button>
+			<progress value="0" max="100" id="fileButton">0%</progress>
 		</div>
 	</div>
 	<!-- <script type="text/JavaScript">
@@ -127,7 +166,7 @@
 		// document.querySelector("#add-stuff").addEventListener('click',
 		// () => {console.log("hello")});
 		
-	 </script> -->
+	</script> -->
 </body>
 </html>
 
