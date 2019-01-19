@@ -35,15 +35,14 @@ app.post('/vuforiaUpload', function(req, res, next) {
 	});
 })
 
-app.post('/addToDatabase', function(req, res, next) {
-
-
-	var docRef = db.collection('urls').doc('alovelace');
-	var setAda = docRef.set({
-	  first: 'Ada',
-	  last: 'Lovelace',
-	  born: 1815
+app.post('/addUrlsToDatabase', function(req, res, next) {
+	var urls = req.body.urls;
+	var bookName = req.body.bookName;
+	var docRef = db.collection('urls').doc(bookName);
+	var setURLS = docRef.set({
+		urls: urls
 	});
+	res.status(200).json({success: "URLS is successfully added to database"});
 })
 
 exports.app = functions.https.onRequest(app);

@@ -28,6 +28,7 @@
 		let selectedImage;
 		let selectedVideo;
 		let uploads = [];
+		let urls = [];
 		// let currIndex = 0;
 
 		$(document).ready(() => {
@@ -63,18 +64,37 @@
 				video : selectedVideo,
 				image : selectedImage
 			}
+			storageRef = firebase.storage().ref('media/' + newUpload.image.name + '/video');
+			urls.push(storageRef.fullPath);
 			uploads.push(newUpload);
-			console.log(uploads);
 		}
 
 		function uploadAll() {
 			var storageRef;
-			uploads.forEach(function(upload, index) {
-				uploadImage(upload);
-				uploadVideo(upload);
-				uploadImageToVuforia(upload)
-			});
+			var bookName = 
+			addUrlsToDatabase(urls, "helloWorld");
+			// uploads.forEach(function(upload, index) {
+			// 	uploadImage(upload);
+			// 	uploadVideo(upload);
+			// 	uploadImageToVuforia(upload);
+			// });
 		}
+
+		function addUrlsToDatabase(urls, bookName) {
+			let body = {
+				urls: urls,
+				bookName: bookName
+			}
+			$.ajax({
+			    type: "POST",
+			    url: "http://localhost:5005/addUrlsToDatabase",
+			    dataType: 'json',
+		        data: body,
+			    success: function(result){
+			        console.log(result);
+			    }
+			});
+		} 
 
 		function uploadImage(upload) {
 			var image = upload.image;
@@ -88,7 +108,7 @@
 				},
 
 				function error(err) {
-					if (err) alert(err);
+					if (err) return alert(err);
 				},
 
 				function complete() {
@@ -110,7 +130,7 @@
 				},
 
 				function error(err) {
-					if (err) alert(err);
+					if (err) return alert(err);
 				},
 
 				function complete() {
