@@ -61,9 +61,7 @@
 			uploads.forEach(function(upload, index) {
 				var image = upload.image;
 				var video = upload.video;
-
-				console.log(image);
-				storageRef = firebase.storage().ref('images/' + image.name)
+				storageRef = firebase.storage().ref('media/' + image.name + '/image');
 				var task = storageRef.put(image);
 				task.on('state_changed',
 					function progress(snapshot) {
@@ -80,8 +78,7 @@
 						return;
 					}
 				)
-				console.log(video);
-				storageRef = firebase.storage().ref('videos/' + video.name)
+				storageRef = firebase.storage().ref('media/' + image.name + '/video');
 				var task = storageRef.put(video);
 				task.on('state_changed', 
 					function progress(snapshot) {
