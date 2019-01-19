@@ -29,7 +29,7 @@
 		let selectedVideo;
 		let uploads = [];
 		// let currIndex = 0;
-
+		
 		$(document).ready(() => {
 
 
@@ -44,10 +44,7 @@
 		  	});
 
 		  	$('.submitButton').on("click", (event) => {
-				if (uploads.filter((upload) => upload.image.name === selectedImage.name).length > 1 ) {
-					console.log("EXE")
-					$('.submitButton').attr("disabled", true);
-				}
+				
 				$('#uploadModal').modal('toggle');
 				  uploadFile();
 				  addCard();	  
@@ -62,6 +59,7 @@
 			// On Click save, push into array.
 			// imageNames.push(selectedImage.name);
 			// videoNames.push(selectedVideo.name);
+			
 			let newUpload = {
 				video : selectedVideo,
 				image : selectedImage
@@ -77,16 +75,23 @@
 				uploadVideo(upload);
 				uploadImageToVuforia(upload)
 			});
+			// let progBar = document.getElementById(`${image.name}_prog`);
+			// progBar.className = "hide-prog";
 		}
 
 		function uploadImage(upload) {
 			var image = upload.image;
 			var video = upload.video;
+			let progBar = document.getElementById(`${image.name}_prog`);
+			// progBar.setAttribute("class", "show-prog");
+			// console.log(progBar)
 			storageRef = firebase.storage().ref('media/' + image.name + '/image');
 			var task = storageRef.put(image);
 			task.on('state_changed',
 				function progress(snapshot) {
 					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+					progBar.value = percentage;
+					// progBar.className = "hide-prog";
 					console.log("Uploading Image " + image.name + ": " + percentage + "%");
 				},
 
@@ -95,7 +100,11 @@
 				},
 
 				function complete() {
-					console.log("COMPLETED UPLOAD OF " + image.name);	
+					console.log("COMPLETED UPLOAD OF " + image.name);
+					let doneDiv = document.createElement("div");
+					doneDiv.className = "done-tick"
+					doneDiv.innerHTML = "&#10004";
+					document.getElementById(`${image.name}`).appendChild(doneDiv);
 					return;
 				}
 			)
@@ -118,6 +127,10 @@
 
 				function complete() {
 					console.log("COMPLETED UPLOAD OF " + video.name);	
+					let doneDiv = document.createElement("div");
+					doneDiv.className = "done-tick";
+					doneDiv.innerHTML = "&#10004";
+					document.getElementById(`${video.name}`).appendChild(doneDiv);
 					return;
 				}
 			)
@@ -142,7 +155,16 @@
 					        console.log(result);
 					    }
 					});
+					let list = document.getElementById("upload-container");
+					list.parentNode.removeChild(list);
+					let postDownloadDiv = document.createElement("div");
+					postDownloadDiv.id = "empty-container";
+					postDownloadDiv.innerHTML = "Add a card and see your stories come alive in your mobile!"
+					list.appendChild(postDownloadDiv);
+					uploads = [];
+					console.log(list);
 				}
+
 			);
 		}
 
@@ -178,13 +200,25 @@
 			newElement.innerHTML += uploads[currentIndex].image.name;
 			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
-			console.log(htmlArr);
-			let imageElem = document.getElementById(`${uploads[currentIndex].image.name}`);
+			// let getNewElem = document.getElementById(`${uploads[currentIndex].image.name}`)
+			// let progDiv = document.createElement("div");
+			// // progDiv.className = "";
+			// progDiv.id = uploads[currentIndex].image.name + "_progdiv";
+			// getNewElem.appendChild(progDiv);
+			// let getBar = document.getElementById(progDiv.id);
+			// let progBar = document.createElement("progress");
+			// progBar.id= "" + uploads[currentIndex].image.name + "_prog";
+			// progBar.className= "progress-bar";
+			// progBar.value = 0;
+			// progBar.max = 100;
+			// getBar.appendChild(progBar);
+			// console.log(htmlArr);
+			// let imageElem = document.getElementById(``);
 			let vidElem = document.createElement("div");
 			vidElem.id = "" + uploads[currentIndex].video.name;
 			vidElem.className = "upload-vid";
 			vidElem.innerHTML += uploads[currentIndex].video.name;
-			imageElem.appendChild(vidElem);
+			htmlArr.appendChild(vidElem);
 		}
 
 	</script>
@@ -193,19 +227,21 @@
 	<div class="topnav">
 		<span>RefreshAR</span>
 	</div>
+	<div class="big-container">
+	<div class="background-pic">
 	<div class="book-name">
 		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title" onchange="changeValue(this.value)" />
 	</div>
 	<div id="upload-container">
 		<div id="empty-container">
-			Click the Upload button to start creating your Refresh Card
+			Add a card and see your stories come alive in your mobile!
 		</div>
 		
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add New Gifts</button>
+				<!-- <button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button> -->
 				<div class="modal fade" id="uploadModal" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -231,10 +267,15 @@
 					</div>
 				</div>
 			</div>
-			<button class="uploadButton btn btn-primary">Upload Files</button>
-			<progress value="0" max="100" id="fileButton">0%</progress>
+			<div class="buttons-line">
+				<button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button>
+				<button class="uploadButton btn btn-success btn-sm">Upload Files</button>
+			</div>
+			<!-- <progress value="0" max="100" id="fileButton">0%</progress> -->
 		</div>
 	</div>
+</div>
+</div>
 	<!-- <script type="text/JavaScript">
 		// $(document).ready(function () {
 		// 	$("#add-stuff").click(function () {
