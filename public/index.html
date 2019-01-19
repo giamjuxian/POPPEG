@@ -168,10 +168,10 @@
 					let doneDiv = document.createElement("div");
 					doneDiv.className = "done-tick";
 					doneDiv.innerHTML = "&#10004";
-					document.getElementById('submitButton').attr("disabled", "disabled");
 					document.getElementById(`${video.name}`).appendChild(doneDiv);
 					selectedImage = null;
 					selectedVideo = null;
+					$('#submitButton').attr("disabled", "disabled");
 					return;
 				}
 			)
@@ -196,14 +196,6 @@
 					        console.log(result);
 					    }
 					});
-					// let list = document.getElementById("upload-container");
-					// list.parentNode.removeChild(list);
-					// let postDownloadDiv = document.createElement("div");
-					// postDownloadDiv.id = "empty-container";
-					// postDownloadDiv.innerHTML = "Add a card and see your stories come alive in your mobile!"
-					// list.appendChild(postDownloadDiv);
-					// uploads = [];
-					// console.log(list);
 				}
 
 			);
@@ -225,36 +217,24 @@
 		}
 
 		function changeValue(val) {
-			console.log(val);
-			$('#book-title').val(val);
+			if (val !== null) {
+				$('#uploadButton').removeAttr("disabled");
+			} else {
+				$('#uploadButton').attr("disabled", "disabled");
+			}
+			
 		}
+
 		function addCard() {
 			let currentIndex = uploads.length - 1;
 			let htmlArr = document.getElementById("upload-container");
 			console.log(htmlArr);
-			// if (document.getElementById("empty-container") !== undefined) {
-			// 	$("#empty-container").remove();
-			// } 
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
 			newElement.id = "" + uploads[currentIndex].image.name;
 			newElement.innerHTML += uploads[currentIndex].image.name;
 			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
-			// let getNewElem = document.getElementById(`${uploads[currentIndex].image.name}`)
-			// let progDiv = document.createElement("div");
-			// // progDiv.className = "";
-			// progDiv.id = uploads[currentIndex].image.name + "_progdiv";
-			// getNewElem.appendChild(progDiv);
-			// let getBar = document.getElementById(progDiv.id);
-			// let progBar = document.createElement("progress");
-			// progBar.id= "" + uploads[currentIndex].image.name + "_prog";
-			// progBar.className= "progress-bar";
-			// progBar.value = 0;
-			// progBar.max = 100;
-			// getBar.appendChild(progBar);
-			// console.log(htmlArr);
-			// let imageElem = document.getElementById(``);
 			let vidElem = document.createElement("div");
 			vidElem.id = "" + uploads[currentIndex].video.name;
 			vidElem.className = "upload-vid";
@@ -314,7 +294,7 @@
 			</div>
 			<div class="buttons-line">
 				<button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button>
-				<button class="uploadButton btn btn-success btn-sm">Upload Files</button>
+				<button class=" btn btn-success btn-sm" id="uploadButton" disabled="disabled">Upload Files</button>
 			</div>
 			<!-- <progress value="0" max="100" id="fileButton">0%</progress> -->
 		</div>
