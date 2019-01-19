@@ -1,0 +1,11 @@
+.topnav {
+    /* display: block;
+    float: left; */
+    color: #dcdcdc;
+    text-align: left;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace
+}

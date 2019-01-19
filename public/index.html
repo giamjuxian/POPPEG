@@ -3,10 +3,16 @@
 <head>
 	<link rel="shortcut icon" href="#" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+	<link rel="stylesheet" href="app.css" />
 	<script>
 		// Initialize Firebase
 		var config = {
@@ -22,6 +28,7 @@
 		let selectedImage;
 		let selectedVideo;
 		let uploads = [];
+		// let currIndex = 0;
 
 		$(document).ready(() => {
 
@@ -37,8 +44,10 @@
 		  	});
 
 		  	$('.submitButton').on("click", (event) => {
-		  		$('#uploadModal').modal('toggle');
-		  		uploadFile();
+				$('#uploadModal').modal('toggle');
+				  uploadFile();
+				  addCard();	  
+					
 		  	});
 
 		  	$('.uploadButton').on("click", (event) => {
@@ -48,6 +57,8 @@
 
 		function uploadFile() {
 			// On Click save, push into array.
+			// imageNames.push(selectedImage.name);
+			// videoNames.push(selectedVideo.name);
 			let newUpload = {
 				video : selectedVideo,
 				image : selectedImage
@@ -101,10 +112,34 @@
 
 			});
 		}
+
+		function addCard() {
+			let currentIndex = uploads.length - 1;
+			let htmlArr = document.getElementById("upload-container");
+			console.log(htmlArr);
+			if (document.getElementById("empty-container") !== undefined) {
+				$("#empty-container").remove();
+			} 
+			let newElement = document.createElement("div");
+			console.log(uploads[currentIndex]);
+			newElement.id = "" + uploads[currentIndex].image.name;
+			newElement.innerHTML += "" + uploads[currentIndex].image.name;
+			// // newElement.className = "image";
+			htmlArr.appendChild(newElement);
+			console.log(htmlArr);
+		}
+
 	</script>
 </head> 
 <body>
-	<div id="upload-container"></div>
+	<div class="topnav">
+		<span>RefreshAR</span>
+	</div>
+	<div id="upload-container">
+		<div id="empty-container">
+			Click the Upload button to start creating your Refresh Card
+		</div>
+	</div>
 	<!-- <button id="video-add">Add New Video</button>
 		<button id="picture-add">Add New Image</button> -->
 
