@@ -15,8 +15,10 @@ const bucket = gcs.bucket(bucketName);
 
 exports.uploadImage = function(req, res, next) {
 	var file = req.file
-	var fileName = req.body.imageName
-	return res.send(fileName)
+	var fileName = req.body.fileName
+	console.log("FILE", req.files);
+	console.log("FILE NAME", fileName);
+	return res.json({"fileName" : fileName});
 	// var fileName = req.query.imageName
 	// var uploadTo = uploadFolder + '/' + fileName
 
