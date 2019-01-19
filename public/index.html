@@ -45,10 +45,13 @@
 		  	});
 
 		  	$('.submitButton').on("click", (event) => {
+				if (uploads.filter((upload) => upload.image.name === selectedImage.name).length > 1 ) {
+					console.log("EXE")
+					$('.submitButton').attr("disabled", true);
+				}
 				$('#uploadModal').modal('toggle');
 				  uploadFile();
 				  addCard();	  
-					
 		  	});
 
 		  	$('.uploadButton').on("click", (event) => {
@@ -178,20 +181,16 @@
 		  });
 		}
 
+		function changeValue(val) {
+			console.log(val);
+			$('#book-title').val(val);
+		}
 		function addCard() {
 			let currentIndex = uploads.length - 1;
 			let htmlArr = document.getElementById("upload-container");
 			console.log(htmlArr);
 			if (document.getElementById("empty-container") !== undefined) {
 				$("#empty-container").remove();
-				let newElem = document.createElement("div");
-				newElem.className = "book-name";
-				newElem.innerHTML = "Name of Book: ";
-				let newBook = document.createElement("input")
-				newBook.type = "text";
-				newBook.placeholder = "Insert Book Title.";
-				newElem.appendChild(newBook);
-				htmlArr.appendChild(newElem);
 			} 
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
@@ -203,6 +202,7 @@
 			let imageElem = document.getElementById(`${uploads[currentIndex].image.name}`);
 			let vidElem = document.createElement("div");
 			vidElem.id = "" + uploads[currentIndex].video.name;
+			vidElem.className = "upload-vid";
 			vidElem.innerHTML += uploads[currentIndex].video.name;
 			imageElem.appendChild(vidElem);
 		}
@@ -213,10 +213,14 @@
 	<div class="topnav">
 		<span>RefreshAR</span>
 	</div>
+	<div class="book-name">
+		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title" onchange="changeValue(this.value)" />
+	</div>
 	<div id="upload-container">
 		<div id="empty-container">
 			Click the Upload button to start creating your Refresh Card
 		</div>
+		
 	</div>
 	<div class="container">
 		<div class="row">
