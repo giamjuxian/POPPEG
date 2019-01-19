@@ -59,45 +59,94 @@
 		function uploadAll() {
 			var storageRef;
 			uploads.forEach(function(upload, index) {
-				var image = upload.image;
-				var video = upload.video;
-				storageRef = firebase.storage().ref('media/' + image.name + '/image');
-				var task = storageRef.put(image);
-				task.on('state_changed',
-					function progress(snapshot) {
-						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-						console.log("Uploading Image " + image.name + ": " + percentage + "%");
-					},
-
-					function error(err) {
-						if (err) alert(err);
-					},
-
-					function complete() {
-						console.log("COMPLETED UPLOAD OF " + image.name);	
-						return;
-					}
-				)
-				storageRef = firebase.storage().ref('media/' + image.name + '/video');
-				var task = storageRef.put(video);
-				task.on('state_changed', 
-					function progress(snapshot) {
-						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-						console.log("Uploading Video " + video.name + ": " + percentage + "%");
-					},
-
-					function error(err) {
-						if (err) alert(err);
-					},
-
-					function complete() {
-						console.log("COMPLETED UPLOAD OF " + video.name);	
-						return;
-					}
-				)
-
+				uploadImage(upload);
+				uploadVideo(upload);
+				uploadImageToVuforia(upload)
 			});
 		}
+
+		function uploadImage(upload) {
+			var image = upload.image;
+			var video = upload.video;
+			storageRef = firebase.storage().ref('media/' + image.name + '/image');
+			var task = storageRef.put(image);
+			task.on('state_changed',
+				function progress(snapshot) {
+					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+					console.log("Uploading Image " + image.name + ": " + percentage + "%");
+				},
+
+				function error(err) {
+					if (err) alert(err);
+				},
+
+				function complete() {
+					console.log("COMPLETED UPLOAD OF " + image.name);	
+					return;
+				}
+			)
+		}
+
+		function uploadVideo(upload) {
+			var image = upload.image;
+			var video = upload.video;
+			storageRef = firebase.storage().ref('media/' + image.name + '/video');
+			var task = storageRef.put(video);
+			task.on('state_changed', 
+				function progress(snapshot) {
+					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+					console.log("Uploading Video " + video.name + ": " + percentage + "%");
+				},
+
+				function error(err) {
+					if (err) alert(err);
+				},
+
+				function complete() {
+					console.log("COMPLETED UPLOAD OF " + video.name);	
+					return;
+				}
+			)
+		}
+
+		function uploadImageToVuforia(upload) {
+			var image = upload.image;
+			console.log(image);
+			getBase64(image).then(
+				data => {
+					let body = {
+						name : image.name,
+						width: 15,
+						image : data
+					}
+					$.ajax({
+					    type: "POST",
+					    url: "http://localhost:5005/vuforiaUpload",
+					    dataType: 'json',
+				        data: body,
+					    success: function(result){
+					        console.log(result);
+					    }
+					});
+				}
+			);
+		}
+
+		function getBase64(file) {
+		  return new Promise((resolve, reject) => {
+		    const reader = new FileReader();
+		    reader.readAsDataURL(file);
+		    reader.onload = () => {
+		      let encoded = reader.result.replace(/^data:(.*;base64,)?/, '');
+		      if ((encoded.length % 4) > 0) {
+		        encoded += '='.repeat(4 - (encoded.length % 4));
+		      }
+		      resolve(encoded);
+		    };
+		    reader.onerror = error => reject(error);
+		  });
+		}
+
 	</script>
 </head> 
 <body>
