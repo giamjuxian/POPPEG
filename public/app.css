@@ -74,10 +74,18 @@
     text-align: center;
 }
 
-.done-tick {
+#done-tick-image {
     color: green;
     font-size: 24px;
+    display: none;
 }
+
+#done-tick-vid {
+    color: green;
+    font-size: 24px;
+    /* display: none; */
+}
+
 .file-input {
     display: inline-block;
     width: 100%;
@@ -114,3 +122,4 @@
       text-align: left;
 
   }
+  
