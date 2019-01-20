@@ -30,8 +30,8 @@
 		let uploads = [];
 		let entries = [];
 		let selectedName = null;
-		let selectedImageDate = null;
-		let selectedVideoDate = null;
+		// let selectedImageDate = null;
+		// let selectedVideoDate = null;
 		// let currIndex = 0;
 		
 		$(document).ready(() => {
@@ -39,8 +39,8 @@
 
 		  	$('#image-field').on("change", (event) => {
 				selectedImage = event.target.files[0];
-				selectedImageDate = Date.now();
-				console.log(selectedImageDate);
+				// selectedImageDate = Date.now();
+				// console.log(selectedImageDate);
 				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
 					$('#uploadButton').removeAttr("disabled");
 					$('#submitButton').removeAttr("disabled");
@@ -52,9 +52,9 @@
 
 		  	$('#video-field').on("change", (event) => {
 				selectedVideo = event.target.files[0];
-				selectedVideoDate = Date.now();
-				console.log(selectedVideoDate);
-				console.log(Date.now());
+				// selectedVideoDate = Date.now();
+				// console.log(selectedVideoDate);
+				// console.log(Date.now());
 				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
 					$('#uploadButton').removeAttr("disabled");
 					$('#submitButton').removeAttr("disabled");
@@ -154,11 +154,18 @@
 
 				function complete() {
 					console.log("COMPLETED UPLOAD OF " + image.name);
-					// let imagetick = document.getElementById('done-tick-image');
+					// let imagetick = document.getElementById(`${image.name}`);
 					// console.log(imagetick.style.display)
 					// if (imagetick.style.display === "none") {
 					// 	imagetick.style.display = "block";
 					// }
+					// console.log(document.getElementById(`${image.name}`).find('span').css({"display" : "block"}));
+					let tempImageDiv = document.getElementById(`${image.name}`);
+					let tempSpan = document.createElement("span");
+					tempSpan.id = "done-tick-image";
+					tempSpan.style.display = "block";
+					tempSpan.innerHTML = "&#10004";
+					tempImageDiv.appendChild(tempSpan);
 					uploads = uploads.filter(upload => upload.image !== image);
 					// let doneDiv = document.createElement("div");
 					// doneDiv.className = "done-tick"
@@ -196,12 +203,20 @@
 					// if (vidtick.style.display === "none") {
 					// 	vidtick.style.display = "block";
 					// }
+					// console.log($(`#${video.name}`).find('span'));
+					// uploads = uploads.filter(upload => upload.image !== image);
+					let tempVidDiv = document.getElementById(`${video.name}`);
+					let tempSpan = document.createElement("span");
+					tempSpan.id = "done-tick-image";
+					tempSpan.style.display = "block";
+					tempSpan.innerHTML = "&#10004";
+					tempVidDiv.appendChild(tempSpan);
 					uploads = uploads.filter(upload => upload.video !== video);
 					console.log(uploads);
 					selectedImage = null;
 					selectedVideo = null;
 					$('#submitButton').attr("disabled", "disabled");
-					alert("Done with uploads!");
+					// alert("Done with uploads!");
 					return;
 				}
 			)
@@ -257,12 +272,12 @@
 			console.log(htmlArr);
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
-			newElement.id = selectedImageDate + "";
+			newElement.id = uploads[currentIndex].image.name + "";
 			newElement.innerHTML = uploads[currentIndex].image.name + "<span id='done-tick-image' style='display: none'>&#10004</span>";
 			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
 			let vidElem = document.createElement("div");
-			vidElem.id = "" + selectedVideoDate;
+			vidElem.id = "" + uploads[currentIndex].video.name;
 			vidElem.className = "upload-vid";
 			vidElem.innerHTML = uploads[currentIndex].video.name  + "<span id='done-tick-vid' style='display: none'>&#10004</span>";
 			htmlArr.appendChild(vidElem);
@@ -338,26 +353,6 @@
 	</div>
 </div>
 </div>
-	<script type="text/JavaScript">
-		// $(document).ready(function () {
-		// 	$("#add-stuff").click(function () {
-		// 		console.log("")
-		// 	});
-		// })
-		// function handleFileUploadSubmit(e) {
-		// 	console.log(e);
-		// }
-
-		// document.querySelector("#add-stuff").addEventListener('click',
-		// () => {console.log("hello")});
-		// $(function() {
-		// 	$('.file-input > input').on('change', function() {
-		// 		let inputValue = $(this).val();
-
-		// 		$('.input-value').html(inputValue);
-		// 	})
-		// })
-	</script>
 </body>
 </html>
 

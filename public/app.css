@@ -77,7 +77,7 @@
 #done-tick-image {
     color: green;
     font-size: 24px;
-    /* display: none; */
+    display: none;
 }
 
 #done-tick-vid {
