@@ -10,12 +10,16 @@ using System.Threading;
 using System.Collections;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DatabaseManager : MonoBehaviour
 {
+    public GameObject downloadButton;
+    public GameObject cameraButton;
     private List<Entry> allEntries;
     private FirebaseStorage storage;
     private StorageReference storage_ref;
+    private int downloadsRunning = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,22 @@ public class DatabaseManager : MonoBehaviour
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         storage = FirebaseStorage.DefaultInstance;
         storage_ref = storage.GetReferenceFromUrl("gs://refreshar-c9d2f.appspot.com");
+    }
+
+    void Update()
+    {
+        Debug.Log(downloadsRunning);
+        if (downloadsRunning > 0)
+        {
+            downloadButton.GetComponentInChildren<Text>().text = "Downloading";
+            cameraButton.SetActive(false);
+        }
+
+        if (downloadsRunning <= 0) 
+        {
+            downloadButton.GetComponentInChildren<Text>().text = "Download";
+            cameraButton.SetActive(true);
+        }
     }
 
     public void GetData()
@@ -80,14 +100,18 @@ public class DatabaseManager : MonoBehaviour
 
     IEnumerator DownloadVideoFromURL(string url, string name)
     {
+        downloadsRunning++;
         var www = new WWW(url);
         Debug.Log("Downloading!");
         yield return www;
         Debug.Log(Application.persistentDataPath);
         File.WriteAllBytes(Application.persistentDataPath + "/" + name + ".mp4", www.bytes);
         Debug.Log("File Saved!");
+        downloadsRunning--;
     }
 }
+
+
 
 class Entry
 {

@@ -10,8 +10,6 @@ public class VideoHandler : MonoBehaviour, ITrackableEventHandler
     #region PRIVATE_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
-    public GameObject VideoPlayerGO;
-    private VideoPlayer videoPlayer;
 
     #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -19,7 +17,6 @@ public class VideoHandler : MonoBehaviour, ITrackableEventHandler
 
     protected virtual void Start()
     {
-        videoPlayer = VideoPlayerGO.GetComponent<VideoPlayer>();
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
@@ -69,7 +66,7 @@ public class VideoHandler : MonoBehaviour, ITrackableEventHandler
 
         // Enable rendering:
         foreach (var component in videoComponents) {
-            component.url = Application.persistentDataPath + "/videos/" + imageName;
+            component.url = Application.persistentDataPath + "/" + imageName + ".mp4";
             component.Play();
         }
     }
@@ -77,6 +74,7 @@ public class VideoHandler : MonoBehaviour, ITrackableEventHandler
 
     protected virtual void OnTrackingLost()
     {
+        Debug.Log("CLEARING TRACKABLES");
         // clear all known trackables
         var tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
         foreach (TargetFinder target in tracker.GetTargetFinders())
@@ -91,12 +89,6 @@ public class VideoHandler : MonoBehaviour, ITrackableEventHandler
             component.Stop();
     }
 
-
-    private void PlayVideo(string fileName)
-    {
-        videoPlayer.url = Application.persistentDataPath + "/videos/" + fileName;
-        videoPlayer.Play();
-    }
 
     #endregion // PRIVATE_METHODS
 }

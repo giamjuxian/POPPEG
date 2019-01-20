@@ -1,11 +1,12 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const admin = require('firebase-admin');
+const vuforia = require('vuforiajs');
+const firebase = require('firebase');
 
 admin.initializeApp(functions.config().firebase);
 var db = admin.firestore();
 
-var vuforia = require('vuforiajs');
 var client = vuforia.client({
     'accessKey': '4734be8d373164570b5ea5f5421c47df2845a64e',
     'secretKey': '7d0ea5b4190bc98dca2ed81f6384b069ae641610',
@@ -13,6 +14,14 @@ var client = vuforia.client({
     'clientSecretKey': 'f25ae10ca341c69c354e30a9c429b521020fc46e',
 });
 var util = vuforia.util();
+
+var config = {
+	apiKey: "AIzaSyAywhDGO_S_UY6HX_tlPPpjrFU3mkO6bQE",
+	authDomain: "refreshar-c9d2f.firebaseapp.com",
+	databaseURL: "https://refreshar-c9d2f.firebaseio.com/",
+	storageBucket: "refreshar-c9d2f.appspot.com"
+};
+firebase.initializeApp(config);
 
 const app = express();
 
@@ -28,19 +37,21 @@ app.post('/vuforiaUpload', function(req, res, next) {
 	};
 	client.addTarget(target, function (error, result) {
 	    if (error) { 
-	        res.status(404).json({error: error});
+	        return res.status(404).json({error: error});
 	    } else {
-	        res.status(200).json({success: "Image is successfully uploaded"});
+	        return res.status(200).json({success: "Image is successfully uploaded"});
 	    }
 	});
 })
 
 app.post('/addUrlsToDatabase', function(req, res, next) {
-	var urls = req.body.urls;
+	var entries = req.body.entries;
 	var bookName = req.body.bookName;
-	var docRef = db.collection('urls').doc(bookName);
-	var setURLS = docRef.set({
-		urls: urls
+	if (!bookName || bookName == "") {
+		bookName = "empty";
+	}
+	firebase.database().ref('targets/' + bookName + '/').set({
+		entries : entries
 	});
 	res.status(200).json({success: "URLS is successfully added to database"});
 })

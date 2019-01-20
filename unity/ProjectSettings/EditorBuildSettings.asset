@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Menu.unity
     guid: bfe46aa97faaa44f6a52ca21d3579a4e
-  - enabled: 1
+  - enabled: 0
     path: Assets/AR_Demo.unity
     guid: 36351f2e24b0747e8998b3a557c26c68
+  - enabled: 1
+    path: Assets/CameraScene.unity
+    guid: 35e757cb2dd214afda8af320bb7b1f94
   m_configObjects: {}
