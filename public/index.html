@@ -28,7 +28,7 @@
 		let selectedImage = null;
 		let selectedVideo = null;
 		let uploads = [];
-		let urls = [];
+		let entries = [];
 		// let currIndex = 0;
 		
 		$(document).ready(() => {
@@ -78,8 +78,11 @@
 				image : selectedImage
 			}
 
-			storageRef = firebase.storage().ref('media/' + newUpload.image.name + '/video');
-			urls.push(storageRef.fullPath);
+			storageRef = firebase.storage().ref('media/' + removeSpecialCharacters(newUpload.image.name) + '/video');
+			entries.push({
+				name: removeSpecialCharacters(newUpload.image.name),
+				url: storageRef.fullPath
+			});
 			uploads.push(newUpload);
 		}
 
@@ -92,18 +95,18 @@
 			});
 			// let progBar = document.getElementById(`${image.name}_prog`);
 			// progBar.className = "hide-prog";
-			var bookName = 
-			addUrlsToDatabase(urls, "helloWorld");
-			// uploads.forEach(function(upload, index) {
-			// 	uploadImage(upload);
-			// 	uploadVideo(upload);
-			// 	uploadImageToVuforia(upload);
-			// });
+			var bookName = 	$('#book-title').val();
+			addUrlsToDatabase(entries, bookName);
+			uploads.forEach(function(upload, index) {
+				uploadImage(upload);
+				uploadVideo(upload);
+				uploadImageToVuforia(upload);
+			});
 		}
 
-		function addUrlsToDatabase(urls, bookName) {
+		function addUrlsToDatabase(entries, bookName) {
 			let body = {
-				urls: urls,
+				entries: entries,
 				bookName: bookName
 			}
 			$.ajax({
@@ -120,15 +123,15 @@
 		function uploadImage(upload) {
 			var image = upload.image;
 			var video = upload.video;
-			let progBar = document.getElementById(`${image.name}_prog`);
+			// let progBar = document.getElementById(`${image.name}_prog`);
 			// progBar.setAttribute("class", "show-prog");
 			// console.log(progBar)
-			storageRef = firebase.storage().ref('media/' + image.name + '/image');
+			storageRef = firebase.storage().ref('media/' + removeSpecialCharacters(image.name) + '/image');
 			var task = storageRef.put(image);
 			task.on('state_changed',
 				function progress(snapshot) {
 					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-					progBar.value = percentage;
+					// progBar.value = percentage;
 					// progBar.className = "hide-prog";
 					console.log("Uploading Image " + image.name + ": " + percentage + "%");
 				},
@@ -151,7 +154,7 @@
 		function uploadVideo(upload) {
 			var image = upload.image;
 			var video = upload.video;
-			storageRef = firebase.storage().ref('media/' + image.name + '/video');
+			storageRef = firebase.storage().ref('media/' + removeSpecialCharacters(image.name) + '/video');
 			var task = storageRef.put(video);
 			task.on('state_changed', 
 				function progress(snapshot) {
@@ -183,7 +186,7 @@
 			getBase64(image).then(
 				data => {
 					let body = {
-						name : image.name,
+						name : removeSpecialCharacters(image.name),
 						width: 15,
 						image : data
 					}
@@ -196,14 +199,6 @@
 					        console.log(result);
 					    }
 					});
-					// let list = document.getElementById("upload-container");
-					// list.parentNode.removeChild(list);
-					// let postDownloadDiv = document.createElement("div");
-					// postDownloadDiv.id = "empty-container";
-					// postDownloadDiv.innerHTML = "Add a card and see your stories come alive in your mobile!"
-					// list.appendChild(postDownloadDiv);
-					// uploads = [];
-					// console.log(list);
 				}
 
 			);
@@ -224,10 +219,10 @@
 		  });
 		}
 
-		function changeValue(val) {
-			console.log(val);
-			$('#book-title').val(val);
+		function removeSpecialCharacters(name) {
+			return name.replace(/[\W_]/g, "-");
 		}
+
 		function addCard() {
 			let currentIndex = uploads.length - 1;
 			let htmlArr = document.getElementById("upload-container");
@@ -271,7 +266,7 @@
 	<div class="big-container">
 	<div class="background-pic">
 	<div class="book-name">
-		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title" onchange="changeValue(this.value)" />
+		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title"/>
 	</div>
 	<div id="upload-container">
 		<div id="empty-container">
