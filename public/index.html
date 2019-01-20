@@ -29,6 +29,9 @@
 		let selectedVideo = null;
 		let uploads = [];
 		let entries = [];
+		let selectedName = null;
+		let selectedImageDate = null;
+		let selectedVideoDate = null;
 		// let currIndex = 0;
 		
 		$(document).ready(() => {
@@ -36,21 +39,29 @@
 
 		  	$('#image-field').on("change", (event) => {
 				selectedImage = event.target.files[0];
-				if (selectedVideo !== null) {
+				selectedImageDate = Date.now();
+				console.log(selectedImageDate);
+				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
+					$('#uploadButton').removeAttr("disabled");
+					$('#submitButton').removeAttr("disabled");
+				} else if (selectedVideo !== null ) {
 					$('#submitButton').removeAttr("disabled");
 				}
 				document.getElementById('input-image').innerHTML = selectedImage.name;
-				  console.log(selectedImage);
-				//   console.log(document.getElementById("input-image"));
 		  	});
 
 		  	$('#video-field').on("change", (event) => {
-				if (selectedImage !== null) {
+				selectedVideo = event.target.files[0];
+				selectedVideoDate = Date.now();
+				console.log(selectedVideoDate);
+				console.log(Date.now());
+				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
+					$('#uploadButton').removeAttr("disabled");
+					$('#submitButton').removeAttr("disabled");
+				} else if (selectedImage !== null ) {
 					$('#submitButton').removeAttr("disabled");
 				}
-				  selectedVideo = event.target.files[0];
-				  document.getElementById('input-vid').innerHTML = selectedVideo.name;
-		  		console.log(selectedVideo);
+				document.getElementById('input-vid').innerHTML = selectedVideo.name;
 		  	});
 			  
 		  	$('#submitButton').on("click", (event) => {
@@ -62,7 +73,8 @@
 		  	});
 
 		  	$('#uploadButton').on("click", (event) => {
-		  		uploadAll()
+				  uploadAll(),
+				  $('#uploadButton').attr("disabled", "disabled");
 		  	});
  		});
 
@@ -88,11 +100,11 @@
 
 		function uploadAll() {
 			var storageRef;
-			uploads.forEach(function(upload, index) {
-				uploadImage(upload);
-				uploadVideo(upload);
-				uploadImageToVuforia(upload)
-			});
+			// uploads.forEach(function(upload, index) {
+			// 	uploadImage(upload);
+			// 	uploadVideo(upload);
+			// 	uploadImageToVuforia(upload)
+			// });
 			// let progBar = document.getElementById(`${image.name}_prog`);
 			// progBar.className = "hide-prog";
 			var bookName = 	$('#book-title').val();
@@ -142,10 +154,16 @@
 
 				function complete() {
 					console.log("COMPLETED UPLOAD OF " + image.name);
-					let doneDiv = document.createElement("div");
-					doneDiv.className = "done-tick"
-					doneDiv.innerHTML = "&#10004";
-					document.getElementById(`${image.name}`).appendChild(doneDiv);
+					// let imagetick = document.getElementById('done-tick-image');
+					// console.log(imagetick.style.display)
+					// if (imagetick.style.display === "none") {
+					// 	imagetick.style.display = "block";
+					// }
+					uploads = uploads.filter(upload => upload.image !== image);
+					// let doneDiv = document.createElement("div");
+					// doneDiv.className = "done-tick"
+					// doneDiv.innerHTML = "&#10004";
+					// document.getElementById(`${selectedImageDate}`).appendChild(doneDiv);
 					return;
 				}
 			)
@@ -168,13 +186,22 @@
 
 				function complete() {
 					console.log("COMPLETED UPLOAD OF " + video.name);	
-					let doneDiv = document.createElement("div");
-					doneDiv.className = "done-tick";
-					doneDiv.innerHTML = "&#10004";
-					document.getElementById(`${video.name}`).appendChild(doneDiv);
+					// let doneDiv = document.createElement("div");
+					// doneDiv.className = "done-tick";
+					// doneDiv.innerHTML = "&#10004";
+					// document.getElementById(`${selectedVideoDate}`).appendChild(doneDiv);
+					
+					// let vidtick = document.getElementById('done-tick-vid');
+					// console.log(vidtick.style.display);
+					// if (vidtick.style.display === "none") {
+					// 	vidtick.style.display = "block";
+					// }
+					uploads = uploads.filter(upload => upload.video !== video);
+					console.log(uploads);
 					selectedImage = null;
 					selectedVideo = null;
 					$('#submitButton').attr("disabled", "disabled");
+					alert("Done with uploads!");
 					return;
 				}
 			)
@@ -224,20 +251,31 @@
 		}
 
 		function addCard() {
+			
 			let currentIndex = uploads.length - 1;
 			let htmlArr = document.getElementById("upload-container");
 			console.log(htmlArr);
 			let newElement = document.createElement("div");
 			console.log(uploads[currentIndex]);
-			newElement.id = "" + uploads[currentIndex].image.name;
-			newElement.innerHTML += uploads[currentIndex].image.name;
+			newElement.id = selectedImageDate + "";
+			newElement.innerHTML = uploads[currentIndex].image.name + "<span id='done-tick-image' style='display: none'>&#10004</span>";
 			newElement.className = "upload-card";
 			htmlArr.appendChild(newElement);
 			let vidElem = document.createElement("div");
-			vidElem.id = "" + uploads[currentIndex].video.name;
+			vidElem.id = "" + selectedVideoDate;
 			vidElem.className = "upload-vid";
-			vidElem.innerHTML += uploads[currentIndex].video.name;
+			vidElem.innerHTML = uploads[currentIndex].video.name  + "<span id='done-tick-vid' style='display: none'>&#10004</span>";
 			htmlArr.appendChild(vidElem);
+		}
+
+		function changeName(namevalue) {
+			selectedName = namevalue;
+			if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
+					$('#uploadButton').removeAttr("disabled");
+					// $('#submitButton').removeAttr("disabled");
+			}
+			return selectedName == namevalue;
+
 		}
 
 	</script>
@@ -249,7 +287,7 @@
 	<div class="big-container">
 	<div class="background-pic">
 	<div class="book-name">
-		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title"/>
+		Name of Book: <input id="book-title" type="text" placeholder="Insert Book Title" onchange="changeName(this.val)"/>
 	</div>
 	<div id="upload-container">
 		<div id="empty-container">
@@ -293,6 +331,7 @@
 			<div class="buttons-line">
 				<button id="cardButton" class="btn btn-primary btn-sm" data-target="#uploadModal" data-toggle="modal">Add Card</button>
 				<button class=" btn btn-success btn-sm" id="uploadButton" disabled="disabled">Upload Files</button>
+				
 			</div>
 			<!-- <progress value="0" max="100" id="fileButton">0%</progress> -->
 		</div>
