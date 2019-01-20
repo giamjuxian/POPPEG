@@ -16,6 +16,8 @@ public class DatabaseManager : MonoBehaviour
 {
     public GameObject downloadButton;
     public GameObject cameraButton;
+    public GameObject textField;
+    public GameObject incorrectTextField;
     private List<Entry> allEntries;
     private FirebaseStorage storage;
     private StorageReference storage_ref;
@@ -39,7 +41,7 @@ public class DatabaseManager : MonoBehaviour
             cameraButton.SetActive(false);
         }
 
-        if (downloadsRunning <= 0) 
+        if (downloadsRunning <= 0)
         {
             downloadButton.GetComponentInChildren<Text>().text = "Download";
             cameraButton.SetActive(true);
@@ -48,28 +50,44 @@ public class DatabaseManager : MonoBehaviour
 
     public void GetData()
     {
-        FirebaseDatabase.DefaultInstance.RootReference.Child("targets").GetValueAsync().ContinueWith(task =>
-      {
-          if (task.IsFaulted)
-          {
-              Debug.Log("ERROR");
-          }
-          else if (task.IsCompleted)
-          {
-              DataSnapshot snapshot = task.Result;
-              foreach (DataSnapshot book in snapshot.Children)
-              {
-                  DataSnapshot entries = book.Child("entries");
-                  foreach (DataSnapshot entry in entries.Children)
-                  {
-                      string entryName = entry.Child("name").Value.ToString();
-                      string entryURL = entry.Child("url").Value.ToString();
-                      allEntries.Add(new Entry(entryName, entryURL));
-                  }
-              }
-              DownloadVideo();
-          }
-      });
+        string bookName = GameObject.Find("BookName").GetComponent<Text>().text;
+        Debug.Log(bookName);
+        if (!string.IsNullOrEmpty(bookName))
+        {
+            FirebaseDatabase.DefaultInstance.RootReference.Child("targets").GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.Log("ERROR");
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.HasChild(bookName))
+                    {
+                        DataSnapshot entries = snapshot.Child(bookName).Child("entries");
+                        foreach (DataSnapshot entry in entries.Children)
+                        {
+                            string entryName = entry.Child("name").Value.ToString();
+                            string entryURL = entry.Child("url").Value.ToString();
+                            allEntries.Add(new Entry(entryName, entryURL));
+                        }
+                        DownloadVideo();
+                    }
+                    else {
+                        incorrectTextField.SetActive(true);
+                    }
+
+                }
+
+            });
+
+        }
+        else
+        {
+            GameObject.Find("Placeholder").GetComponent<Text>().color = Color.red;
+        }
+
     }
 
     public void DownloadVideo()
@@ -93,7 +111,8 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    public void CameraScene() {
+    public void CameraScene()
+    {
         SceneManager.LoadScene(1);
     }
 
