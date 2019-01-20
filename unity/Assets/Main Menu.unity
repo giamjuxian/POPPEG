@@ -379,6 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204c804729144442fafb945cd312d484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downloadButton: {fileID: 432406638}
+  cameraButton: {fileID: 1569195327}
 --- !u!1 &432406638
 GameObject:
   m_ObjectHideFlags: 0
