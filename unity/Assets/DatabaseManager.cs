@@ -33,7 +33,6 @@ public class DatabaseManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(downloadsRunning);
         if (downloadsRunning > 0)
         {
             downloadButton.GetComponentInChildren<Text>().text = "Downloading";
