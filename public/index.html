@@ -120,7 +120,7 @@
 		function uploadImage(upload) {
 			var image = upload.image;
 			var video = upload.video;
-			let progBar = document.getElementById(`${image.name}_prog`);
+			// let progBar = document.getElementById(`${image.name}_prog`);
 			// progBar.setAttribute("class", "show-prog");
 			// console.log(progBar)
 			storageRef = firebase.storage().ref('media/' + image.name + '/image');
@@ -128,7 +128,7 @@
 			task.on('state_changed',
 				function progress(snapshot) {
 					var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-					progBar.value = percentage;
+					// progBar.value = percentage;
 					// progBar.className = "hide-prog";
 					console.log("Uploading Image " + image.name + ": " + percentage + "%");
 				},
