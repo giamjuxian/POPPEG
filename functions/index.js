@@ -50,7 +50,7 @@ app.post('/addUrlsToDatabase', function(req, res, next) {
 	if (!bookName || bookName == "") {
 		bookName = "empty";
 	}
-	firebase.database().ref('targets/' + bookName + '/').set({
+	firebase.database().ref('targets/' + bookName).set({
 		entries : entries
 	});
 	res.status(200).json({success: "URLS is successfully added to database"});
