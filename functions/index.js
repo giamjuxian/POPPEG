@@ -16,10 +16,10 @@ var client = vuforia.client({
 var util = vuforia.util();
 
 var config = {
-	apiKey: "AIzaSyAywhDGO_S_UY6HX_tlPPpjrFU3mkO6bQE",
-	authDomain: "refreshar-c9d2f.firebaseapp.com",
-	databaseURL: "https://refreshar-c9d2f.firebaseio.com/",
-	storageBucket: "refreshar-c9d2f.appspot.com"
+	apiKey: "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
+	authDomain: "poppeg-95e96.firebaseapp.com",
+	databaseURL: "https://poppeg-95e96.firebaseio.com/",
+	storageBucket: "poppeg-95e96.appspot.com"
 };
 firebase.initializeApp(config);
 
