@@ -8,10 +8,10 @@ admin.initializeApp(functions.config().firebase);
 var db = admin.firestore();
 
 var client = vuforia.client({
-    'accessKey': '4734be8d373164570b5ea5f5421c47df2845a64e',
-    'secretKey': '7d0ea5b4190bc98dca2ed81f6384b069ae641610',
-    'clientAccessKey': '0f207cbf4f3fab96dd48ea99e3a042bc798d9b0c',
-    'clientSecretKey': 'f25ae10ca341c69c354e30a9c429b521020fc46e',
+    'accessKey': '96fc90be4ba8d32c31d9a613cab5dc46d54ba81d',
+    'secretKey': 'e389e18534680afd9bc9649dde032779b6e528b3',
+    'clientAccessKey': '876180953382a439ffe6b4f613294548c9a65f1b',
+    'clientSecretKey': '84ab566d52203a407d0cda6ed7d63db38d4275f8',
 });
 var util = vuforia.util();
 
