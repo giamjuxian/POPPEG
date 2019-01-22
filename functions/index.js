@@ -56,4 +56,8 @@ app.post('/addUrlsToDatabase', function(req, res, next) {
 	res.status(200).json({success: "URLS is successfully added to database"});
 })
 
+app.get('/hello', function(req, res, next) {
+	return res.status(200).send("Hello")
+})
+
 exports.app = functions.https.onRequest(app);

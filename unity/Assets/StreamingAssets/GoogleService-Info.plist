@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>237013132204-bku1t8n0iiramuvj6r4vq295m2hjo06h.apps.googleusercontent.com</string>
+	<string>723639879254-cb50vkrt459bm24hnbfg9kgdjoctn7uo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.237013132204-bku1t8n0iiramuvj6r4vq295m2hjo06h</string>
+	<string>com.googleusercontent.apps.723639879254-cb50vkrt459bm24hnbfg9kgdjoctn7uo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAf1rYl3mKQc0Rtj6I9EXPYq0GwHGBOsEU</string>
+	<string>AIzaSyC-ZxGL2GFXmSNOJF9A8wVNrTwicqz_f20</string>
 	<key>GCM_SENDER_ID</key>
-	<string>237013132204</string>
+	<string>723639879254</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.RefreshAR.RefreshAR</string>
+	<string>com.poppeg.poppeg</string>
 	<key>PROJECT_ID</key>
-	<string>refreshar-c9d2f</string>
+	<string>poppeg-95e96</string>
 	<key>STORAGE_BUCKET</key>
-	<string>refreshar-c9d2f.appspot.com</string>
+	<string>poppeg-95e96.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:237013132204:ios:cfa4a1757f48b448</string>
+	<string>1:723639879254:ios:b6167f47b8415fb0</string>
 	<key>DATABASE_URL</key>
-	<string>https://refreshar-c9d2f.firebaseio.com</string>
+	<string>https://poppeg-95e96.firebaseio.com</string>
 </dict>
 </plist>

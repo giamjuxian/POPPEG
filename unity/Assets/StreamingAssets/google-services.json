@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "237013132204",
-    "firebase_url": "https://refreshar-c9d2f.firebaseio.com",
-    "project_id": "refreshar-c9d2f",
-    "storage_bucket": "refreshar-c9d2f.appspot.com"
+    "project_number": "723639879254",
+    "firebase_url": "https://poppeg-95e96.firebaseio.com",
+    "project_id": "poppeg-95e96",
+    "storage_bucket": "poppeg-95e96.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:237013132204:android:cfa4a1757f48b448",
+        "mobilesdk_app_id": "1:723639879254:android:b6167f47b8415fb0",
         "android_client_info": {
-          "package_name": "com.RefreshAR.RefreshAR"
+          "package_name": "com.poppeg.poppeg"
         }
       },
       "oauth_client": [
         {
-          "client_id": "237013132204-d537mdbvga2ebnd1grhm7bk9hfn6h8r7.apps.googleusercontent.com",
+          "client_id": "723639879254-ur1ul8ou3nralkuu5klc5b1a5v1raks8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBbWKqKHk-xxWbu1YWqC4oeiHO1NkG5In0"
+          "current_key": "AIzaSyAgTc0AbwE6plww0y8TYBPWo2eQm1zPN1Q"
         }
       ],
       "services": {

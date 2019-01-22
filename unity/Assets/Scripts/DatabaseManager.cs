@@ -27,10 +27,10 @@ public class DatabaseManager : MonoBehaviour
     void Start()
     {
         allEntries = new List<Entry>();
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://refreshar-c9d2f.firebaseio.com/");
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://poppeg-95e96.firebaseio.com/");
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         storage = FirebaseStorage.DefaultInstance;
-        storage_ref = storage.GetReferenceFromUrl("gs://refreshar-c9d2f.appspot.com");
+        storage_ref = storage.GetReferenceFromUrl("gs://poppeg-95e96.appspot.com");
     }
 
     void Update()
@@ -98,7 +98,7 @@ public class DatabaseManager : MonoBehaviour
             string entryUrl = e.GetUrl();
             string entryName = e.GetName();
             StorageReference gs_reference =
-                storage.GetReferenceFromUrl("gs://refreshar-c9d2f.appspot.com/" + entryUrl);
+                storage.GetReferenceFromUrl("gs://poppeg-95e96.appspot.com/" + entryUrl);
 
             gs_reference.GetDownloadUrlAsync().ContinueWith((Task<Uri> task) =>
             {
