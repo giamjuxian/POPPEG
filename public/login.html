@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <link rel="shortcut icon" href="#" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="login.css" type="text/css" />
+    </head>
+    <body>
+        <!-- <div class="login">
+            <div class="container">
+                <div class="row">
+                    <div class="text-center">
+                        <h1>Welcome to Poppeg</h1>
+                    </div>
+                </div>
+                <form action="index.html" method="POST" onsubmit="return Validate()" name="book-form" class="form-inline justify-content-center"> 
+                    <div class="form-group mb-2">
+                        <input type="text" class="form-control" placeholder="Book Title..." />  
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" class="form control" placeholder="POPPEG Code..." />
+                    </div>
+                    <button type="submit" class="btn btn-warning mb-2">Get Book!</button>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4 col-md-offset-1">
+                            <input type="text" class="form-control" placeholder="Enter Book Title">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" placeholder="Enter Your Code">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <button type="submit" class="btn btn-warning form-control">Get Book!</button>
+                        </div>
+                    </div>
+            </form>
+            </div>
+        </div> -->
+        <div class="background-pic">
+            <div class="modal-dialog text-center">
+                <div class="col-sm-9 login-modal">
+                    <div class="modal-content">
+                        <div class="header-modal">POPPEG</div>
+                        <div class="form-input">
+                            <form action="index.html" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Book Title">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter POPCode">
+                                </div>
+                                <button type="submit" class="btn btn-warning">Get Book!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

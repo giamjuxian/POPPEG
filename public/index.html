@@ -30,17 +30,12 @@
 		let uploads = [];
 		let entries = [];
 		let selectedName = null;
-		// let selectedImageDate = null;
-		// let selectedVideoDate = null;
-		// let currIndex = 0;
 		
 		$(document).ready(() => {
 
 
 		  	$('#image-field').on("change", (event) => {
 				selectedImage = event.target.files[0];
-				// selectedImageDate = Date.now();
-				// console.log(selectedImageDate);
 				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
 					$('#uploadButton').removeAttr("disabled");
 					$('#submitButton').removeAttr("disabled");
@@ -52,9 +47,6 @@
 
 		  	$('#video-field').on("change", (event) => {
 				selectedVideo = event.target.files[0];
-				// selectedVideoDate = Date.now();
-				// console.log(selectedVideoDate);
-				// console.log(Date.now());
 				if (selectedVideo !== null && selectedImage !== null && selectedName !== null) {
 					$('#uploadButton').removeAttr("disabled");
 					$('#submitButton').removeAttr("disabled");
