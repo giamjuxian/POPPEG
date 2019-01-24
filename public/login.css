@@ -8,6 +8,26 @@
     margin-left: -25%;
     margin-top: 10%;
 }
+.thumbnail {
+    margin-top: -60px;
+    margin-bottom: 45px;
+    padding: 0;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: solid 1px #434e5a;
+    background-color: #434e5a;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thumbnail img {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+    border-radius: 50%;	
+    position: fixed;
+}
 
 .modal-content {
     background-color: #434e5a;
@@ -19,7 +39,9 @@
 .header-modal {
     color: white;
     margin: 10px;
+    padding: 10px 0px;
     font-size: 20px;
+    margin-top: -35px;
 }
 
 .form-group {

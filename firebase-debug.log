@@ -1,0 +1,44 @@
+[debug] [2019-01-24T17:11:22.908Z] ----------------------------------------------------------------------
+[debug] [2019-01-24T17:11:22.910Z] Command:       /usr/local/bin/node /usr/local/bin/Firebase serve --only hosting,functions
+[debug] [2019-01-24T17:11:22.910Z] CLI Version:   6.3.0
+[debug] [2019-01-24T17:11:22.910Z] Platform:      darwin
+[debug] [2019-01-24T17:11:22.910Z] Node Version:  v10.14.1
+[debug] [2019-01-24T17:11:22.917Z] Time:          Fri Jan 25 2019 01:11:22 GMT+0800 (Singapore Standard Time)
+[debug] [2019-01-24T17:11:22.917Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-24T17:11:22.932Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-24T17:11:22.933Z] > authorizing via signed-in user
+[debug] [2019-01-24T17:11:22.933Z] [iam] checking project refreshar-c9d2f for permissions ["firebase.projects.get"]
+[debug] [2019-01-24T17:11:22.935Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-01-24T17:11:22.935Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-01-24T17:11:23.071Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-24T17:11:23.080Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/refreshar-c9d2f:testIamPermissions  
+
+[debug] [2019-01-24T17:11:24.315Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-24T17:11:24.316Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/refreshar-c9d2f  
+ 
+[debug] [2019-01-24T17:11:25.550Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/clarencekoh/Desktop/Refreshar/RefreshAR'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-01-24T17:11:26.415Z] Fetching environment
+[debug] [2019-01-24T17:11:26.417Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/237013132204:getServerAppConfig  
+ 
+[debug] [2019-01-24T17:11:26.417Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/237013132204/clients/_:getWebAppConfig  
+ 
+[debug] [2019-01-24T17:11:26.774Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-24T17:11:26.774Z] Starting @google-cloud/functions-emulator
+[debug] [2019-01-24T17:11:26.806Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-01-24T17:11:27.809Z] Parsing function triggers
+[warn] ⚠  functions: Failed to load functions source code. Ensure that you have the latest SDK by running npm i --save firebase-functions inside the functions directory.
+[debug] [2019-01-24T17:11:28.533Z] Error during trigger parsing:  Error parsing triggers: Cannot find module '@google-cloud/firestore'
+
+Try running "npm install" in your functions directory before deploying.
+[warn] ⚠  functions: Error from emulator. Error parsing triggers: Cannot find module '@google-cloud/firestore'
+
+Try running "npm install" in your functions directory before deploying.
+[debug] [2019-01-24T17:11:28.534Z] 
