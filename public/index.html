@@ -14,7 +14,9 @@
 	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 	<link rel="stylesheet" href="app.css" />
 	<script>
-		// Initialize Firebase
+		// var apiURL = "http://localhost:5000/";
+		var apiURL = "https://poppeg.com/";
+
 		var config = {
 		  	apiKey: "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
 		  	authDomain: "poppeg-95e96.firebaseapp.com",
@@ -114,8 +116,8 @@
 				bookName: bookName
 			}
 			$.ajax({
-			    type: "POST",
-			    url: "https://poppeg-95e96.firebaseapp.com/addUrlsToDatabase",
+				type: "POST",
+			    url: apiURL + "addUrlsToDatabase",
 			    dataType: 'json',
 		        data: body,
 			    success: function(result){
@@ -225,8 +227,8 @@
 						image : data
 					}
 					$.ajax({
-					    type: "POST",
-					    url: "https://poppeg-95e96.firebaseapp.com/vuforiaUpload",
+						type: "POST",
+					    url: apiURL + "vuforiaUpload",
 					    dataType: 'json',
 				        data: body,
 					    success: function(result){

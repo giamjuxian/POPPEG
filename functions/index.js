@@ -3,25 +3,18 @@ const express = require('express');
 const admin = require('firebase-admin');
 const vuforia = require('vuforiajs');
 const firebase = require('firebase');
+const config = require('./config.json');
+const database_config = config.database_config;
+const vuforia_config = config.vuforia_config;
+
+console.log("DATABASE CONFIG", database_config);
+console.log("VUFORIA CONFIG", vuforia_config);
 
 admin.initializeApp(functions.config().firebase);
-var db = admin.firestore();
-
-var client = vuforia.client({
-    'accessKey': '96fc90be4ba8d32c31d9a613cab5dc46d54ba81d',
-    'secretKey': 'e389e18534680afd9bc9649dde032779b6e528b3',
-    'clientAccessKey': '876180953382a439ffe6b4f613294548c9a65f1b',
-    'clientSecretKey': '84ab566d52203a407d0cda6ed7d63db38d4275f8',
-});
+firebase.initializeApp(database_config);
+var client = vuforia.client(vuforia_config);
 var util = vuforia.util();
 
-var config = {
-	apiKey: "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
-	authDomain: "poppeg-95e96.firebaseapp.com",
-	databaseURL: "https://poppeg-95e96.firebaseio.com/",
-	storageBucket: "poppeg-95e96.appspot.com"
-};
-firebase.initializeApp(config);
 
 const app = express();
 
