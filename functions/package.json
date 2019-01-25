@@ -9,11 +9,13 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "consolidate": "^0.15.1",
     "express": "^4.16.4",
+    "firebase": "^5.8.0",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0",
-    "vuforiajs": "^0.2.5",
-    "firebase": "^5.8.0"
+    "handlebars": "^4.0.12",
+    "vuforiajs": "^0.2.5"
   },
   "private": true
 }
