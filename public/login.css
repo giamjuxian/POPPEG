@@ -89,3 +89,21 @@
     padding: 0;
     margin: 0;
 }
+
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    color: #FFFACD;
+    padding-left: 20px;
+}
+
+small {
+    font-size: smaller;
+}
+
+input[type="text"]:focus,
+button[type="submit"]:focus {
+    box-shadow:0 0 10px 5px rgb(46, 0, 153);
+}
