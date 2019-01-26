@@ -23,7 +23,7 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/uploadpage', function (req, res, next) {
-	res.render('uploadpage');
+	res.render('collections');
 });
 
 app.post('/vuforiaUpload', function (req, res, next) {
