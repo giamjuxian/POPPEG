@@ -9,7 +9,10 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "@google-cloud/storage": "^2.3.4",
+    "busboy": "^0.3.0",
     "consolidate": "^0.15.1",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "firebase": "^5.8.0",
     "firebase-admin": "~6.0.0",

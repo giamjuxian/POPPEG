@@ -50,9 +50,9 @@ public class DatabaseManager : MonoBehaviour
 
     public void GetData()
     {
-        string bookName = GameObject.Find("BookName").GetComponent<Text>().text;
-        Debug.Log(bookName);
-        if (!string.IsNullOrEmpty(bookName))
+        string albumName = GameObject.Find("BookName").GetComponent<Text>().text;
+        Debug.Log(albumName);
+        if (!string.IsNullOrEmpty(albumName))
         {
             FirebaseDatabase.DefaultInstance.RootReference.Child("targets").GetValueAsync().ContinueWith(task =>
             {
@@ -63,9 +63,9 @@ public class DatabaseManager : MonoBehaviour
                 else if (task.IsCompleted)
                 {
                     DataSnapshot snapshot = task.Result;
-                    if (snapshot.HasChild(bookName))
+                    if (snapshot.HasChild(albumName))
                     {
-                        DataSnapshot entries = snapshot.Child(bookName).Child("entries");
+                        DataSnapshot entries = snapshot.Child(albumName).Child("entries");
                         foreach (DataSnapshot entry in entries.Children)
                         {
                             string entryName = entry.Child("name").Value.ToString();
