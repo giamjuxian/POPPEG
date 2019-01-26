@@ -1,0 +1,35 @@
+[debug] [2019-01-26T17:24:46.374Z] ----------------------------------------------------------------------
+[debug] [2019-01-26T17:24:46.376Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2019-01-26T17:24:46.376Z] CLI Version:   6.3.0
+[debug] [2019-01-26T17:24:46.376Z] Platform:      darwin
+[debug] [2019-01-26T17:24:46.376Z] Node Version:  v10.14.1
+[debug] [2019-01-26T17:24:46.427Z] Time:          Sun Jan 27 2019 01:24:46 GMT+0800 (Singapore Standard Time)
+[debug] [2019-01-26T17:24:46.427Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-26T17:24:46.441Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-26T17:24:46.441Z] > authorizing via signed-in user
+[debug] [2019-01-26T17:24:46.441Z] [iam] checking project refreshar-c9d2f for permissions ["firebase.projects.get"]
+[debug] [2019-01-26T17:24:46.443Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/refreshar-c9d2f:testIamPermissions  
+
+[debug] [2019-01-26T17:24:47.772Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-26T17:24:47.775Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/refreshar-c9d2f  
+ 
+[debug] [2019-01-26T17:24:49.022Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/clarencekoh/Desktop/Refreshar/RefreshAR'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-01-26T17:24:50.117Z] Fetching environment
+[debug] [2019-01-26T17:24:50.120Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/237013132204:getServerAppConfig  
+ 
+[debug] [2019-01-26T17:24:50.120Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/237013132204/clients/_:getWebAppConfig  
+ 
+[debug] [2019-01-26T17:24:50.484Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-26T17:24:50.485Z] Starting @google-cloud/functions-emulator
+[debug] [2019-01-26T17:24:51.424Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-01-26T17:24:52.022Z] Parsing function triggers
+[info] ✔  functions: app: http://localhost:5001/refreshar-c9d2f/us-central1/app
+[info] [hosting] Rewriting / to local function app
+[info] [hosting] Rewriting / to local function app
