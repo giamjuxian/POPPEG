@@ -3,7 +3,9 @@
         "apiKey": "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
         "authDomain": "poppeg-95e96.firebaseapp.com",
         "databaseURL": "https://poppeg-95e96.firebaseio.com/",
-        "storageBucket": "poppeg-95e96.appspot.com"
+        "projectId": "poppeg-95e96",
+        "storageBucket": "poppeg-95e96.appspot.com",
+        "messagingSenderId": "237013132204"
     },
     "vuforia_config" : {
         "accessKey" : "96fc90be4ba8d32c31d9a613cab5dc46d54ba81d",
