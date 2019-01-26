@@ -30,8 +30,8 @@ exports.uploadImageToStorage = function (req, res, next) {
             file.pipe(fs.createWriteStream(filepath));
         });
 
-        busboy.on('field', function(fieldname, val) {
-            Object.assign(uploadData, {albumName: val});
+        busboy.on('field', function (fieldname, val) {
+            Object.assign(uploadData, { albumName: val });
         });
 
         busboy.on('finish', function () {
@@ -39,7 +39,7 @@ exports.uploadImageToStorage = function (req, res, next) {
 
             let options = {
                 uploadType: 'media',
-                destination: 'media/' + uploadData.albumName + '/' +removeSpecialCharacters(uploadData.filename) + '/image',
+                destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/image',
                 metadata: {
                     metadata: {
                         contentType: uploadData.type
@@ -73,8 +73,8 @@ exports.uploadVideoToStorage = function (req, res, next) {
             file.pipe(fs.createWriteStream(filepath));
         });
 
-        busboy.on('field', function(fieldname, val) {
-            Object.assign(uploadData, {albumName: val});
+        busboy.on('field', function (fieldname, val) {
+            Object.assign(uploadData, { albumName: val });
         });
 
         busboy.on('finish', function () {
@@ -82,7 +82,7 @@ exports.uploadVideoToStorage = function (req, res, next) {
 
             let options = {
                 uploadType: 'media',
-                destination: 'media/' + uploadData.albumName + '/' +removeSpecialCharacters(uploadData.filename) + '/video',
+                destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/video',
                 metadata: {
                     metadata: {
                         contentType: uploadData.type
