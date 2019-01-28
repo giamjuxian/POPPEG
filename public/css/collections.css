@@ -40,3 +40,10 @@
     margin-bottom: 30px;
     float: left; 
 }
+
+body {
+    background-color: #4f307e;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
