@@ -67,3 +67,13 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+
+#uploadButton {
+    margin-left: 20px;
+    border: solid 1px #FFFFFF;
+}
+
+#uploadButton:hover {
+    border-color: #000000;
+    color: #000000;
+}

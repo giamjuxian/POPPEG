@@ -32,29 +32,33 @@
             <img src="media/poppeg_strip_vector.png" class=" poppeg-logo img-fluid" alt="Responsive image" style="width: 100%" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 text-center" id="emptyHeader">
-            Your cart is currently empty!
+	<div class="row">
+		<div class="col-md-12 col-xs-12 text-center standard-header">
+			<span>Your cart is currently empty!</span>
+		</div>
+	</div>
+    <br />
+    <div class="container">
+        <div class="row">
+            {{!-- <div class="col-xs-12 col-md-2 col-lg-2 col-lg-offset-6 col-md-offset-6">
+                <button type="button" class="btn btn-add-collection btn-lg" style="margin-top:15px">
+                    Add New Card
+                </button>
+            </div> --}}
+            <div class="col-xs-12 col-lg-offset-6 col-md-offset-6">
+                <div class="btn-toolbar">
+                    <button id="addCardButton" type="button" class="btn btn-add-collection btn-lg" style="margin-top:15px">Add to Collection</button>
+                    <button id="uploadButton" type="button" class="btn btn-success btn-lg" style="margin-top:15px">Upload Now!</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div class="col-xs-12 col-md-6">
-                <button id="addItems" class="btn btn-warning" data-toggle="modal" data-target="#itemsModal">
-                    Add Items
-                </button>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <button id="uploadItems" class="btn btn-success">
-                    Upload Now!
-                </button>
-            </div>
+
+
+
+	<div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-lg-offset-4" style="margin-top: 30px">
+            <p><span class="text-white footer">A Project by POPPEG</span></p>
         </div>
-    </div>
-
-
-
-    <div class="footer">
-        <small class="text-white">A Project by POPPEG</small>
-    </div>
+    </div> 
 </body>
