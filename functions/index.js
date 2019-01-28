@@ -24,7 +24,7 @@ app.set('view engine', 'hbs');
  * Web Views
  */
 app.get('/', function (req, res, next) {
-	res.render('login');
+	res.render('loginpage');
 });
 
 app.get('/uploadpage', function (req, res, next) {
