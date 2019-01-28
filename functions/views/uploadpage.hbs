@@ -13,8 +13,8 @@
 	 crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 	<script>
-		var apiURL = "http://localhost:5010/";
-		// var apiURL = "https://poppeg.com/";
+		// var apiURL = "http://localhost:5000/";
+		var apiURL = "https://www.poppeg.com/";
 
 		var config = {
 			apiKey: "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
@@ -80,10 +80,9 @@
 				image: selectedImage
 			}
 
-			storageRef = firebase.storage().ref('media/' + removeSpecialCharacters(newUpload.image.name) + '/video');
 			entries.push({
 				name: removeSpecialCharacters(newUpload.image.name),
-				url: storageRef.fullPath
+				url: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/video'
 			});
 			uploads.push(newUpload);
 		}
@@ -224,7 +223,7 @@
 					}
 					$.ajax({
 						type: "POST",
-						url: apiURL + "vuforiaUpload",
+						url: apiURL + "uploadImageToVuforia",
 						dataType: 'json',
 						data: body,
 						success: function (result) {

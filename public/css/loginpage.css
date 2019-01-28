@@ -1,0 +1,45 @@
+body {
+    background-color: #4f307e;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+.poppeg-logo {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    float: left; 
+}
+
+.footer {
+    color: #FFFFFF;
+    font-size: 10px;
+}       
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.btn-album-next {
+    background-color: #f2d824;
+    color:#000000;
+    font-weight: bold;
+    border-color: #f2d824;
+}
+
+.text-white {
+    color: #FFFFFF;
+}
+
+.panel-body {
+    height: 1400px;
+}
+
+.offset-top-15 {
+    margin-top: 15px;
+}
+
+.offset-top-30 {
+    margin-top: 30px;
+}
