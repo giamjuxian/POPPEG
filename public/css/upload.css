@@ -1,18 +1,8 @@
-.background {
-    height: 100%;
-    width: 100%;
-    background-color: #4d2a7c;
-    position: absolute;
-    left: 0;
-    right: 0;
-    padding: 0;
-    margin: 0;
-}
-
-.standardHeader img {
-    height: 150px;
-    width: 500px;
-    margin: 50px 0;
+body {
+    background-color: #4f307e;
+    height:100%;
+    margin:0;
+    padding:0;
 }
 
 #emptyHeader {
@@ -26,4 +16,15 @@
 #addItems:hover {
     background-color: rgba(255, 115, 0, 0.705);
     cursor: pointer;
+}
+
+.poppeg-logo {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    float: left; 
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
