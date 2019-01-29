@@ -1,341 +1,36 @@
-[debug] [2019-01-28T15:12:53.858Z] ----------------------------------------------------------------------
-[debug] [2019-01-28T15:12:53.860Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only hosting,functions
-[debug] [2019-01-28T15:12:53.860Z] CLI Version:   6.3.0
-[debug] [2019-01-28T15:12:53.860Z] Platform:      darwin
-[debug] [2019-01-28T15:12:53.860Z] Node Version:  v10.14.1
-[debug] [2019-01-28T15:12:53.861Z] Time:          Mon Jan 28 2019 23:12:53 GMT+0800 (Singapore Standard Time)
-[debug] [2019-01-28T15:12:53.861Z] ----------------------------------------------------------------------
+[debug] [2019-01-29T03:42:06.217Z] ----------------------------------------------------------------------
+[debug] [2019-01-29T03:42:06.218Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2019-01-29T03:42:06.219Z] CLI Version:   6.3.0
+[debug] [2019-01-29T03:42:06.219Z] Platform:      darwin
+[debug] [2019-01-29T03:42:06.219Z] Node Version:  v10.14.1
+[debug] [2019-01-29T03:42:06.221Z] Time:          Tue Jan 29 2019 11:42:06 GMT+0800 (Singapore Standard Time)
+[debug] [2019-01-29T03:42:06.221Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-01-28T15:12:53.868Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-01-28T15:12:53.868Z] > authorizing via signed-in user
-[debug] [2019-01-28T15:12:53.868Z] [iam] checking project poppeg-95e96 for permissions ["firebase.projects.get"]
-[debug] [2019-01-28T15:12:53.870Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96:testIamPermissions  
+[debug] [2019-01-29T03:42:06.230Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-29T03:42:06.230Z] > authorizing via signed-in user
+[debug] [2019-01-29T03:42:06.230Z] [iam] checking project poppeg-95e96 for permissions ["firebase.projects.get"]
+[debug] [2019-01-29T03:42:06.232Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96:testIamPermissions  
 
-[debug] [2019-01-28T15:12:55.111Z] <<< HTTP RESPONSE 200
-[debug] [2019-01-28T15:12:55.112Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96  
+[debug] [2019-01-29T03:42:07.399Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-29T03:42:07.400Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96  
  
-[debug] [2019-01-28T15:12:56.364Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-29T03:42:08.635Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/clarencekoh/Desktop/Refreshar/RefreshAR'...
 [info] 
 [info] i  functions: Preparing to emulate functions.
-[debug] [2019-01-28T15:12:56.710Z] Fetching environment
-[debug] [2019-01-28T15:12:56.712Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254:getServerAppConfig  
+[debug] [2019-01-29T03:42:08.976Z] Fetching environment
+[debug] [2019-01-29T03:42:08.978Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254:getServerAppConfig  
  
-[debug] [2019-01-28T15:12:56.713Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254/clients/_:getWebAppConfig  
+[debug] [2019-01-29T03:42:08.979Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254/clients/_:getWebAppConfig  
  
-[debug] [2019-01-28T15:12:56.990Z] <<< HTTP RESPONSE 200
-[debug] [2019-01-28T15:12:56.990Z] Starting @google-cloud/functions-emulator
-[debug] [2019-01-28T15:12:57.005Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-29T03:42:09.352Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-29T03:42:09.352Z] Starting @google-cloud/functions-emulator
+[debug] [2019-01-29T03:42:09.555Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000
-[debug] [2019-01-28T15:12:58.044Z] Parsing function triggers
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
+[debug] [2019-01-29T03:42:10.397Z] Parsing function triggers
 [info] ✔  functions: app: http://localhost:5001/poppeg-95e96/us-central1/app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting / to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /uploadpage to local function app
 [info] [hosting] Rewriting / to local function app
 [info] [hosting] Rewriting / to local function app
 [info] [hosting] Rewriting /uploadpage to local function app
@@ -414,88 +109,50 @@
 [info] [hosting] Rewriting /upload to local function app
 [info] [hosting] Rewriting /upload to local function app
 [info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting / to local function app
+[info] [hosting] Rewriting / to local function app
 [info] [hosting] Rewriting /uploadpage to local function app
 [info] [hosting] Rewriting /uploadpage to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
-[info] [hosting] Rewriting /upload to local function app
 [info] [hosting] Rewriting /upload to local function app
 [info] [hosting] Rewriting /upload to local function app
 [info] [hosting] Rewriting /upload to local function app

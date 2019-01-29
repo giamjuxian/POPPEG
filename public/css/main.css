@@ -67,6 +67,11 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+.new-card{
+    border: solid black 2px;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 #uploadButton {
     margin-left: 20px;
@@ -76,4 +81,12 @@ body {
 #uploadButton:hover {
     border-color: #000000;
     color: #000000;
+}
+
+@media (max-width: 760px) {
+    .btn-toolbar {
+        margin: 0;
+        border-radius: 10px;
+        display: block;
+    }
 }
