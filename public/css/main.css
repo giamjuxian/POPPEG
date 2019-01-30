@@ -95,7 +95,7 @@ body {
 }
 .delete-btn:hover {
     cursor: pointer;
-    box-shadow: whitesmoke;
+    background-color: darkred;
 }
 
 @media (max-width: 996px) {

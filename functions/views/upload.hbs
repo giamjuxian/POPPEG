@@ -18,10 +18,18 @@
         crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <script>
+        const emptyHeader = '<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header"><span>Your cart is currently empty!</span></div>';
+        function removeCard() {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+            console.log(document.getElementsByClassName('card-template'));
+            if (document.getElementsByClassName('card-template').length === 0) {
+                document.getElementById("uploadContainer").innerHTML = emptyHeader;
+            }
+        }
         let number_of_cards = 0;
         var apiURL = "http://localhost:5000/";
         // var apiURL = "https://poppeg.com/";
-        // const emptyHeader = '<div class="row"><div class="col-md-offset-1 col-md-5 col-xs-12 jumbotron" style="border: solid black 2px; font-size:16px; border-radius:10px; font-weight:bold;"><span id="imageDescription">Image:</span></div><div class="col-md-5 col-xs-12 jumbotron" style="border: solid black 2px; font-size:16px; border-radius:10px; font-weight:bold;"><span id="videoDescription">Video:</span></div></div>';
+
         $(document).ready(() => {
             $('#getAlbumButton').on('click', (event) => {
                 window.location.href = apiURL + 'uploadpage';
@@ -35,8 +43,8 @@
                 // standard click add button, add to uploadContainer a card
                 let uploadContainer = document.getElementById("uploadContainer");
                 let newCard = document.createElement("div");
-                newCard.className = "row";
-                newCard.id = "cardTemplate";
+                newCard.className = "row card-template";
+                newCard.id = "cardTemplate" + number_of_cards;
                 uploadContainer.appendChild(newCard);
                 let newImage = document.createElement("div");
                 newImage.className = "col-xs-12 col-md-5 col-lg-5 media-block"
@@ -56,7 +64,7 @@
                 newImgInput.type = "file";
                 newImgInput.accept = "image/*";
                 newImgInput.style.display = "inline";
-                document.getElementById('cardTemplate').append(newImage);
+                document.getElementById(`cardTemplate${number_of_cards}`).append(newImage);
                 document.getElementById(`imageBlock${number_of_cards}`).append(newImgInput);
                 let newVid = document.createElement("div");
                 newVid.className = "col-xs-12 col-md-5 col-lg-5 media-block"
@@ -74,7 +82,7 @@
                 newVidInput.type = "file";
                 newVidInput.accept = "video/*";
                 newVidInput.style.display = "inline";
-                document.getElementById('cardTemplate').append(newVid);
+                document.getElementById(`cardTemplate${number_of_cards}`).append(newVid);
                 document.getElementById(`videoBlock${number_of_cards}`).append(newVidInput);
                 let deleteButton = document.createElement("button");
                 deleteButton.id = "deleteButton" + number_of_cards;
@@ -82,16 +90,18 @@
                 deleteButton.innerHTML = "X";
                 deleteButton.type = "button";
                 deleteButton.fontFamily = "Open Sans";
-                document.getElementById('cardTemplate').append(deleteButton);
+                document.getElementById(`cardTemplate${number_of_cards}`).append(deleteButton);
+                document.getElementById(`deleteButton${number_of_cards}`).addEventListener("click", removeCard);
                 console.log("EXECUTED");
                 number_of_cards += 1;
 
             });
             $('#uploadButton').on('click', (event) => {
                 console.log(document.getElementById("trash"));
-            })
-
+            });
         });
+
+
     </script>
 </head>
 
