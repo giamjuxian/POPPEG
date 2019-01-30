@@ -76,6 +76,8 @@ body {
 #uploadButton {
     margin-left: 20px;
     border: solid 1px #FFFFFF;
+    display: inline;
+    vertical-align: top;
 }
 
 #uploadButton:hover {
@@ -83,10 +85,3 @@ body {
     color: #000000;
 }
 
-@media (max-width: 760px) {
-    .btn-toolbar {
-        margin: 0;
-        border-radius: 10px;
-        display: block;
-    }
-}
