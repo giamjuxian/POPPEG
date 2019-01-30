@@ -47,6 +47,7 @@
                 let newImgInput = document.createElement("input");
                 newImgInput.id = "imageUpload" + number_of_cards;
                 newImgInput.type = "file";
+                newImgInput.accept = "image/*";
                 document.getElementById('cardTemplate').append(newImage);
                 document.getElementById(`imageBlock${number_of_cards}`).append(newImgInput);
                 let newVid = document.createElement("div");
@@ -61,6 +62,7 @@
                 let newVidInput = document.createElement("input");
                 newVidInput.id = "videoUpload" + number_of_cards;
                 newVidInput.type = "file";
+                newVidInput.accept = "video/*";
                 document.getElementById('cardTemplate').append(newVid);
                 document.getElementById(`videoBlock${number_of_cards}`).append(newVidInput);
                 console.log("EXECUTED");
