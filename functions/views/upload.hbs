@@ -16,12 +16,62 @@
 	 crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 	<script>
+        let number_of_cards = 0;
 		var apiURL = "http://localhost:5000/";
 		// var apiURL = "https://poppeg.com/";
+        // const emptyHeader = '<div class="row"><div class="col-md-offset-1 col-md-5 col-xs-12 jumbotron" style="border: solid black 2px; font-size:16px; border-radius:10px; font-weight:bold;"><span id="imageDescription">Image:</span></div><div class="col-md-5 col-xs-12 jumbotron" style="border: solid black 2px; font-size:16px; border-radius:10px; font-weight:bold;"><span id="videoDescription">Video:</span></div></div>';
 		$(document).ready(() => {
 			$('#getAlbumButton').on('click', (event) => {
 				window.location.href = apiURL + 'uploadpage';
 			});
+            $('#addCardButton').on('click', (event) => {
+                // when you add a new card, the emptyHeader must be removed
+                if (document.getElementById("emptyHeader") !== null) {
+                    $('#emptyHeader').remove();
+                } else {}
+
+                // standard click add button, add to uploadContainer a card
+                let uploadContainer = document.getElementById("uploadContainer");
+                let newCard = document.createElement("div");
+                newCard.className = "container row";
+                newCard.id = "cardTemplate";
+                uploadContainer.appendChild(newCard);
+                let newImage = document.createElement("div");
+                newImage.className = "col-xs-12 col-md-5 col-lg-5"
+                newImage.innerHTML = "Image: ";
+                newImage.id = "imageBlock" + number_of_cards;
+                newImage.style.fontSize = "20px";
+                newImage.style.fontWeight = "bold";
+                newImage.style.backgroundColor = "#FFFDD0";
+                newImage.style.fontFamily = "Open Sans";
+                let newImgInput = document.createElement("input");
+                newImgInput.id = "imageUpload" + number_of_cards;
+                newImgInput.type = "file";
+                newImgInput.accept = "image/*";
+                document.getElementById('cardTemplate').append(newImage);
+                document.getElementById(`imageBlock${number_of_cards}`).append(newImgInput);
+                let newVid = document.createElement("div");
+                newVid.className = "col-xs-12 col-md-5 col-lg-5 col-offset-md-6 col-offset-lg-6"
+                newVid.innerHTML = "Video: ";
+                newVid.id = "videoBlock" + number_of_cards;
+                console.log(newVid.id);
+                newVid.style.fontSize = "20px";
+                newVid.style.fontWeight = "bold";
+                newVid.style.backgroundColor = "#FFFDD0";
+                newVid.style.fontFamily = "Open Sans";
+                let newVidInput = document.createElement("input");
+                newVidInput.id = "videoUpload" + number_of_cards;
+                newVidInput.type = "file";
+                newVidInput.accept = "video/*";
+                document.getElementById('cardTemplate').append(newVid);
+                document.getElementById(`videoBlock${number_of_cards}`).append(newVidInput);
+                console.log("EXECUTED");
+                number_of_cards += 1;
+                
+            });
+            $('#uploadButton').on('click', (event) => {
+                console.log(document.getElementById("trash"));
+            })
         
 		});
 	</script>
@@ -32,27 +82,32 @@
             <img src="media/poppeg_strip_vector.png" class=" poppeg-logo img-fluid" alt="Responsive image" style="width: 100%" />
         </div>
     </div>
-	<div class="row">
-		<div class="col-md-12 col-xs-12 text-center standard-header">
-			<span>Your cart is currently empty!</span>
-		</div>
-	</div>
-    <br />
-    <div class="container">
+    <div class="container" id="uploadContainer">
         <div class="row">
-            {{!-- <div class="col-xs-12 col-md-2 col-lg-2 col-lg-offset-6 col-md-offset-6">
-                <button type="button" class="btn btn-add-collection btn-lg" style="margin-top:15px">
-                    Add New Card
-                </button>
-            </div> --}}
-            <div class="col-xs-12 col-lg-offset-6 col-md-offset-6">
-                <div class="btn-toolbar">
-                    <button id="addCardButton" type="button" class="btn btn-add-collection btn-lg" style="margin-top:15px">Add to Collection</button>
-                    <button id="uploadButton" type="button" class="btn btn-success btn-lg" style="margin-top:15px">Upload Now!</button>
-                </div>
+            <div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
+                <span>Your cart is currently empty!</span>
             </div>
         </div>
     </div>
+    <br />
+    {{!-- <div class="container"> --}}
+        <div class="row">
+            {{!-- <div class="col-xs-12 col-lg-offset-5 col-md-offset-5"> --}}
+            <div class="btn-toolbar col-md-12 col-lg-12">
+                <div class="col-xs-12 col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+                    <button id="addCardButton" type="button" class="btn btn-add-collection btn-lg" style="margin-top:15px">
+                        Add New Card
+                    </button>
+                </div>
+                <div class="col-xs-12 col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+                    <button id="uploadButton" type="button" class="btn btn-success btn-lg" style="margin-top:15px">
+                        Upload Now!
+                    </button>
+                </div>
+            </div>
+            {{!-- </div> --}}
+        </div>
+    {{!-- </div> --}}
 
 
 

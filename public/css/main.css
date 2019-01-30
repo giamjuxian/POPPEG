@@ -67,13 +67,21 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+.new-card{
+    border: solid black 2px;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 #uploadButton {
     margin-left: 20px;
     border: solid 1px #FFFFFF;
+    display: inline;
+    vertical-align: top;
 }
 
 #uploadButton:hover {
     border-color: #000000;
     color: #000000;
 }
+
