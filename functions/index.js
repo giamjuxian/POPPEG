@@ -27,10 +27,6 @@ app.get('/', function (req, res, next) {
 	res.render('loginpage');
 });
 
-app.get('/uploadpage', function (req, res, next) {
-	res.render('collections');
-});
-
 app.get('/upload', function (req, res, next) {
 	res.render('upload');
 });

@@ -21,21 +21,26 @@ body {
     margin-right: 0px;
 }
 
-.btn-album-next {
+.btn-green {
     background-color: #f2d824;
     color:#000000;
     font-weight: bold;
     border-color: #f2d824;
 }
 
-.btn-add-collection {
-    background-color: #FFAC33;
-    font-weight: bold;
-    color: #FFFFFF;
-    border-color: #FFFFFF;
+.btn-green:hover {
+    border-color: #f2d824;
 }
-.btn-add-collection:hover {
-    border-color: #000000;
+
+.btn-red {
+    background-color: #ED3030;
+    color:#000000;
+    font-weight: bold;
+    border-color: #ED3030;
+}
+
+.btn-red:hover {
+    border-color: #ED3030;
 }
 
 .text-white {
@@ -55,8 +60,7 @@ body {
 }
 
 .standard-header {
-    font-size: 35px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
     letter-spacing: 2px;
     color: #f2d824;
 }
@@ -67,21 +71,10 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+
 .new-card{
     border: solid black 2px;
     font-weight: bold;
     font-size: 20px;
-}
-
-#uploadButton {
-    margin-left: 20px;
-    border: solid 1px #FFFFFF;
-    display: inline;
-    vertical-align: top;
-}
-
-#uploadButton:hover {
-    border-color: #000000;
-    color: #000000;
 }
 
