@@ -78,3 +78,12 @@ body {
     font-size: 20px;
 }
 
+.media-block {
+    padding: 20px 10px;
+}
+
+@media (max-width: 996px) {
+    .media-block {
+        border-radius: 10px;
+    }
+}

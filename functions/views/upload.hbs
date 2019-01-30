@@ -35,36 +35,43 @@
                 // standard click add button, add to uploadContainer a card
                 let uploadContainer = document.getElementById("uploadContainer");
                 let newCard = document.createElement("div");
-                newCard.className = "container row";
+                newCard.className = "row";
                 newCard.id = "cardTemplate";
                 uploadContainer.appendChild(newCard);
                 let newImage = document.createElement("div");
-                newImage.className = "col-xs-12 col-md-5 col-lg-5"
+                newImage.className = "col-xs-12 col-md-6 col-lg-6 media-block"
                 newImage.innerHTML = "Image: ";
                 newImage.id = "imageBlock" + number_of_cards;
                 newImage.style.fontSize = "20px";
                 newImage.style.fontWeight = "bold";
                 newImage.style.backgroundColor = "#FFFDD0";
                 newImage.style.fontFamily = "Open Sans";
+                newImage.style.border = "solid black 2px";
+                newImage.style.borderBottomLeftRadius = "10px";
+                newImage.style.borderTopLeftRadius = "10px";
                 let newImgInput = document.createElement("input");
                 newImgInput.id = "imageUpload" + number_of_cards;
                 newImgInput.type = "file";
                 newImgInput.accept = "image/*";
+                newImgInput.style.display = "inline";
                 document.getElementById('cardTemplate').append(newImage);
                 document.getElementById(`imageBlock${number_of_cards}`).append(newImgInput);
                 let newVid = document.createElement("div");
-                newVid.className = "col-xs-12 col-md-5 col-lg-5 col-offset-md-6 col-offset-lg-6"
+                newVid.className = "col-xs-12 col-md-6 col-lg-6 media-block"
                 newVid.innerHTML = "Video: ";
                 newVid.id = "videoBlock" + number_of_cards;
-                console.log(newVid.id);
                 newVid.style.fontSize = "20px";
                 newVid.style.fontWeight = "bold";
                 newVid.style.backgroundColor = "#FFFDD0";
                 newVid.style.fontFamily = "Open Sans";
+                newVid.style.border = "solid black 2px";
+                newVid.style.borderBottomRightRadius = "10px";
+                newVid.style.borderTopRightRadius = "10px";
                 let newVidInput = document.createElement("input");
                 newVidInput.id = "videoUpload" + number_of_cards;
                 newVidInput.type = "file";
                 newVidInput.accept = "video/*";
+                newVidInput.style.display = "inline";
                 document.getElementById('cardTemplate').append(newVid);
                 document.getElementById(`videoBlock${number_of_cards}`).append(newVidInput);
                 console.log("EXECUTED");
