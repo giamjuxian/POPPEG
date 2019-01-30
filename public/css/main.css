@@ -82,8 +82,28 @@ body {
     padding: 20px 10px;
 }
 
+.delete-btn {
+    background-color: rgba(255, 0, 0, 0.623);
+    color: #FFFFFF;
+    border: #FFFFFF solid 1px; 
+    font-size: 18px;
+    font-weight: bold;
+    padding: 19.5px 10.5px;
+    margin-top: 2.5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.delete-btn:hover {
+    cursor: pointer;
+    box-shadow: whitesmoke;
+}
+
 @media (max-width: 996px) {
     .media-block {
         border-radius: 10px;
+    }
+    .delete-btn {
+        border-radius: 10px;
+        margin-left: 25%;
     }
 }
