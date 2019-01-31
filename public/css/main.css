@@ -51,6 +51,14 @@ body {
     height: 1400px;
 }
 
+.upload-card {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+}
+
 .offset-top-15 {
     margin-top: 15px;
 }
@@ -93,6 +101,7 @@ body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 .delete-btn:hover {
     cursor: pointer;
     background-color: darkred;

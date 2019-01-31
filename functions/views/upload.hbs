@@ -13,93 +13,63 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
     <script>
         const emptyHeader = '<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header"><span>Your cart is currently empty!</span></div>';
-        function removeCard() {
-            this.parentNode.parentNode.removeChild(this.parentNode);
-            console.log(document.getElementsByClassName('card-template'));
-            if (document.getElementsByClassName('card-template').length === 0) {
-                document.getElementById("uploadContainer").innerHTML = emptyHeader;
-            }
-        }
-        let number_of_cards = 0;
+        let numberOfCards = 0;
         var apiURL = "http://localhost:5000/";
         // var apiURL = "https://poppeg.com/";
 
         $(document).ready(() => {
-            $('#getAlbumButton').on('click', (event) => {
-                window.location.href = apiURL + 'uploadpage';
-            });
             $('#addCardButton').on('click', (event) => {
                 // when you add a new card, the emptyHeader must be removed
                 if (document.getElementById("emptyHeader") !== null) {
                     $('#emptyHeader').remove();
-                } else { }
-
+                }
                 // standard click add button, add to uploadContainer a card
-                let uploadContainer = document.getElementById("uploadContainer");
-                let newCard = document.createElement("div");
-                newCard.className = "row card-template";
-                newCard.id = "cardTemplate" + number_of_cards;
-                uploadContainer.appendChild(newCard);
-                let newImage = document.createElement("div");
-                newImage.className = "col-xs-12 col-md-5 col-lg-5 media-block"
-                newImage.innerHTML = "Image: ";
-                newImage.id = "imageBlock" + number_of_cards;
-                newImage.style.fontSize = "18px";
-                newImage.style.fontWeight = "bold";
-                newImage.style.backgroundColor = "#FFFFFF";
-                newImage.style.fontFamily = "Open Sans";
-                newImage.style.borderLeft = "solid black 2px";
-                newImage.style.borderTop = "solid black 2px";
-                newImage.style.borderBottom = "solid black 2px";
-                newImage.style.borderBottomLeftRadius = "10px";
-                newImage.style.borderTopLeftRadius = "10px";
-                let newImgInput = document.createElement("input");
-                newImgInput.id = "imageUpload" + number_of_cards;
-                newImgInput.type = "file";
-                newImgInput.accept = "image/*";
-                newImgInput.style.display = "inline";
-                document.getElementById(`cardTemplate${number_of_cards}`).append(newImage);
-                document.getElementById(`imageBlock${number_of_cards}`).append(newImgInput);
-                let newVid = document.createElement("div");
-                newVid.className = "col-xs-12 col-md-5 col-lg-5 media-block"
-                newVid.innerHTML = "Video: ";
-                newVid.id = "videoBlock" + number_of_cards;
-                newVid.style.fontSize = "18px";
-                newVid.style.fontWeight = "bold";
-                newVid.style.backgroundColor = "#FFFFFF";
-                newVid.style.fontFamily = "Open Sans";
-                newVid.style.borderTop = "solid black 2px";
-                newVid.style.borderRight = "solid black 2px";
-                newVid.style.borderBottom = "solid black 2px";
-                let newVidInput = document.createElement("input");
-                newVidInput.id = "videoUpload" + number_of_cards;
-                newVidInput.type = "file";
-                newVidInput.accept = "video/*";
-                newVidInput.style.display = "inline";
-                document.getElementById(`cardTemplate${number_of_cards}`).append(newVid);
-                document.getElementById(`videoBlock${number_of_cards}`).append(newVidInput);
-                let deleteButton = document.createElement("button");
-                deleteButton.id = "deleteButton" + number_of_cards;
-                deleteButton.className = "delete-btn col-xs-6 col-md-1 col-lg-1";
-                deleteButton.innerHTML = "X";
-                deleteButton.type = "button";
-                deleteButton.fontFamily = "Open Sans";
-                document.getElementById(`cardTemplate${number_of_cards}`).append(deleteButton);
-                document.getElementById(`deleteButton${number_of_cards}`).addEventListener("click", removeCard);
-                console.log("EXECUTED");
-                number_of_cards += 1;
-
+                var $uploadContainer = $("#uploadContainer");
+                $uploadContainer.append(addUploadContainer(numberOfCards))
+                numberOfCards += 1;
             });
+
             $('#uploadButton').on('click', (event) => {
                 console.log(document.getElementById("trash"));
             });
+
+            $(document).on('click', "button.delete-btn", (event) => {
+                event.preventDefault();
+                $(event.target).parent().parent().remove();
+                numberOfCards--;
+            });
         });
+
+        function addUploadContainer(numberOfCards) {
+            let html =
+                `<div class="row card-template upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
+                    <div class="col-xs-12 col-md-5 col-lg-5 media-block" id="imageBlock2">
+                        <label for="imageUpload_${numberOfCards}">Image: </label> 
+                        <input id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 media-block" id="videoBlock2">
+                        <label for="videoUpload_${numberOfCards}">Video: </label> 
+                        <input id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
+                    </div>
+                    <div class="col-xs-1 col-md-1 col-lg-1">
+                        <button id="deleteButton_${numberOfCards}" class="delete-btn" type="button">X</button>
+                    </div>
+                </div>`
+            return html;
+        }
+
+        function removeCard() {
+            console.log($(this));
+            if ($('.card-template').length === 0) {
+                $("#uploadContainer").html = emptyHeader;
+            }
+        }
 
 
     </script>
