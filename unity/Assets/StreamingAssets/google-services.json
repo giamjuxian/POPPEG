@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "723639879254",
+    "firebase_url": "https://poppeg-95e96.firebaseio.com",
+    "project_id": "poppeg-95e96",
+    "storage_bucket": "poppeg-95e96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723639879254:android:b6167f47b8415fb0",
+        "android_client_info": {
+          "package_name": "com.poppeg.poppeg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723639879254-ur1ul8ou3nralkuu5klc5b1a5v1raks8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgTc0AbwE6plww0y8TYBPWo2eQm1zPN1Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

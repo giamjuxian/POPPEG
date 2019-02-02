@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/loginpage.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        // var apiURL = "http://localhost:5000/";
+        var apiURL = "https://www.poppeg.com/";
+
+        $(document).ready(() => {
+            $('#getAlbumButton').on('click', (event) => {
+                window.location.href = apiURL + 'uploadpage';
+            })
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+            <img src="media/poppeg_strip_vector.png" class=" poppeg-logo img-fluid" alt="Responsive image" style="width: 100%">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+            <form>
+                <div class="form-group album-form">
+                    <label for="albumTitle"><span class="text-white">Album Title</span></label>
+                    <input type="email" class="form-control input-lg" id="albumTitle" placeholder="Enter Album Title">
+                </div>
+                <div class="form-group album-form">
+                    <label for="popCode"><span class="text-white">POPCode</span></label>
+                    <input type="password" class="form-control input-lg" id="popCode" placeholder="Enter POPCode">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+            <button id="getAlbumButton" type="button" class="btn btn-album-next btn-block btn-lg" style="margin-top:15px">Get Album</button>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4" style="margin-top: 30px">
+            <p><span class="text-white footer">A Project by POPPEG</span></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
