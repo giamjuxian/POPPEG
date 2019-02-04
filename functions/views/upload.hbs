@@ -18,12 +18,17 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
     <script>
-        const emptyHeader = '<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header"><span>Your cart is currently empty!</span></div>';
+        const emptyHeader = 
+        `<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
+            <span>Your cart is currently empty!</span>
+        </div>
+         `;
         let numberOfCards = 0;
         var apiURL = "http://localhost:5000/";
         // var apiURL = "https://poppeg.com/";
 
         $(document).ready(() => {
+            console.log(document.getElementById("uploadContainer").childNodes.length);
             $('#addCardButton').on('click', (event) => {
                 // when you add a new card, the emptyHeader must be removed
                 if (document.getElementById("emptyHeader") !== null) {
@@ -40,9 +45,14 @@
             });
 
             $(document).on('click', "button.delete-btn", (event) => {
+                console.log(event);
                 event.preventDefault();
                 $(event.target).parent().parent().remove();
-                numberOfCards--;
+                console.log(document.getElementById("uploadContainer").childNodes.length);
+                if (document.getElementById("uploadContainer").childNodes.length == 2) {
+                    console.log(typeof(emptyHeader));
+                    $("#uploadContainer").append($(emptyHeader));
+                }
             });
         });
 

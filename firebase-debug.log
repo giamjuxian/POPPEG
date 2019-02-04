@@ -1,0 +1,125 @@
+[debug] [2019-02-04T09:58:29.275Z] ----------------------------------------------------------------------
+[debug] [2019-02-04T09:58:29.277Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2019-02-04T09:58:29.277Z] CLI Version:   6.3.0
+[debug] [2019-02-04T09:58:29.277Z] Platform:      darwin
+[debug] [2019-02-04T09:58:29.277Z] Node Version:  v10.14.1
+[debug] [2019-02-04T09:58:29.285Z] Time:          Mon Feb 04 2019 17:58:29 GMT+0800 (Singapore Standard Time)
+[debug] [2019-02-04T09:58:29.285Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-04T09:58:29.302Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-04T09:58:29.302Z] > authorizing via signed-in user
+[debug] [2019-02-04T09:58:29.303Z] [iam] checking project poppeg-95e96 for permissions ["firebase.projects.get"]
+[debug] [2019-02-04T09:58:29.304Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-02-04T09:58:29.304Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-02-04T09:58:29.415Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-04T09:58:29.428Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96:testIamPermissions  
+
+[debug] [2019-02-04T09:58:30.568Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-04T09:58:30.570Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96  
+ 
+[debug] [2019-02-04T09:58:32.018Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/clarencekoh/Desktop/Refreshar/RefreshAR'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-04T09:58:32.909Z] Fetching environment
+[debug] [2019-02-04T09:58:32.911Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254:getServerAppConfig  
+ 
+[debug] [2019-02-04T09:58:32.911Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254/clients/_:getWebAppConfig  
+ 
+[debug] [2019-02-04T09:58:33.246Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-04T09:58:33.247Z] Starting @google-cloud/functions-emulator
+[debug] [2019-02-04T09:58:33.555Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-02-04T09:58:34.287Z] Parsing function triggers
+[info] [hosting] Rewriting / to local function app
+[info] ✔  functions: app: http://localhost:5001/poppeg-95e96/us-central1/app
+[info] [hosting] Rewriting / to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
+[info] [hosting] Rewriting /upload to local function app
