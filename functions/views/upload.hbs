@@ -67,7 +67,6 @@
                 $(event.target).parent().parent().remove();
                 console.log(document.getElementById("uploadContainer").childNodes.length);
                 if (document.getElementById("uploadContainer").childNodes.length == 2) {
-                    console.log(typeof(emptyHeader));
                     $("#uploadContainer").append($(emptyHeader));
                     $("#uploadButton").attr("disabled", "disabled");
                 }
@@ -75,7 +74,6 @@
 
             $(document).on('change', '.image-upload', (event) => {
                 let fileName = event.target.value;
-                multiplesFileArr.push(fileName);
                 let fileId = event.target.id[12];
                 let enableUpload = imgFileValidator(fileName, fileId);
                 // After file validation, if file is valid, enable upload button, else disable
@@ -91,41 +89,28 @@
             // Check if fileName exists
             if (fileName.length > 0) {
                 // Check if file is already in the cart, prevent double submission
-                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 1) {
-                    let element_popped = multiplesFileArr.pop();
-                    console.log(element_popped);
+                
+                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist in the global variable
                     $(`#errorImg_${uniqueId}`).html("This file is already in your cart! Please pick another .JPEG file.");
                     ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
                     return false;
-                } else { 
-                    // new unique file was posted 
-                    for (let i = 0; i < validFileExtensions.length; i++) {
-                        const current_ext = validFileExtensions[i];
-                        // if the file is of an invalid extension type.
-                        if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() != current_ext.toLowerCase()) {
-                            $(`#errorImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
-                            ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
-                            return false;
-                        } else { 
-                            // return true if the file type is jpg or jpeg
-                            ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
-                            return true; 
-                        }
-                    }   
+                } else { // if the file currently does not exist in multipleFileArr, push into arr this filename
+                    multiplesFileArr.push(fileName);
                 }
+                // new unique file was posted 
                 for (let i = 0; i < validFileExtensions.length; i++) {
                     const current_ext = validFileExtensions[i];
                     // if the file is of an invalid extension type.
-                    if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() != current_ext.toLowerCase()) {
-                        $(`#errorImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
-                        ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
-                        return false;
-                    } else { 
+                    if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() == current_ext.toLowerCase()) {
                         // return true if the file type is jpg or jpeg
                         ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
                         return true; 
-                    }
+                    } else {}
                 }
+                // if does not equal to any file extension, throw error.
+                $(`#errorImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
+                ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
+                return false;
             } else {
                 // Checks if file is empty.
                 $(`#errorImg_${uniqueId}`).html("You must provide a valid .JPEG file!");
