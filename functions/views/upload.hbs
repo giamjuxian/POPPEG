@@ -73,6 +73,12 @@
             });
 
             $(document).on('change', '.image-upload', (event) => {
+                let temp_arr = [];
+                let imageUploads = $('.image-upload');
+                for (let i = 0; i < imageUploads.length; i++) {
+                    temp_arr.push(imageUploads[i].value);
+                }
+                multiplesFileArr = multiplesFileArr.diff(temp_arr);
                 let fileName = event.target.value;
                 let fileId = event.target.id[12];
                 let enableUpload = imgFileValidator(fileName, fileId);
@@ -82,21 +88,33 @@
                 } else {
                     $("#uploadButton").attr("disabled", "disabled");
                 }
-                console.log("executed");
             });
         });
+
+        Array.prototype.diff = function(arr2) {
+            let ret = [];
+            // this refers to Array
+            this.sort();
+            arr2.sort();
+            for(let i = 0; i < this.length; i++) {
+                if(arr2.indexOf(this[i]) > -1){
+                    ret.push(this[i]);
+                }
+            }
+            return ret;
+        };
+
         function imgFileValidator (fileName, uniqueId) {
             // Check if fileName exists
+            console.log(`this is multiple ${multiplesFileArr}`);
             if (fileName.length > 0) {
                 // Check if file is already in the cart, prevent double submission
                 
-                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist in the global variable
+                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist 
                     $(`#errorImg_${uniqueId}`).html("This file is already in your cart! Please pick another .JPEG file.");
                     ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
                     return false;
-                } else { // if the file currently does not exist in multipleFileArr, push into arr this filename
-                    multiplesFileArr.push(fileName);
-                }
+                } else { }
                 // new unique file was posted 
                 for (let i = 0; i < validFileExtensions.length; i++) {
                     const current_ext = validFileExtensions[i];
@@ -104,6 +122,7 @@
                     if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() == current_ext.toLowerCase()) {
                         // return true if the file type is jpg or jpeg
                         ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
+                        multiplesFileArr.push(fileName);
                         return true; 
                     } else {}
                 }
