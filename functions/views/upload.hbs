@@ -18,6 +18,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
     <script>
+        let multiplesFileArr = [];
         const emptyHeader = 
         `<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
             <span>Your cart is currently empty!</span>
@@ -74,6 +75,7 @@
 
             $(document).on('change', '.image-upload', (event) => {
                 let fileName = event.target.value;
+                multiplesFileArr.push(fileName);
                 let fileId = event.target.id[12];
                 let enableUpload = imgFileValidator(fileName, fileId);
                 // After file validation, if file is valid, enable upload button, else disable
@@ -88,35 +90,57 @@
         function imgFileValidator (fileName, uniqueId) {
             // Check if fileName exists
             if (fileName.length > 0) {
+                // Check if file is already in the cart, prevent double submission
+                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 1) {
+                    let element_popped = multiplesFileArr.pop();
+                    console.log(element_popped);
+                    $(`#errorImg_${uniqueId}`).html("This file is already in your cart! Please pick another .JPEG file.");
+                    ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
+                    return false;
+                } else { 
+                    // new unique file was posted 
+                    for (let i = 0; i < validFileExtensions.length; i++) {
+                        const current_ext = validFileExtensions[i];
+                        // if the file is of an invalid extension type.
+                        if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() != current_ext.toLowerCase()) {
+                            $(`#errorImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
+                            ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
+                            return false;
+                        } else { 
+                            // return true if the file type is jpg or jpeg
+                            ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
+                            return true; 
+                        }
+                    }   
+                }
                 for (let i = 0; i < validFileExtensions.length; i++) {
                     const current_ext = validFileExtensions[i];
                     // if the file is of an invalid extension type.
                     if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() != current_ext.toLowerCase()) {
-                        $(`#emptyImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
-                        console.log(uniqueId);
-                        console.log(($(`#emptyImg_${uniqueId}`))[0]);
-                        ($(`#emptyImg_${uniqueId}`))[0].style.display = "block";
+                        $(`#errorImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
+                        ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
                         return false;
                     } else { 
                         // return true if the file type is jpg or jpeg
-                        ($(`#emptyImg_${uniqueId}`))[0].style.display = "none";
+                        ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
                         return true; 
                     }
                 }
             } else {
                 // Checks if file is empty.
-                $(`#emptyImg_${uniqueId}`).html("You must provide a valid .JPEG file!");
-                ($(`#emptyImg_${uniqueId}`))[0].style.display = "block";
+                $(`#errorImg_${uniqueId}`).html("You must provide a valid .JPEG file!");
+                ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
                 return false; 
             }
         }
+
         function addUploadContainer(numberOfCards) {
             let html =
                 `<div class="row card-template upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block imageBlock">
                         <label for="imageUpload_${numberOfCards}">Image: </label> 
                         <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
-                            <div id="emptyImg_${numberOfCards}">Please input a valid file!</div>
+                            <div id="errorImg_${numberOfCards}">Please input a valid file!</div>
                         </input>
                     </div>
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block videoBlock">
@@ -131,11 +155,6 @@
                 </div>`
             return html;
         }
-        function test(inputhere) {
-            console.log(inputhere);
-            console.log("Executed");
-        }
-
 
     </script>
 </head>
