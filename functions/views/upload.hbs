@@ -24,6 +24,7 @@
         </div>
          `;
         let numberOfCards = 0;
+        const validFileExtensions = [".jpg", ".jpeg"]; 
         var apiURL = "http://localhost:5000/";
         // var apiURL = "https://poppeg.com/";
 
@@ -38,11 +39,26 @@
                 var $uploadContainer = $("#uploadContainer");
                 $uploadContainer.append(addUploadContainer(numberOfCards))
                 numberOfCards += 1;
+                if ($("#emptyHeader").length != 1) {
+                    $("#uploadButton").removeAttr("disabled", "disabled");
+                } else {}
+            });
+            
+            $('#uploadButton').on('click', (event) => {
+                // checks if imageBlock and videoBlock fields all filled
+                const numberOfMediaBlocks = $(".imageBlock").length;
+                for (let i = 0; i < numberOfMediaBlocks; i++) {
+                    if (($(".imageBlock").children())[1 + i * 3].value == "") {
+                        ($(".imageBlock").children())[2 + i * 3].style.display = "block";
+                    }
+                    if (($(".videoBlock").children())[1 + i * 3].value == "") {
+                        ($(".videoBlock").children())[2 + i * 3].style.display = "block";
+                    }
+                }
+                console.log(($(".imageBlock").children()));
+                console.log(($(".videoBlock").children()));
             });
 
-            $('#uploadButton').on('click', (event) => {
-                console.log(document.getElementById("trash"));
-            });
 
             $(document).on('click', "button.delete-btn", (event) => {
                 console.log(event);
@@ -52,20 +68,62 @@
                 if (document.getElementById("uploadContainer").childNodes.length == 2) {
                     console.log(typeof(emptyHeader));
                     $("#uploadContainer").append($(emptyHeader));
+                    $("#uploadButton").attr("disabled", "disabled");
                 }
             });
-        });
 
+            $(document).on('change', '.image-upload', (event) => {
+                let fileName = event.target.value;
+                let fileId = event.target.id[12];
+                let enableUpload = imgFileValidator(fileName, fileId);
+                // After file validation, if file is valid, enable upload button, else disable
+                if (enableUpload) {
+                    $("#uploadButton").removeAttr("disabled", "disabled");
+                } else {
+                    $("#uploadButton").attr("disabled", "disabled");
+                }
+                console.log("executed");
+            });
+        });
+        function imgFileValidator (fileName, uniqueId) {
+            // Check if fileName exists
+            if (fileName.length > 0) {
+                for (let i = 0; i < validFileExtensions.length; i++) {
+                    const current_ext = validFileExtensions[i];
+                    // if the file is of an invalid extension type.
+                    if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() != current_ext.toLowerCase()) {
+                        $(`#emptyImg_${uniqueId}`).html("Invalid file type. Please upload a .JPEG file.");
+                        console.log(uniqueId);
+                        console.log(($(`#emptyImg_${uniqueId}`))[0]);
+                        ($(`#emptyImg_${uniqueId}`))[0].style.display = "block";
+                        return false;
+                    } else { 
+                        // return true if the file type is jpg or jpeg
+                        ($(`#emptyImg_${uniqueId}`))[0].style.display = "none";
+                        return true; 
+                    }
+                }
+            } else {
+                // Checks if file is empty.
+                $(`#emptyImg_${uniqueId}`).html("You must provide a valid .JPEG file!");
+                ($(`#emptyImg_${uniqueId}`))[0].style.display = "block";
+                return false; 
+            }
+        }
         function addUploadContainer(numberOfCards) {
             let html =
                 `<div class="row card-template upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
-                    <div class="col-xs-12 col-md-5 col-lg-5 media-block" id="imageBlock2">
+                    <div class="col-xs-12 col-md-5 col-lg-5 media-block imageBlock">
                         <label for="imageUpload_${numberOfCards}">Image: </label> 
-                        <input id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
+                        <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
+                            <div id="emptyImg_${numberOfCards}">Please input a valid file!</div>
+                        </input>
                     </div>
-                    <div class="col-xs-12 col-md-5 col-lg-5 media-block" id="videoBlock2">
+                    <div class="col-xs-12 col-md-5 col-lg-5 media-block videoBlock">
                         <label for="videoUpload_${numberOfCards}">Video: </label> 
                         <input id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
+                            <div id="emptyVid_${numberOfCards}">Please input a valid file!</div>
+                        </input>
                     </div>
                     <div class="col-xs-1 col-md-1 col-lg-1">
                         <button id="deleteButton_${numberOfCards}" class="delete-btn" type="button">X</button>
@@ -73,12 +131,9 @@
                 </div>`
             return html;
         }
-
-        function removeCard() {
-            console.log($(this));
-            if ($('.card-template').length === 0) {
-                $("#uploadContainer").html = emptyHeader;
-            }
+        function test(inputhere) {
+            console.log(inputhere);
+            console.log("Executed");
         }
 
 
@@ -105,7 +160,7 @@
             </button>
         </div>
         <div class="col-xs-12 col-md-2 col-lg-2">
-            <button id="uploadButton" type="button" class="btn btn-red btn-block btn-lg" style="margin-top:15px">
+            <button id="uploadButton" type="button" class="btn btn-red btn-block btn-lg" style="margin-top:15px" disabled="disabled">
                 Upload Now!
             </button>
         </div>

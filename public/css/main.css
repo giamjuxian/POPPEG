@@ -26,6 +26,7 @@ body {
     color:#000000;
     font-weight: bold;
     border-color: #f2d824;
+    justify-content: center;
 }
 
 .btn-green:hover {
@@ -102,11 +103,6 @@ body {
     border-bottom-right-radius: 10px;
 }
 
-.delete-btn:hover {
-    cursor: pointer;
-    background-color: darkred;
-}
-
 @media (max-width: 996px) {
     .media-block {
         border-radius: 10px;
@@ -115,4 +111,12 @@ body {
         border-radius: 10px;
         margin-left: 25%;
     }
+}
+
+.upload-card .media-block div{
+    color: red;
+    display: none;
+    font-size: 13px;
+    color: red;
+    padding-left: 30%;
 }
