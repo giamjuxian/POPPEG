@@ -33,5 +33,6 @@ sysinfo.txt
 
 # Builds
 unity/build_v1.0
+application/build_v1.0.1
 *.apk
 *.unitypackage
