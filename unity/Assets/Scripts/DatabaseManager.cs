@@ -15,17 +15,22 @@ using UnityEngine.UI;
 public class DatabaseManager : MonoBehaviour
 {
     public GameObject downloadButton;
-    public GameObject cameraButton;
+    public GameObject backButton;
     public GameObject textField;
-    public GameObject incorrectTextField;
+    public GameObject warningTextField;
     private List<Entry> allEntries;
     private FirebaseStorage storage;
     private StorageReference storage_ref;
     private int downloadsRunning = 0;
+    private string dotText = "";
+    private int nextUpdate = 1;
+    private bool isDownloading;
+    private Text warningText;
 
-    // Start is called before the first frame update
     void Start()
     {
+        warningText = warningTextField.GetComponentInChildren<Text>();
+        isDownloading = false;
         allEntries = new List<Entry>();
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://poppeg-95e96.firebaseio.com/");
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -37,18 +42,24 @@ public class DatabaseManager : MonoBehaviour
     {
         if (downloadsRunning > 0)
         {
-            downloadButton.GetComponentInChildren<Text>().text = "Downloading";
-            cameraButton.SetActive(false);
+            isDownloading = true;
+            ShowDownloading();
         }
 
         if (downloadsRunning <= 0)
         {
-            downloadButton.GetComponentInChildren<Text>().text = "Download";
-            cameraButton.SetActive(true);
+            if (isDownloading)
+            {
+                ShowDownloadSucceed();
+            }
         }
     }
 
-    public void GetData()
+    /*
+     * Downloads all videos from the indicated album name.
+     * If album name does not exist, warning message is shown.
+     */
+    public void DownloadVideosFromAlbum()
     {
         string albumName = GameObject.Find("BookName").GetComponent<Text>().text;
         Debug.Log(albumName);
@@ -73,9 +84,13 @@ public class DatabaseManager : MonoBehaviour
                             allEntries.Add(new Entry(entryName, entryURL));
                         }
                         DownloadVideo();
+                        warningTextField.SetActive(false);
                     }
-                    else {
-                        incorrectTextField.SetActive(true);
+                    else
+                    {
+                        warningText.text = "Album does not exists";
+                        warningText.color = Color.red;
+                        warningTextField.SetActive(true);
                     }
 
                 }
@@ -85,12 +100,19 @@ public class DatabaseManager : MonoBehaviour
         }
         else
         {
-            GameObject.Find("Placeholder").GetComponent<Text>().color = Color.red;
+            warningText.text = "Please enter an album name";
+            warningText.color = Color.red;
+            warningTextField.SetActive(true);
         }
 
     }
 
-    public void DownloadVideo()
+    #region Helper Methods
+
+    /* 
+     * Retrieves download url from firebase and downloads the video from the url received 
+     */
+    private void DownloadVideo()
     {
         foreach (Entry e in allEntries)
         {
@@ -111,22 +133,58 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    public void CameraScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    IEnumerator DownloadVideoFromURL(string url, string name)
+    /*
+     * Downloads video using the url provided. Video is downloaded as a {{videoName}}.mp4 file
+     */
+    private IEnumerator DownloadVideoFromURL(string url, string videoName)
     {
         downloadsRunning++;
         var www = new WWW(url);
-        Debug.Log("Downloading!");
         yield return www;
-        Debug.Log(Application.persistentDataPath);
-        File.WriteAllBytes(Application.persistentDataPath + "/" + name + ".mp4", www.bytes);
+        File.WriteAllBytes(Application.persistentDataPath + "/" + videoName + ".mp4", www.bytes);
         Debug.Log("File Saved!");
         downloadsRunning--;
     }
+
+    /*
+     * Shows successful message for successful download
+     */
+    private void ShowDownloadSucceed()
+    {
+        downloadsRunning = 0;
+        warningText.text = "Successfully downloaded videos";
+        warningText.color = Color.green;
+        warningTextField.SetActive(true);
+
+        downloadButton.GetComponentInChildren<Text>().text = "Download";
+        backButton.SetActive(true);
+        isDownloading = false;
+    }
+
+    /*
+     * Shows indicator that download is in progress
+     */
+    private void ShowDownloading()
+    {
+        isDownloading = true;
+        UpdateDotText();
+        downloadButton.GetComponentInChildren<Text>().text = "Downloading " + downloadsRunning + " videos" + dotText;
+        backButton.SetActive(false);
+    }
+
+    /*
+     * Updates the dot behind the download text
+     */
+    private void UpdateDotText()
+    {
+        if (Time.time >= nextUpdate)
+        {
+            nextUpdate = Mathf.FloorToInt(Time.time) + 1;
+            dotText = dotText.Equals("...") ? "" : dotText + ".";
+        }
+    }
+    #endregion
+
 }
 
 
