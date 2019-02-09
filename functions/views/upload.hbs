@@ -30,7 +30,6 @@
         // var apiURL = "https://poppeg.com/";
 
         $(document).ready(() => {
-            console.log(document.getElementById("uploadContainer").childNodes.length);
             $('#addCardButton').on('click', (event) => {
                 // when you add a new card, the emptyHeader must be removed
                 if (document.getElementById("emptyHeader") !== null) {
@@ -65,8 +64,9 @@
                 console.log(event);
                 event.preventDefault();
                 $(event.target).parent().parent().remove();
-                console.log(document.getElementById("uploadContainer").childNodes.length);
-                if (document.getElementById("uploadContainer").childNodes.length == 2) {
+                console.log(document.getElementsByClassName("upload-card"));
+                // when empty, put back the empty header.
+                if (document.getElementsByClassName("upload-card").length == 0) {
                     $("#uploadContainer").append($(emptyHeader));
                     $("#uploadButton").attr("disabled", "disabled");
                 }
@@ -140,7 +140,7 @@
 
         function addUploadContainer(numberOfCards) {
             let html =
-                `<div class="row card-template upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
+                `<div class="row upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block imageBlock">
                         <label for="imageUpload_${numberOfCards}">Image: </label> 
                         <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
