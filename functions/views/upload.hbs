@@ -61,14 +61,62 @@
 
 
             $(document).on('click', "button.delete-btn", (event) => {
-                console.log(event);
                 event.preventDefault();
+                console.log($(event.target).parent().parent());
+                console.log("here is event target parent ");
                 $(event.target).parent().parent().remove();
-                console.log(document.getElementsByClassName("upload-card"));
                 // when empty, put back the empty header.
                 if (document.getElementsByClassName("upload-card").length == 0) {
                     $("#uploadContainer").append($(emptyHeader));
                     $("#uploadButton").attr("disabled", "disabled");
+                }
+                let temp_arr = [];
+                let imageUploads = $('.image-upload');
+                // Stores into temp_arr objects which consist of all imageUploadIds and their file names
+                for (let i = 0; i < imageUploads.length; i++) {
+                    const imageUploadId = imageUploads[i].id;
+                    const imageFileValue = imageUploads[i].value;
+                    const imageObj = {
+                        [imageUploadId]: imageFileValue
+                    };
+                    temp_arr.push(imageObj);
+                }
+
+                console.log("should be an array of objectsssss");
+                console.log(temp_arr);
+
+                // if all cards were removed, the multiples array should be emptied as well.
+                if (temp_arr.length == 0) {
+                    multiplesFileArr = [];
+                } else {
+                    // find all the keys in temp_arr with the same values
+                    for (let k = 0; k < multiplesFileArr.length; k++) {
+                        const compareItem = multiplesFileArr[k];
+                        let elementsArr = temp_arr.filter( entry => { 
+                            console.log(Object.values(entry));   
+                            return Object.values(entry) == multiplesFileArr[k]; 
+                        } );
+                        console.log(elementsArr);
+                        // only first element in the error will be a valid input.
+                        if (elementsArr.length >= 1) {
+                            const idNumber = Object.keys(elementsArr[0])[0][12];
+                            console.log(idNumber);
+                            ($(`#errorImg_${idNumber}`))[0].style.display = "none";
+                        } else {}
+                    }
+                }
+                // enable button momentarily
+                $("#uploadButton").removeAttr("disabled", "disabled");
+                const allErrors = $('.error-msg');
+                console.log(allErrors);
+                for(let j = 0; j < allErrors.length; j++) {
+                    console.log(allErrors[j]);
+                    // if there are still errors, the upload button shall be disabled.
+                    if (allErrors[j].style.display == "block") {
+                        console.log(allErrors[j].style.display);
+                        $("#uploadButton").attr("disabled", "disabled");
+                        break;
+                    } else {}
                 }
             });
 
@@ -144,13 +192,13 @@
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block imageBlock">
                         <label for="imageUpload_${numberOfCards}">Image: </label> 
                         <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
-                            <div id="errorImg_${numberOfCards}">Please input a valid file!</div>
+                            <div class="error-msg" id="errorImg_${numberOfCards}">Please input a valid file!</div>
                         </input>
                     </div>
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block videoBlock">
                         <label for="videoUpload_${numberOfCards}">Video: </label> 
                         <input id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
-                            <div id="emptyVid_${numberOfCards}">Please input a valid file!</div>
+                            <div class="error-msg" id="emptyVid_${numberOfCards}">Please input a valid file!</div>
                         </input>
                     </div>
                     <div class="col-xs-1 col-md-1 col-lg-1">
