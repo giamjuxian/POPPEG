@@ -107,11 +107,9 @@
                         let elementsArr = tempArrVid.filter( entry => { 
                             return Object.values(entry) == multiplesVidArr[k]; 
                         } );
-                        console.log(elementsArr);
                         // only first element in the error will be a valid input.
                         if (elementsArr.length >= 1) {
                             const idNumber = Object.keys(elementsArr[0])[0][12];
-                            console.log(idNumber);
                             ($(`#errorVid_${idNumber}`))[0].style.display = "none";
                         } else {}
                     }
@@ -127,11 +125,9 @@
                         let elementsArr = tempArrImg.filter( entry => { 
                             return Object.values(entry) == multiplesImgArr[k]; 
                         } );
-                        console.log(elementsArr);
                         // only first element in the error will be a valid input.
                         if (elementsArr.length >= 1) {
                             const idNumber = Object.keys(elementsArr[0])[0][12];
-                            console.log(idNumber);
                             ($(`#errorImg_${idNumber}`))[0].style.display = "none";
                         } else {}
                     }
@@ -203,10 +199,8 @@
         function checkErrors () {
             const allErrors = $('.error-msg');
             for(let j = 0; j < allErrors.length; j++) {
-                console.log(allErrors[j]);
                 // if there are still errors, the upload button shall be disabled.
                 if (allErrors[j].style.display == "block") {
-                    console.log(allErrors[j].style.display);
                     $("#uploadButton").attr("disabled", "disabled");
                     break;
                 } else {}
