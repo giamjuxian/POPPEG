@@ -37,7 +37,7 @@ app.get('/upload', function (req, res, next) {
  */
 app.post('/uploadImageToVuforia', VuforiaWorker.uploadImageToVuforia);
 
-app.post('/uploadImageToEasyAR', EasyARWorker.testEasyAR);
+app.post('/uploadImageToEasyAR', EasyARWorker.uploadImageToEasyAR);
 
 app.post('/addUrlsToDatabase', DatabaseWorker.uploadEntryToDatabase);
 
