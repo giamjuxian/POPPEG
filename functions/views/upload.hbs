@@ -18,19 +18,20 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
     <script>
-        let multiplesFileArr = [];
+        let multiplesImgArr = [];
+        let multiplesVidArr = [];
         const emptyHeader = 
         `<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
             <span>Your cart is currently empty!</span>
         </div>
          `;
         let numberOfCards = 0;
-        const validFileExtensions = [".jpg", ".jpeg"]; 
+        const validImages = [".jpg", ".jpeg"]; 
+        const validVideos = [".mp4", ".mov"];
         var apiURL = "http://localhost:5000/";
         // var apiURL = "https://poppeg.com/";
 
         $(document).ready(() => {
-            console.log(document.getElementById("uploadContainer").childNodes.length);
             $('#addCardButton').on('click', (event) => {
                 // when you add a new card, the emptyHeader must be removed
                 if (document.getElementById("emptyHeader") !== null) {
@@ -40,36 +41,108 @@
                 var $uploadContainer = $("#uploadContainer");
                 $uploadContainer.append(addUploadContainer(numberOfCards))
                 numberOfCards += 1;
-                if ($("#emptyHeader").length != 1) {
-                    $("#uploadButton").removeAttr("disabled", "disabled");
-                } else {}
+                $("#uploadButton").attr("disabled", "disabled");
             });
             
             $('#uploadButton').on('click', (event) => {
                 // checks if imageBlock and videoBlock fields all filled
                 const numberOfMediaBlocks = $(".imageBlock").length;
                 for (let i = 0; i < numberOfMediaBlocks; i++) {
+
+                    // displays error messages
                     if (($(".imageBlock").children())[1 + i * 3].value == "") {
                         ($(".imageBlock").children())[2 + i * 3].style.display = "block";
                     }
                     if (($(".videoBlock").children())[1 + i * 3].value == "") {
                         ($(".videoBlock").children())[2 + i * 3].style.display = "block";
                     }
+
                 }
-                console.log(($(".imageBlock").children()));
-                console.log(($(".videoBlock").children()));
+
+                // if there are existing errors, disable the upload button. 
+                checkErrors();
             });
 
 
             $(document).on('click', "button.delete-btn", (event) => {
-                console.log(event);
                 event.preventDefault();
                 $(event.target).parent().parent().remove();
-                console.log(document.getElementById("uploadContainer").childNodes.length);
-                if (document.getElementById("uploadContainer").childNodes.length == 2) {
+                // when empty, put back the empty header.
+                if (document.getElementsByClassName("upload-card").length == 0) {
                     $("#uploadContainer").append($(emptyHeader));
                     $("#uploadButton").attr("disabled", "disabled");
                 }
+                let tempArrImg = [];
+                let tempArrVid = [];
+                let imageUploads = $('.image-upload');
+                let vidUploads = $('.video-upload');
+                
+                // Video input changes and validations
+                for (let i = 0; i < vidUploads.length; i++) {
+                    const vidUploadId = vidUploads[i].id;
+                    const vidFileValue = vidUploads[i].value;
+                    const vidObj = {
+                        [vidUploadId]: vidFileValue
+                    };
+                    tempArrVid.push(vidObj);
+                }
+
+                // Stores into tempArrImg objects which consist of all imageUploadIds and their file names
+                for (let i = 0; i < imageUploads.length; i++) {
+                    const imageUploadId = imageUploads[i].id;
+                    const imageFileValue = imageUploads[i].value;
+                    const imageObj = {
+                        [imageUploadId]: imageFileValue
+                    };
+                    tempArrImg.push(imageObj);
+                }
+
+                // if all cards were removed, the multiples array should be emptied as well.
+                if (tempArrVid.length == 0) {
+                    multiplesVidArr = [];
+                } else {
+                    // find all the keys in tempArrVid with the same values
+                    for (let k = 0; k < multiplesVidArr.length; k++) {
+                        const compareItem = multiplesVidArr[k];
+                        let elementsArr = tempArrVid.filter( entry => { 
+                            return Object.values(entry) == multiplesVidArr[k]; 
+                        } );
+                        // only first element in the error will be a valid input.
+                        if (elementsArr.length >= 1) {
+                            const idNumber = Object.keys(elementsArr[0])[0][12];
+                            ($(`#errorVid_${idNumber}`))[0].style.display = "none";
+                        } else {}
+                    }
+                }
+
+                // if all cards were removed, the multiples array should be emptied as well.
+                if (tempArrImg.length == 0) {
+                    multiplesImgArr = [];
+                } else {
+                    // find all the keys in tempArrImg with the same values
+                    for (let k = 0; k < multiplesImgArr.length; k++) {
+                        const compareItem = multiplesImgArr[k];
+                        let elementsArr = tempArrImg.filter( entry => { 
+                            return Object.values(entry) == multiplesImgArr[k]; 
+                        } );
+                        // only first element in the error will be a valid input.
+                        if (elementsArr.length >= 1) {
+                            const idNumber = Object.keys(elementsArr[0])[0][12];
+                            ($(`#errorImg_${idNumber}`))[0].style.display = "none";
+                        } else {}
+                    }
+                }
+
+                // enable button momentarily if emptyHeader is not present 
+                if (document.getElementById("emptyHeader") == null) {
+                    $("#uploadButton").removeAttr("disabled", "disabled");
+                } else {
+                    $("#uploadButton").attr("disabled", "disabled");
+                }
+                
+                // Check number of errors and enable/disable accordingly.
+                checkErrors();
+                
             });
 
             $(document).on('change', '.image-upload', (event) => {
@@ -78,7 +151,7 @@
                 for (let i = 0; i < imageUploads.length; i++) {
                     temp_arr.push(imageUploads[i].value);
                 }
-                multiplesFileArr = multiplesFileArr.diff(temp_arr);
+                multiplesImgArr = multiplesImgArr.diff(temp_arr);
                 let fileName = event.target.value;
                 let fileId = event.target.id[12];
                 let enableUpload = imgFileValidator(fileName, fileId);
@@ -88,6 +161,26 @@
                 } else {
                     $("#uploadButton").attr("disabled", "disabled");
                 }
+                emptyFilesChecker();
+            });
+
+            $(document).on('change', '.video-upload', (event) => {
+                let tempArrVid = [];
+                let vidUploads = $('.video-upload');
+                for (let i = 0; i < vidUploads.length; i++) {
+                    tempArrVid.push(vidUploads[i].value);
+                }
+                multiplesVidArr = multiplesVidArr.diff(tempArrVid);
+                let fileName = event.target.value;
+                let fileId = event.target.id[12];
+                let enableUpload = vidFileValidator(fileName, fileId);
+                // After file validation, if file is valid, enable upload button, else disable
+                if (enableUpload) {
+                    $("#uploadButton").removeAttr("disabled", "disabled");
+                } else {
+                    $("#uploadButton").attr("disabled", "disabled");
+                }
+                emptyFilesChecker();
             });
         });
 
@@ -103,26 +196,34 @@
             }
             return ret;
         };
-
+        function checkErrors () {
+            const allErrors = $('.error-msg');
+            for(let j = 0; j < allErrors.length; j++) {
+                // if there are still errors, the upload button shall be disabled.
+                if (allErrors[j].style.display == "block") {
+                    $("#uploadButton").attr("disabled", "disabled");
+                    break;
+                } else {}
+            }
+        }
         function imgFileValidator (fileName, uniqueId) {
             // Check if fileName exists
-            console.log(`this is multiple ${multiplesFileArr}`);
             if (fileName.length > 0) {
                 // Check if file is already in the cart, prevent double submission
                 
-                if ((multiplesFileArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist 
+                if ((multiplesVidArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist 
                     $(`#errorImg_${uniqueId}`).html("This file is already in your cart! Please pick another .JPEG file.");
                     ($(`#errorImg_${uniqueId}`))[0].style.display = "block";
                     return false;
                 } else { }
                 // new unique file was posted 
-                for (let i = 0; i < validFileExtensions.length; i++) {
-                    const current_ext = validFileExtensions[i];
+                for (let i = 0; i < validImages.length; i++) {
+                    const current_ext = validImages[i];
                     // if the file is of an invalid extension type.
                     if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() == current_ext.toLowerCase()) {
                         // return true if the file type is jpg or jpeg
                         ($(`#errorImg_${uniqueId}`))[0].style.display = "none";
-                        multiplesFileArr.push(fileName);
+                        multiplesVidArr.push(fileName);
                         return true; 
                     } else {}
                 }
@@ -138,19 +239,62 @@
             }
         }
 
+        function vidFileValidator (fileName, uniqueId) {
+            // Check if fileName exists
+            if (fileName.length > 0) {
+                // Check if file is already in the cart, prevent double submission
+                
+                if ((multiplesVidArr.filter(entry => entry == fileName)).length > 0) { // checks that file already exist 
+                    $(`#errorVid_${uniqueId}`).html("This file is already in your cart! Please pick another .mp4 or .mov file.");
+                    ($(`#errorVid_${uniqueId}`))[0].style.display = "block";
+                    return false;
+                } else { }
+                // new unique file was posted 
+                for (let i = 0; i < validVideos.length; i++) {
+                    const current_ext = validVideos[i];
+                    // if the file is of an invalid extension type.
+                    if (fileName.substr(fileName.length - current_ext.length, fileName.length).toLowerCase() == current_ext.toLowerCase()) {
+                        // return true if the file type is mp4
+                        ($(`#errorVid_${uniqueId}`))[0].style.display = "none";
+                        multiplesVidArr.push(fileName);
+                        return true; 
+                    } else {}
+                }
+                // if does not equal to any file extension, throw error.
+                $(`#errorVid_${uniqueId}`).html("Invalid file type. Please upload a .mp4 or .mov file.");
+                ($(`#errorVid_${uniqueId}`))[0].style.display = "block";
+                return false;
+            } else {
+                // Checks if file is empty.
+                $(`#errorVid_${uniqueId}`).html("You must provide a valid .mp4 or .mov file!");
+                ($(`#errorVid_${uniqueId}`))[0].style.display = "block";
+                return false; 
+            }
+        }
+
+        function emptyFilesChecker () {
+            let imageUploads = $(".image-upload");
+            let vidUploads = $(".video-upload");
+            for (let i = 0; i < imageUploads.length; i++) {
+                if (vidUploads[i].value == "" || imageUploads[i].value == "") {
+                    $("#uploadButton").attr("disabled", "disabled");
+                } else {}
+            }
+        }
+
         function addUploadContainer(numberOfCards) {
             let html =
-                `<div class="row card-template upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
+                `<div class="row upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block imageBlock">
                         <label for="imageUpload_${numberOfCards}">Image: </label> 
                         <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
-                            <div id="errorImg_${numberOfCards}">Please input a valid file!</div>
+                            <div class="error-msg" id="errorImg_${numberOfCards}">Please input a valid file!</div>
                         </input>
                     </div>
                     <div class="col-xs-12 col-md-5 col-lg-5 media-block videoBlock">
                         <label for="videoUpload_${numberOfCards}">Video: </label> 
-                        <input id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
-                            <div id="emptyVid_${numberOfCards}">Please input a valid file!</div>
+                        <input class="video-upload" id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
+                            <div class="error-msg" id="errorVid_${numberOfCards}">Please input a valid file!</div>
                         </input>
                     </div>
                     <div class="col-xs-1 col-md-1 col-lg-1">
