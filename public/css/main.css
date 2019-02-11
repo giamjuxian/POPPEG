@@ -21,7 +21,7 @@ body {
     margin-right: 0px;
 }
 
-.btn-green {
+.btn-yellow {
     background-color: #f2d824;
     color:#000000;
     font-weight: bold;
@@ -46,6 +46,12 @@ body {
 
 .text-white {
     color: #FFFFFF;
+}
+
+.text-error {
+    color: red;
+    display: none; 
+    padding-left: 0px;
 }
 
 .panel-body {
@@ -117,5 +123,4 @@ body {
     color: red;
     display: none;
     font-size: 13px;
-    padding-left: 10%;
 }

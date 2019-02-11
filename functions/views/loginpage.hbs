@@ -64,19 +64,20 @@
                 <div class="form-group album-form">
                     <label for="albumTitle"><span class="text-white">Album Title</span></label>
                     <input type="email" class="form-control input-lg" id="albumTitle" placeholder="Enter Album Title">
-                    <div id="bookError" style="display: none; color: red; font-size: 20px; padding-left:25%;">Please input your book title!</div>
+                    <div id="codeError" class="text-error">Please input valid popCode!</div>
+                    <div id="bookError"  class="text-error">Please input your book title!</div>
                 </div>
                 <div class="form-group album-form">
                     <label for="popCode"><span class="text-white">POPCode</span></label>
                     <input type="password" class="form-control input-lg" id="popCode" placeholder="Enter POPCode">
-                    <div id="codeError" style="display: none; color: red; font-size: 20px; padding-left:25%;">Please input valid popCode!</div>
+                    <div id="codeError" class="text-error">Please input valid popCode!</div>
                 </div>
             </form>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-            <button id="getAlbumButton" type="button" class="btn btn-green btn-block btn-lg" style="margin-top:15px">Get Album</button>
+            <button id="getAlbumButton" type="button" class="btn btn-yellow btn-block btn-lg" style="margin-top:15px">Get Album</button>
         </div>
     </div>
     </div>

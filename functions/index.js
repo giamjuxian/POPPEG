@@ -9,6 +9,7 @@ const config = require('./config.json');
 const DatabaseWorker = require('./workers/databaseWorker');
 const StorageWorker = require('./workers/storageWorker');
 const VuforiaWorker = require('./workers/vuforiaWorker');
+const EasyARWorker = require('./workers/easyARWorker')
 const database_config = config.database_config;
 
 admin.initializeApp(functions.config().firebase);
@@ -28,7 +29,7 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/upload', function (req, res, next) {
-	res.render('upload');
+	res.render('uploadpage');
 });
 
 /**
@@ -36,8 +37,12 @@ app.get('/upload', function (req, res, next) {
  */
 app.post('/uploadImageToVuforia', VuforiaWorker.uploadImageToVuforia);
 
+app.post('/uploadImageToEasyAR', EasyARWorker.testEasyAR);
+
 app.post('/addUrlsToDatabase', DatabaseWorker.uploadEntryToDatabase);
 
 app.post('/uploadImageToStorage', StorageWorker.uploadImageToStorage);
+
+app.post('/uploadVideoToStorage', StorageWorker.uploadVideoToStorage);
 
 exports.app = functions.https.onRequest(app);
