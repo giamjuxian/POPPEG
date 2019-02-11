@@ -24,12 +24,4 @@ public class MenuManager : MonoBehaviour
         mainPanel.SetActive(!isDownloadPanel);
         downloadPanel.SetActive(isDownloadPanel);
     }
-
-    /*
-     * Loads camera scene using vuforia
-     */
-    public void LoadCameraScene()
-    {
-        SceneManager.LoadScene(1);
-    }
 }

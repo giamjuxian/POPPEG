@@ -38,7 +38,7 @@ public class DatabaseManager : MonoBehaviour
         storage_ref = storage.GetReferenceFromUrl("gs://poppeg-95e96.appspot.com");
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (downloadsRunning > 0)
         {

@@ -47,6 +47,7 @@ public class EasyARCloudHandler : CloudRecognizerBehaviour
             uids.Add(imageTarget.Uid);
 
             var target = new GameObject();
+            target.transform.name = "VideoPlayerParent";
             var targetBehaviour = target.AddComponent<VideoImageTargetBehaviour>();
             if (!targetBehaviour.SetupWithTarget(imageTarget))
                 continue;
@@ -54,8 +55,8 @@ public class EasyARCloudHandler : CloudRecognizerBehaviour
 
             var videoPlayer = Instantiate(videoPlayerPrefab);
             videoPlayer.transform.parent = target.transform;
-            videoPlayer.transform.localPosition = Vector3.up / 10;
-            videoPlayer.transform.localScale = new Vector3(targetBehaviour.Size.x / Mathf.Max(targetBehaviour.Size.x, targetBehaviour.Size.y) * 1.6f , 0.9f , 1);
+            videoPlayer.transform.localPosition = Vector3.zero;
+            videoPlayer.transform.localScale = new Vector3(targetBehaviour.Size.x / Mathf.Max(targetBehaviour.Size.x, targetBehaviour.Size.y) * 1.2f , 0.675f , 1);
 
             if (SaveNewTarget)
             {

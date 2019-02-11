@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using EasyAR;
+using UnityEngine.Video;
 
 public class VideoImageTargetBehaviour : ImageTargetBehaviour
 {
@@ -14,12 +15,18 @@ public class VideoImageTargetBehaviour : ImageTargetBehaviour
 
     void OnTargetFound(TargetAbstractBehaviour behaviour)
     {
-        Debug.Log("Found: " + Target.Id);
+        Debug.Log("Found: " + Target.Id + " (" + Target.Name + ")");
+        var videoComponents = GetComponentsInChildren<VideoPlayer>(true);
+        foreach (var component in videoComponents)
+        {
+            component.url = Application.persistentDataPath + "/" + Target.Name + ".mp4";
+            component.Play();
+        }
     }
 
     void OnTargetLost(TargetAbstractBehaviour behaviour)
     {
-        Debug.Log("Lost: " + Target.Id);
+        Debug.Log("Lost: " + Target.Id + " (" + Target.Name + ")");
     }
 
     void OnTargetLoad(ImageTargetBaseBehaviour behaviour, ImageTrackerBaseBehaviour tracker, bool status)
