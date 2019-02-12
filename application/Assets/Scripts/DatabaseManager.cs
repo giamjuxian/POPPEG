@@ -156,7 +156,7 @@ public class DatabaseManager : MonoBehaviour
         var www = new WWW(url);
         yield return www;
         File.WriteAllBytes(Application.persistentDataPath + "/" + videoName + ".mp4", www.bytes);
-        Debug.Log("File Saved!");
+        Debug.Log("File Saved: " + Application.persistentDataPath + "/" + videoName + ".mp4");
         downloadsRunning--;
     }
 
