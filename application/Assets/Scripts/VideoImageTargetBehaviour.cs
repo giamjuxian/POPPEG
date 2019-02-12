@@ -20,6 +20,7 @@ public class VideoImageTargetBehaviour : ImageTargetBehaviour
         foreach (var component in videoComponents)
         {
             component.url = Application.persistentDataPath + "/" + Target.Name + ".mp4";
+            Debug.Log("Playing from: " + Application.persistentDataPath + "/" + Target.Name + ".mp4");
             component.Play();
         }
     }

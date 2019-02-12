@@ -27,6 +27,11 @@ public class DatabaseManager : MonoBehaviour
     private bool isDownloading;
     private Text warningText;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Start()
     {
         warningText = warningTextField.GetComponentInChildren<Text>();
@@ -61,15 +66,20 @@ public class DatabaseManager : MonoBehaviour
      */
     public void DownloadVideosFromAlbum()
     {
+        downloadButton.GetComponentInChildren<Text>().text = "Starting Download...";
         string albumName = GameObject.Find("BookName").GetComponent<Text>().text;
-        Debug.Log(albumName);
+        Debug.Log("Starting download for " + albumName);
         if (!string.IsNullOrEmpty(albumName))
         {
             FirebaseDatabase.DefaultInstance.RootReference.Child("targets").GetValueAsync().ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
-                    Debug.Log("ERROR");
+                    downloadButton.GetComponentInChildren<Text>().text = "Download";
+                    warningText.text = "Error occured. Please try again";
+                    warningText.color = Color.red;
+                    warningTextField.SetActive(true);
+                    downloadButton.GetComponentInChildren<Text>().text = "Download";
                 }
                 else if (task.IsCompleted)
                 {
@@ -88,6 +98,7 @@ public class DatabaseManager : MonoBehaviour
                     }
                     else
                     {
+                        downloadButton.GetComponentInChildren<Text>().text = "Download";
                         warningText.text = "Album does not exists";
                         warningText.color = Color.red;
                         warningTextField.SetActive(true);
@@ -100,6 +111,7 @@ public class DatabaseManager : MonoBehaviour
         }
         else
         {
+            downloadButton.GetComponentInChildren<Text>().text = "Download";
             warningText.text = "Please enter an album name";
             warningText.color = Color.red;
             warningTextField.SetActive(true);
@@ -114,6 +126,8 @@ public class DatabaseManager : MonoBehaviour
      */
     private void DownloadVideo()
     {
+        downloadButton.GetComponentInChildren<Text>().text = "Starting Download...";
+        backButton.SetActive(false);
         foreach (Entry e in allEntries)
         {
             Debug.Log("NAME: " + e.GetName() + " URL: " + e.GetUrl());
@@ -142,7 +156,7 @@ public class DatabaseManager : MonoBehaviour
         var www = new WWW(url);
         yield return www;
         File.WriteAllBytes(Application.persistentDataPath + "/" + videoName + ".mp4", www.bytes);
-        Debug.Log("File Saved!");
+        Debug.Log("File Saved: " + Application.persistentDataPath + "/" + videoName + ".mp4");
         downloadsRunning--;
     }
 
@@ -159,6 +173,7 @@ public class DatabaseManager : MonoBehaviour
         downloadButton.GetComponentInChildren<Text>().text = "Download";
         backButton.SetActive(true);
         isDownloading = false;
+        allEntries.Clear();
     }
 
     /*
