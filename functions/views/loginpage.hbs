@@ -31,10 +31,14 @@
                 if ($("#albumTitle").val() == "") {
                     ($("#bookError"))[0].style.display = "block";
                     haveInput = false;
+                } else {
+                    ($("#bookError"))[0].style.display = "none";
                 }
                 if ($("#popCode").val() == "") {
                     ($("#codeError"))[0].style.display = "block";
                     haveInput = false;
+                } else {
+                    ($("#codeError"))[0].style.display = "none";
                 }
                 // needs to updated with checks with database for accurate credentials.
                 if (haveInput) {

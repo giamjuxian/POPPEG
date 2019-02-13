@@ -124,3 +124,8 @@ body {
     display: none;
     font-size: 13px;
 }
+
+#uploadSuccess {
+    color: white;
+    font-size: 27px;
+}
