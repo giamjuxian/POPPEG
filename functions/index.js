@@ -45,4 +45,14 @@ app.post('/uploadImageToStorage', StorageWorker.uploadImageToStorage);
 
 app.post('/uploadVideoToStorage', StorageWorker.uploadVideoToStorage);
 
+app.get('/checkAlbumExist', DatabaseWorker.checkAlbumExist)
+
+app.get('/checkPopCodeExists', DatabaseWorker.checkPopCodeExists);
+
+app.get('/addPopCode', DatabaseWorker.addPopCode);
+
+app.post('/updatePopCode', DatabaseWorker.updatePopCode);
+
+app.get('/getPopCodeData/:popCode', DatabaseWorker.getPopCodeData);
+
 exports.app = functions.https.onRequest(app);

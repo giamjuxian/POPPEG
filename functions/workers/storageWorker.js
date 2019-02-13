@@ -35,8 +35,6 @@ exports.uploadImageToStorage = function (req, res, next) {
         });
 
         busboy.on('finish', function () {
-            console.log(uploadData);
-
             let options = {
                 uploadType: 'media',
                 destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/image',
@@ -78,8 +76,6 @@ exports.uploadVideoToStorage = function (req, res, next) {
         });
 
         busboy.on('finish', function () {
-            console.log(uploadData);
-
             let options = {
                 uploadType: 'media',
                 destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/video',

@@ -31,19 +31,39 @@
 		const validVideos = [".mp4", ".mov"];
 		var apiURL = "http://localhost:5000/";
 		// var apiURL = "https://www.poppeg.com/";
-		const albumName = "hello";
 
 		$(document).ready(() => {
+			const albumName = localStorage.getItem("albumName");
+			const popCode = localStorage.getItem("popCode");
+			let popCodeData = {
+				popCode: popCode,
+				numberOfImages: 0,
+				numberOfImagesUsed: 0
+			};
+			var availableImages = 0;
+			$("#addCardButton").attr("disabled", true);
+			$("#uploadImageAvailable").html("Loading");
+			getPopCodeData(popCode).then(function (data) {
+				popCodeData = data;
+				availableImages = popCodeData.numberOfImages - popCodeData.numberOfImagesUsed;
+				console.log(popCodeData);
+				updateImageAvailableField(availableImages);
+			});
+
 			$('#addCardButton').on('click', (event) => {
-				// when you add a new card, the emptyHeader must be removed
-				if (document.getElementById("emptyHeader") !== null) {
-					$('#emptyHeader').remove();
+				if (availableImages > 0) {
+					// when you add a new card, the emptyHeader must be removed
+					if (document.getElementById("emptyHeader") !== null) {
+						$('#emptyHeader').remove();
+					}
+					// standard click add button, add to uploadContainer a card
+					var $uploadContainer = $("#uploadContainer");
+					$uploadContainer.append(addUploadContainer(numberOfCards))
+					numberOfCards += 1;
+					availableImages--;
+					updateImageAvailableField(availableImages);
+					$("#uploadButton").attr("disabled", "disabled");
 				}
-				// standard click add button, add to uploadContainer a card
-				var $uploadContainer = $("#uploadContainer");
-				$uploadContainer.append(addUploadContainer(numberOfCards))
-				numberOfCards += 1;
-				$("#uploadButton").attr("disabled", "disabled");
 			});
 
 			$('#uploadButton').on('click', (event) => {
@@ -55,18 +75,20 @@
 					$uploadButton.text("Uploading");
 					$uploadButton.attr("disabled", true);
 					$addCardButton.attr("disabled", true);
-					
+
 					// Check if field is empty
 					if (($(".imageBlock").children())[1 + i * 3].value == "") {
 						($(".imageBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Failed";
+						$uploadButton.text() = "Upload";
 						$uploadButton.attr("disabled", false);
+						$addCardButton.attr("disabled", false);
 						return;
 					}
 					if (($(".videoBlock").children())[1 + i * 3].value == "") {
 						($(".videoBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Failed";
+						$uploadButton.text() = "Upload";
 						$uploadButton.attr("disabled", false);
+						$addCardButton.attr("disabled", false);
 						return;
 					}
 				}
@@ -84,31 +106,63 @@
 						url: 'media/' + albumName + '/' + removeSpecialCharacters(newUpload.video.name) + '/video'
 					});
 				})
-				uploadAlbumToDatabase(entries, albumName);
+				var deferreds = [];
+
 				uploads.forEach(function (upload, index) {
-					uploadImage(upload.image, albumName);
-					uploadVideo(upload.video, albumName);
-					getBase64(upload.image).then(
+					deferreds.push(uploadImage(upload.image, albumName));
+					deferreds.push(uploadVideo(upload.video, albumName));
+					deferreds.push(getBase64(upload.image).then(
 						data => {
 							let body = {
 								name: removeSpecialCharacters(upload.image.name),
 								image: data
 							}
-							$.ajax({
+							return $.ajax({
 								type: "POST",
 								url: apiURL + "uploadImageToEasyAR",
 								dataType: 'json',
 								data: body,
-								success: function (result) {
-									console.log(result);
-								},
-								error: function (err) {
-									console.log(err);
-								}
 							});
 						}
-					);
-				})
+					));
+				});
+
+				$.when.apply($, deferreds).then(function (data, textStatus, jqXHR) {
+					uploadAlbumToDatabase(entries, albumName)
+						.then(function (err, result) {
+							if (err) {
+								alert("Error occured when updating database" + JSON.stringify(err));
+							} else {
+								let body = {
+									popCode: popCode,
+									numberOfImagesUsed: uploads.length
+								}
+								$.ajax({
+									type: "POST",
+									url: apiURL + "updatePopCode",
+									dataType: 'json',
+									data: body,
+									success: function (result) {
+										$uploadButton.text("Success");
+									},
+									error: function (error) {
+										$uploadButton.text("Error");
+										alert("Error occured when updating PopCode. " + JSON.stringify(error));
+									}
+								});
+							}
+						})
+				}).fail(function (error) {
+					var errorMsg = error.responseJSON.error;
+					$uploadButton.text("Error");
+					alert("Error occured when uploading images. " + JSON.stringify(errorMsg.result));
+				}).always(function () {
+					setTimeout(function () {
+						$uploadButton.text("Upload");
+						$uploadButton.attr("disabled", false);
+						$addCardButton.attr("disabled", false);
+					}, 3000);
+				});
 			});
 
 			$(document).on('click', ".delete-button", (event) => {
@@ -189,7 +243,8 @@
 
 				// Check number of errors and enable/disable accordingly.
 				checkHasErrors();
-
+				availableImages++;
+				updateImageAvailableField(availableImages);
 			});
 
 			$(document).on('change', '.image-upload', (event) => {
@@ -244,6 +299,36 @@
 			return ret;
 		};
 
+		function updateImageAvailableField(availableImages) {
+			if (availableImages > 0) {
+				$("#addCardButton").attr("disabled", false);
+			} else {
+				$("#addCardButton").attr("disabled", true);
+			}
+			$("#uploadImageAvailable").html("You can upload " + availableImages + " more images");
+		}
+
+		function getPopCodeData(popCode) {
+			return new Promise((resolve, reject) => {
+				$.ajax({
+					url: apiURL + '/getPopCodeData/' + popCode,
+					type: 'GET',
+					success: function (data) {
+						let popCodeData = {
+							popCode: data.popCode,
+							numberOfImages: data.numberOfImages,
+							numberOfImagesUsed: data.numberOfImagesUsed
+						};
+						resolve(popCodeData);
+					},
+					error: function (error) {
+						alert("Error occurred. Please try again.");
+						reject(error);
+					}
+				});
+			})
+		}
+
 		function removeSpecialCharacters(name) {
 			return name.replace(/[\W_]/g, "-");
 		}
@@ -252,18 +337,12 @@
 			var fd = new FormData();
 			fd.append('image', image);
 			fd.append('albumName', albumName);
-			$.ajax({
+			return $.ajax({
 				url: apiURL + '/uploadImageToStorage',
 				data: fd,
 				processData: false,
 				contentType: false,
-				type: 'POST',
-				success: function (result) {
-					console.log(result);
-				},
-				error: function(err) {
-					alert("Error occured:" + err.error);
-				}
+				type: 'POST'
 			});
 		}
 
@@ -271,35 +350,55 @@
 			var fd = new FormData();
 			fd.append('video', video);
 			fd.append('albumName', albumName);
-			$.ajax({
+			return $.ajax({
 				url: apiURL + '/uploadVideoToStorage',
 				data: fd,
 				processData: false,
 				contentType: false,
-				type: 'POST',
-				success: function (result) {
-					console.log(result);
-				},
-				error: function(err) {
-					alert("Error occured:" + err.error);
-				}
+				type: 'POST'
 			});
 		}
 
 		function uploadAlbumToDatabase(entries, bookName) {
-			let body = {
-				entries: entries,
-				bookName: bookName
-			}
-			$.ajax({
-				type: "POST",
-				url: apiURL + "addUrlsToDatabase",
-				dataType: 'json',
-				data: body,
-				success: function (result) {
-					console.log(result);
+			return new Promise((resolve, reject) => {
+				let body = {
+					entries: entries,
+					bookName: bookName
 				}
+				$.ajax({
+					type: "POST",
+					url: apiURL + "addUrlsToDatabase",
+					dataType: 'json',
+					data: body,
+					success: function (result) {
+						resolve(null, result);
+					},
+					error: function (error) {
+						resolve(error, null);
+					}
+				});
 			});
+		}
+
+		function updatePOPCode(popCode, numberOfImagesUsed) {
+			return new Promise((resolve, reject) => {
+				let body = {
+					popCode: popCode,
+					numberOfImagesUsed: numberOfImagesUsed
+				}
+				$.ajax({
+					type: "POST",
+					url: apiURL + "updatePopCode",
+					dataType: 'json',
+					data: body,
+					success: function (result) {
+						resolve(null, result);
+					},
+					error: function (error) {
+						reject(error, null);
+					}
+				});
+			})
 		}
 
 		function checkHasErrors() {
@@ -436,10 +535,15 @@
 		</div>
 	</div>
 	<div class="row">
+		<div id="uploadImageAvailable" class="col-md-12 col-xs-12 text-center standard-header">
+			<span>Loading</span>
+		</div>
+		<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
+			<span>Your cart is currently empty!</span>
+		</div>
+	</div>
+	<div class="row">
 		<div class="container" id="uploadContainer">
-			<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
-				<span>Your cart is currently empty!</span>
-			</div>
 		</div>
 	</div>
 	<div class="row">

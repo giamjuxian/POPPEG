@@ -24,37 +24,80 @@
         $(document).ready(() => {
             $('#getAlbumButton').on('click', (event) => {
                 // check if input fields are empty, if yes, display error and 
-                let haveInput = true;
                 // if any input is left empty,
                 // return haveInput false, prevent redirecting to upload
+                $(".error-text").each(function (index, errorText) {
+                    $(errorText).hide();
+                })
+                var albumName = $("#albumName").val();
+                var popCode = $("#popCode").val();
+                if (albumName == "" || albumName == undefined || albumName == null) {
+                    ($("#noAlbumError"))[0].style.display = "block";
+                    return;
+                }
+                if (popCode == "" || popCode == undefined || popCode == null) {
+                    ($("#noCodeError"))[0].style.display = "block";
+                    return;
+                }
 
-                if ($("#albumTitle").val() == "") {
-                    ($("#bookError"))[0].style.display = "block";
-                    haveInput = false;
-                }
-                if ($("#popCode").val() == "") {
-                    ($("#codeError"))[0].style.display = "block";
-                    haveInput = false;
-                }
-                // needs to updated with checks with database for accurate credentials.
-                if (haveInput) {
-                    window.location.href = apiURL + 'upload';
+                $("#getAlbumButton").text("Loading");
+                $("#getAlbumButton").attr("disabled", true);
+                $.ajax({
+                    type: "GET",
+                    url: apiURL + "checkAlbumExist?albumName=" + albumName,
+                    success: function (result) {
+                        if (result && !result.containsDuplicate) {
+                            $.ajax({
+                                type: "GET",
+                                url: apiURL + "checkPopCodeExists?popCode=" + popCode,
+                                success: function (result) {
+                                    if (result && result.popCodeExists) {
+                                        $("#getAlbumButton").text("Get Album");
+                                        $("#getAlbumButton").attr("disabled", false);
+                                        localStorage.setItem("albumName", albumName);
+                                        localStorage.setItem("popCode", popCode);
+                                        window.location.href = apiURL + 'upload';
+                                    } else {
+                                        ($("#popCodeInvalidError"))[0].style.display = "block";
+                                        $("#getAlbumButton").text("Get Album");
+                                        $("#getAlbumButton").attr("disabled", false);
+                                        return;
+                                    }
+                                },
+                                error: function (err) {
+                                    alert("Error has occured. Please try again! " + err);
+                                    return;
+                                }
+                            });
+                        } else {
+                            ($("#duplicateAlbumError"))[0].style.display = "block";
+                            $("#getAlbumButton").text("Get Album");
+                            $("#getAlbumButton").attr("disabled", false);
+                            return;
+                        }
+
+                    },
+                    error: function (err) {
+                        alert("Error has occured. Please try again! " + err);
+                        return;
+                    }
+                });
+
+            });
+
+            $("#albumName").on('change', (event) => {
+                if (event.target.value == "") {
+                    ($("#noAlbumError"))[0].style.display = "block";
                 }
             });
 
-            $("#albumTitle").on('change', (event) => {
-                if(event.target.value == "") {
-                    ($("#bookError"))[0].style.display = "block";
-                }
-            });
             $("#popCode").on('change', (event) => {
-                if(event.target.value == "") {
-                    ($("#codeError"))[0].style.display = "block";
+                if (event.target.value == "") {
+                    ($("#noCodeError"))[0].style.display = "block";
                 }
             });
         });
     </script>
-
 </head>
 
 <body>
@@ -67,21 +110,28 @@
         <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4 album-col">
             <form>
                 <div class="form-group album-form">
-                    <label for="albumTitle"><span class="text-white">Album Title</span></label>
-                    <input type="email" class="form-control input-lg" id="albumTitle" placeholder="Enter Album Title">
-                    <div id="bookError" style="display: none; color: red; font-size: 20px; padding-left:25%;">Please input your book title!</div>
+                    <label for="albumName"><span class="text-white">Album Name</span></label>
+                    <input type="email" class="form-control input-lg" id="albumName" placeholder="Enter Album Name">
+                    <div id="noAlbumError" class="error-text text-error" style="display: none;">Please input your album
+                        name!</div>
+                    <div id="duplicateAlbumError" class="error-text text-error" style="display: none;">This album name
+                        already exists. Please input another name!</div>
                 </div>
                 <div class="form-group album-form">
                     <label for="popCode"><span class="text-white">POPCode</span></label>
                     <input type="password" class="form-control input-lg" id="popCode" placeholder="Enter POPCode">
-                    <div id="codeError" style="display: none; color: red; font-size: 20px; padding-left:25%;">Please input valid popCode!</div>
+                    <div id="noCodeError" class="error-text text-error" style="display: none;">Please input valid
+                        POPCode!</div>
+                    <div id="popCodeInvalidError" class="error-text text-error" style="display: none;">This POPCode is
+                        not valid. Please input valid POPCode!</div>
                 </div>
             </form>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-            <button id="getAlbumButton" type="button" class="btn btn-green btn-block btn-lg" style="margin-top:15px">Get Album</button>
+            <button id="getAlbumButton" type="button" class="btn btn-yellow btn-block btn-lg" style="margin-top:15px">Get
+                Album</button>
         </div>
     </div>
     </div>
