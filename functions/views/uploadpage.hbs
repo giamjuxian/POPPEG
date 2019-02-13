@@ -44,7 +44,7 @@
 			$('#uploadIndicator').hide();
 			$("#addCardButton").attr("disabled", true);
 			$("#uploadImageAvailable").html("Loading");
-			getPopCodeData(popCode).then(function (err, data) {
+			getPopCodeData(popCode).then(function (data) {
 				popCodeData = data;
 				availableImages = popCodeData.numberOfImages - popCodeData.numberOfImagesUsed;
 				console.log(popCodeData);
@@ -317,11 +317,11 @@
 							numberOfImages: data.numberOfImages,
 							numberOfImagesUsed: data.numberOfImagesUsed
 						};
-						resolve(null, popCodeData);
+						resolve(popCodeData);
 					},
 					error: function (error) {
 						alert("Error occurred. Please try again.");
-						resolve(error, null);
+						resolve(error);
 					}
 				});
 			})
