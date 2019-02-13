@@ -2,7 +2,6 @@
 
 const firebase = require('firebase');
 
-
 exports.uploadEntryToDatabase = function (req, res, next) {
 	var entries = req.body.entries;
 	var bookName = req.body.bookName;
