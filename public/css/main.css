@@ -94,7 +94,11 @@ body {
 }
 
 .media-block {
-    padding: 20px 10px;
+    padding: 20px 0px 10px 0px;
+}
+
+.bg-purple {
+    background-color: #4f307e !important;
 }
 
 .delete-btn {
@@ -112,6 +116,7 @@ body {
 @media (max-width: 996px) {
     .media-block {
         border-radius: 10px;
+        padding: 20px 0px 10px 0px;
     }
     .delete-btn {
         border-radius: 10px;
