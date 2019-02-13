@@ -25,12 +25,16 @@ app.set('view engine', 'hbs');
  * Web Views
  */
 app.get('/', function (req, res, next) {
-	res.render('loginpage');
+	res.render('successpage');
 });
 
 app.get('/upload', function (req, res, next) {
 	res.render('uploadpage');
 });
+
+// app.get('/success', function (req, res, next) {
+// 	res.render('sucesspage');
+// });
 
 /**
  * APIs
