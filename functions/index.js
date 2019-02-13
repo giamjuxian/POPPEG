@@ -32,6 +32,10 @@ app.get('/upload', function (req, res, next) {
 	res.render('uploadpage');
 });
 
+app.get('/success', function (req, res, next) {
+	res.render('successpage');
+});
+
 /**
  * APIs
  */

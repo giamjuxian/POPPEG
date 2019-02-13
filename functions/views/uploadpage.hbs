@@ -140,6 +140,7 @@
 									data: body,
 									success: function (result) {
 										$uploadButtonText.text("Success");
+										window.location.href = apiURL + 'success';
 									},
 									error: function (error) {
 										$uploadButtonText.text("Error");
