@@ -45,7 +45,10 @@ exports.uploadImageToStorage = function (req, res, next) {
                 }
             };
             bucket.upload(uploadData.file, options, function (err, upload) {
-                if (err) return res.status(500).json({ error: err });
+                if (err) {
+                    console.error("Error Uploading Image - " + err);
+                    return res.status(500).json({ error: err });
+                }
                 return res.status(200).json({
                     message: "Image: " + uploadData.filename + " uploaded successfully!"
                 });
@@ -86,7 +89,10 @@ exports.uploadVideoToStorage = function (req, res, next) {
                 }
             };
             bucket.upload(uploadData.file, options, function (err, upload) {
-                if (err) return res.status(500).json({ error: err });
+                if (err) {
+                    console.error("Error Uploading Image - " + err);
+                    return res.status(500).json({ error: err });
+                }
                 return res.status(200).json({
                     message: "Video: " + uploadData.filename + " uploaded successfully!"
                 });

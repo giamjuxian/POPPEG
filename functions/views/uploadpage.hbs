@@ -41,6 +41,7 @@
 				numberOfImagesUsed: 0
 			};
 			var availableImages = 0;
+			$('#uploadIndicator').hide();
 			$("#addCardButton").attr("disabled", true);
 			$("#uploadImageAvailable").html("Loading");
 			getPopCodeData(popCode).then(function (data) {
@@ -69,26 +70,21 @@
 			$('#uploadButton').on('click', (event) => {
 				// checks if imageBlock and videoBlock fields all filled
 				const numberOfMediaBlocks = $(".imageBlock").length;
+				var $uploadButton = $('#uploadButton');
+				var $uploadButtonText = $('#uploadButtonText');
+				var $addCardButton = $('#addCardButton');
+				var $uploadIndicator = $('#uploadIndicator');
+				toggleLoading(true);
 				for (let i = 0; i < numberOfMediaBlocks; i++) {
-					var $uploadButton = $('#uploadButton');
-					var $addCardButton = $('#addCardButton');
-					$uploadButton.text("Uploading");
-					$uploadButton.attr("disabled", true);
-					$addCardButton.attr("disabled", true);
-
 					// Check if field is empty
 					if (($(".imageBlock").children())[1 + i * 3].value == "") {
 						($(".imageBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Upload";
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 						return;
 					}
 					if (($(".videoBlock").children())[1 + i * 3].value == "") {
 						($(".videoBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Upload";
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 						return;
 					}
 				}
@@ -143,24 +139,25 @@
 									dataType: 'json',
 									data: body,
 									success: function (result) {
-										$uploadButton.text("Success");
+										$uploadButtonText.text("Success");
 									},
 									error: function (error) {
-										$uploadButton.text("Error");
+										$uploadButtonText.text("Error");
 										alert("Error occured when updating PopCode. " + JSON.stringify(error));
 									}
 								});
 							}
 						})
 				}).fail(function (error) {
-					var errorMsg = error.responseJSON.error;
-					$uploadButton.text("Error");
-					alert("Error occured when uploading images. " + JSON.stringify(errorMsg.result));
+					var errorMsg = error;
+					if (error && error.responseJSON && error.responseJSON.error) {
+						var errorMsg = error.responseJSON.error.result;
+					}
+					alert("Error occured when uploading images. " + JSON.stringify(errorMsg));
+					$uploadButtonText.text("Error");
 				}).always(function () {
 					setTimeout(function () {
-						$uploadButton.text("Upload");
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 					}, 3000);
 				});
 			});
@@ -525,6 +522,24 @@
 				reader.onerror = error => reject(error);
 			});
 		}
+
+		function toggleLoading(isLoading) {
+			var $uploadButton = $('#uploadButton');
+			var $uploadButtonText = $('#uploadButtonText');
+			var $addCardButton = $('#addCardButton');
+			var $uploadIndicator = $('#uploadIndicator');
+			if (isLoading) {
+				$uploadIndicator.show();
+				$uploadButtonText.text("Uploading");
+				$uploadButton.attr("disabled", true);
+				$addCardButton.attr("disabled", true);
+			} else {
+				$uploadIndicator.hide();
+				$uploadButtonText.text("Upload");
+				$uploadButton.attr("disabled", false);
+				$addCardButton.attr("disabled", false);
+			}
+		}
 	</script>
 </head>
 
@@ -554,7 +569,7 @@
 		</div>
 		<div class="col-xs-12 col-md-2 col-lg-2">
 			<button id="uploadButton" type="button" class="btn btn-red btn-block btn-lg" style="margin-top:15px" disabled="disabled">
-				Upload Now!
+				<i id="uploadIndicator" class="fa fa-circle-o-notch fa-spin"></i> <span id="uploadButtonText">Upload</span>
 			</button>
 		</div>
 	</div>
