@@ -90,7 +90,7 @@ exports.uploadVideoToStorage = function (req, res, next) {
             };
             bucket.upload(uploadData.file, options, function (err, upload) {
                 if (err) {
-                    console.error("Error Uploading Image - " + err);
+                    console.error("Error Uploading Video - " + err);
                     return res.status(500).json({ error: err });
                 }
                 return res.status(200).json({
