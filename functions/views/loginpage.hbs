@@ -26,6 +26,7 @@
                 // check if input fields are empty, if yes, display error and 
                 // if any input is left empty,
                 // return haveInput false, prevent redirecting to upload
+<<<<<<< HEAD
                 $(".error-text").each(function (index, errorText) {
                     $(errorText).hide();
                 })
@@ -34,6 +35,20 @@
                 if (albumName == "" || albumName == undefined || albumName == null) {
                     ($("#noAlbumError"))[0].style.display = "block";
                     return;
+=======
+
+                if ($("#albumTitle").val() == "") {
+                    ($("#bookError"))[0].style.display = "block";
+                    haveInput = false;
+                } else {
+                    ($("#bookError"))[0].style.display = "none";
+                }
+                if ($("#popCode").val() == "") {
+                    ($("#codeError"))[0].style.display = "block";
+                    haveInput = false;
+                } else {
+                    ($("#codeError"))[0].style.display = "none";
+>>>>>>> 7aea70e38ffd2b2cdb1a96797ee57b950a2a1c3a
                 }
                 if (popCode == "" || popCode == undefined || popCode == null) {
                     ($("#noCodeError"))[0].style.display = "block";
@@ -110,20 +125,30 @@
         <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4 album-col">
             <form>
                 <div class="form-group album-form">
+<<<<<<< HEAD
                     <label for="albumName"><span class="text-white">Album Name</span></label>
                     <input type="email" class="form-control input-lg" id="albumName" placeholder="Enter Album Name">
                     <div id="noAlbumError" class="error-text text-error" style="display: none;">Please input your album
                         name!</div>
                     <div id="duplicateAlbumError" class="error-text text-error" style="display: none;">This album name
                         already exists. Please input another name!</div>
+=======
+                    <label for="albumTitle"><span class="text-white">Album Title</span></label>
+                    <input type="email" class="form-control input-lg" id="albumTitle" placeholder="Enter Album Title">
+                    <div id="bookError" style="display: none; color: red; font-size: 20px; text-align:center;">Please input your book title!</div>
+>>>>>>> 7aea70e38ffd2b2cdb1a96797ee57b950a2a1c3a
                 </div>
                 <div class="form-group album-form">
                     <label for="popCode"><span class="text-white">POPCode</span></label>
                     <input type="password" class="form-control input-lg" id="popCode" placeholder="Enter POPCode">
+<<<<<<< HEAD
                     <div id="noCodeError" class="error-text text-error" style="display: none;">Please input valid
                         POPCode!</div>
                     <div id="popCodeInvalidError" class="error-text text-error" style="display: none;">This POPCode is
                         not valid. Please input valid POPCode!</div>
+=======
+                    <div id="codeError" style="display: none; color: red; font-size: 20px; text-align:center;">Please input valid popCode!</div>
+>>>>>>> 7aea70e38ffd2b2cdb1a96797ee57b950a2a1c3a
                 </div>
             </form>
         </div>
