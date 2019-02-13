@@ -311,7 +311,7 @@
 		function getPopCodeData(popCode) {
 			return new Promise((resolve, reject) => {
 				$.ajax({
-					url: apiURL + '/getPopCodeData/' + popCode,
+					url: apiURL + 'getPopCodeData/' + popCode,
 					type: 'GET',
 					success: function (data) {
 						let popCodeData = {
@@ -338,7 +338,7 @@
 			fd.append('image', image);
 			fd.append('albumName', albumName);
 			return $.ajax({
-				url: apiURL + '/uploadImageToStorage',
+				url: apiURL + 'uploadImageToStorage',
 				data: fd,
 				processData: false,
 				contentType: false,
@@ -351,7 +351,7 @@
 			fd.append('video', video);
 			fd.append('albumName', albumName);
 			return $.ajax({
-				url: apiURL + '/uploadVideoToStorage',
+				url: apiURL + 'uploadVideoToStorage',
 				data: fd,
 				processData: false,
 				contentType: false,
