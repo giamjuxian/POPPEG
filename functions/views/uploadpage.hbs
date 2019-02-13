@@ -103,7 +103,7 @@
 					});
 				})
 				var deferreds = [];
-
+				deferreds.push(uploadAlbumToDatabase(entries, albumName));
 				uploads.forEach(function (upload, index) {
 					deferreds.push(uploadImage(upload.image, albumName));
 					deferreds.push(uploadVideo(upload.video, albumName));
@@ -124,37 +124,36 @@
 				});
 
 				$.when.apply($, deferreds).then(function (data, textStatus, jqXHR) {
-					uploadAlbumToDatabase(entries, albumName)
-						.then(function (err, result) {
-							if (err) {
-								alert("Error occured when updating database" + JSON.stringify(err));
-							} else {
-								let body = {
-									popCode: popCode,
-									numberOfImagesUsed: uploads.length
-								}
-								$.ajax({
-									type: "POST",
-									url: apiURL + "updatePopCode",
-									dataType: 'json',
-									data: body,
-									success: function (result) {
-										$uploadButtonText.text("Success");
-										window.location.href = apiURL + 'success';
-									},
-									error: function (error) {
-										$uploadButtonText.text("Error");
-										alert("Error occured when updating PopCode. " + JSON.stringify(error));
-									}
-								});
+					if (err) {
+						alert("Error occured when updating database" + JSON.stringify(err));
+					} else {
+						let body = {
+							popCode: popCode,
+							numberOfImagesUsed: uploads.length
+						}
+						$.ajax({
+							type: "POST",
+							url: apiURL + "updatePopCode",
+							dataType: 'json',
+							data: body,
+							success: function (result) {
+								$uploadButtonText.text("Success");
+								window.location.href = apiURL + 'success';
+							},
+							error: function (error) {
+								$uploadButtonText.text("Error");
+								alert("Error occured when updating PopCode. " + JSON.stringify(error));
 							}
-						})
+						});
+					}
 				}).fail(function (error) {
 					var errorMsg = error;
 					if (error && error.responseJSON && error.responseJSON.error) {
 						var errorMsg = error.responseJSON.error.result;
 					}
-					alert("Error occured when uploading images. " + JSON.stringify(errorMsg));
+					console.log(error);
+					console.log(errorMsg);
+					alert("Error occured when uploading media. " + JSON.stringify(errorMsg));
 					$uploadButtonText.text("Error");
 				}).always(function () {
 					setTimeout(function () {
@@ -358,23 +357,15 @@
 		}
 
 		function uploadAlbumToDatabase(entries, bookName) {
-			return new Promise((resolve, reject) => {
-				let body = {
-					entries: entries,
-					bookName: bookName
-				}
-				$.ajax({
-					type: "POST",
-					url: apiURL + "addUrlsToDatabase",
-					dataType: 'json',
-					data: body,
-					success: function (result) {
-						resolve(null, result);
-					},
-					error: function (error) {
-						resolve(error, null);
-					}
-				});
+			let body = {
+				entries: entries,
+				bookName: bookName
+			}
+			return $.ajax({
+				type: "POST",
+				url: apiURL + "addUrlsToDatabase",
+				dataType: 'json',
+				data: body,
 			});
 		}
 
