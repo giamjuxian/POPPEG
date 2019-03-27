@@ -22,15 +22,14 @@
 		let multiplesImgArr = [];
 		let multiplesVidArr = [];
 		const emptyHeader =
-			`<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
+		`<div id="emptyHeader" class="col-md-12 col-xs-12 text-center standard-header">
             <span>Your cart is currently empty!</span>
-        </div>
-         `;
+        </div>`;
 		let numberOfCards = 0;
 		const validImages = [".jpg", ".jpeg"];
 		const validVideos = [".mp4", ".mov"];
-		var apiURL = "http://localhost:5000/";
-		// var apiURL = "https://www.poppeg.com/";
+		// var apiURL = "http://localhost:5000/";
+		var apiURL = "https://www.poppeg.com/";
 
 		$(document).ready(() => {
 			const albumName = localStorage.getItem("albumName");
@@ -41,14 +40,29 @@
 				numberOfImagesUsed: 0
 			};
 			var availableImages = 0;
-			$("#addCardButton").attr("disabled", true);
-			$("#uploadImageAvailable").html("Loading");
+
+			// Load information and intialize firebase
 			getPopCodeData(popCode).then(function (data) {
 				popCodeData = data;
 				availableImages = popCodeData.numberOfImages - popCodeData.numberOfImagesUsed;
 				console.log(popCodeData);
 				updateImageAvailableField(availableImages);
 			});
+
+			var config = {
+				apiKey: "AIzaSyCJ_8fywjzItSCX63_1XE2tjaHDdLdLbRw",
+				authDomain: "poppeg-95e96.firebaseapp.com",
+				databaseURL: "https://poppeg-95e96.firebaseio.com",
+				projectId: "poppeg-95e96",
+				storageBucket: "poppeg-95e96.appspot.com",
+				messagingSenderId: "237013132204"
+			};
+
+			firebase.initializeApp(config);
+
+			$('#uploadIndicator').hide();
+			$("#addCardButton").attr("disabled", true);
+			$("#uploadImageAvailable").html("Loading");
 
 			$('#addCardButton').on('click', (event) => {
 				if (availableImages > 0) {
@@ -69,49 +83,59 @@
 			$('#uploadButton').on('click', (event) => {
 				// checks if imageBlock and videoBlock fields all filled
 				const numberOfMediaBlocks = $(".imageBlock").length;
-				for (let i = 0; i < numberOfMediaBlocks; i++) {
-					var $uploadButton = $('#uploadButton');
-					var $addCardButton = $('#addCardButton');
-					$uploadButton.text("Uploading");
-					$uploadButton.attr("disabled", true);
-					$addCardButton.attr("disabled", true);
+				var $uploadButton = $('#uploadButton');
+				var $uploadButtonText = $('#uploadButtonText');
+				var $addCardButton = $('#addCardButton');
+				var $uploadIndicator = $('#uploadIndicator');
+				toggleLoading(true);
 
-					// Check if field is empty
+				// Validation to check for empty file
+				for (let i = 0; i < numberOfMediaBlocks; i++) {
 					if (($(".imageBlock").children())[1 + i * 3].value == "") {
 						($(".imageBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Upload";
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 						return;
 					}
 					if (($(".videoBlock").children())[1 + i * 3].value == "") {
 						($(".videoBlock").children())[2 + i * 3].style.display = "block";
-						$uploadButton.text() = "Upload";
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 						return;
 					}
 				}
+
 				let uploads = [];
 				let entries = [];
 				let uploadImagesEncoded = [];
 				$(".upload-card").each(function (index, card) {
 					let newUpload = {
 						image: $(card).find(".image-upload").prop('files')[0],
-						video: $(card).find(".video-upload").prop('files')[0]
+						video: $(card).find(".video-upload").prop('files')[0],
+						$imageField: $(card).find(".image-upload"),
+						$videoField: $(card).find(".video-upload")
 					};
 					uploads.push(newUpload);
 					entries.push({
 						name: removeSpecialCharacters(newUpload.image.name),
 						url: 'media/' + albumName + '/' + removeSpecialCharacters(newUpload.video.name) + '/video'
 					});
-				})
-				var deferreds = [];
+				});
 
+				// Validation to check for too large images
+				for (let i = 0; i < uploads.length; i++) {
+					var image = uploads[i].image;
+					if (image.size > 2000000) {
+						alert("Image " + image.name + " is too big. Please provide an image that is less than 2MB.");
+						toggleLoading(false);
+						return;
+					}
+				}
+
+				$(".progress").show();
+				$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
+
+				var easyARDeferreds = [];
 				uploads.forEach(function (upload, index) {
-					deferreds.push(uploadImage(upload.image, albumName));
-					deferreds.push(uploadVideo(upload.video, albumName));
-					deferreds.push(getBase64(upload.image).then(
+					easyARDeferreds.push(getBase64(upload.image).then(
 						data => {
 							let body = {
 								name: removeSpecialCharacters(upload.image.name),
@@ -125,42 +149,54 @@
 							});
 						}
 					));
-				});
+				})
 
-				$.when.apply($, deferreds).then(function (data, textStatus, jqXHR) {
-					uploadAlbumToDatabase(entries, albumName)
-						.then(function (err, result) {
-							if (err) {
-								alert("Error occured when updating database" + JSON.stringify(err));
-							} else {
-								let body = {
-									popCode: popCode,
-									numberOfImagesUsed: uploads.length
-								}
-								$.ajax({
-									type: "POST",
-									url: apiURL + "updatePopCode",
-									dataType: 'json',
-									data: body,
-									success: function (result) {
-										$uploadButton.text("Success");
-									},
-									error: function (error) {
-										$uploadButton.text("Error");
-										alert("Error occured when updating PopCode. " + JSON.stringify(error));
-									}
-								});
+				$.when.apply($, easyARDeferreds).then(function (data, textStatus, jqXHR) {
+					// Upload easyar images successful. Continue to upload to database
+					var deferreds = [];
+					deferreds.push(uploadAlbumToDatabase(entries, albumName));
+					uploads.forEach(function (upload, index) {
+						deferreds.push(uploadImage(upload.image, albumName, upload.$imageField));
+						deferreds.push(uploadVideo(upload.video, albumName, upload.$videoField));
+					});
+
+					$.when.apply($, deferreds).then(function (data, textStatus, jqXHR) {
+						let body = {
+							popCode: popCode,
+							numberOfImagesUsed: uploads.length
+						}
+						$.ajax({
+							type: "POST",
+							url: apiURL + "updatePopCode",
+							dataType: 'json',
+							data: body,
+							success: function (result) {
+								$uploadButtonText.text("Success");
+								window.location.href = apiURL + 'success';
+							},
+							error: function (error) {
+								$uploadButtonText.text("Error");
+								alert("Error occured when updating PopCode. " + JSON.stringify(error));
 							}
-						})
+						});
+					}).fail(function (error) {
+						var errorMsg = error;
+						alert("Error occured when uploading media. " + JSON.stringify(errorMsg));
+						$uploadButtonText.text("Error");
+					}).always(function () {
+						setTimeout(function () {
+							toggleLoading(false);
+						}, 3000);
+					});
 				}).fail(function (error) {
-					var errorMsg = error.responseJSON.error;
-					$uploadButton.text("Error");
-					alert("Error occured when uploading images. " + JSON.stringify(errorMsg.result));
-				}).always(function () {
+					var errorMsg = error;
+					if (error && error.responseJSON && error.responseJSON.error) {
+						var errorMsg = error.responseJSON.error.result;
+					}
+					alert("Error occured when uploading to easyAR. " + JSON.stringify(errorMsg));
+					$uploadButtonText.text("Error");
 					setTimeout(function () {
-						$uploadButton.text("Upload");
-						$uploadButton.attr("disabled", false);
-						$addCardButton.attr("disabled", false);
+						toggleLoading(false);
 					}, 3000);
 				});
 			});
@@ -311,7 +347,7 @@
 		function getPopCodeData(popCode) {
 			return new Promise((resolve, reject) => {
 				$.ajax({
-					url: apiURL + '/getPopCodeData/' + popCode,
+					url: apiURL + 'getPopCodeData/' + popCode,
 					type: 'GET',
 					success: function (data) {
 						let popCodeData = {
@@ -323,7 +359,7 @@
 					},
 					error: function (error) {
 						alert("Error occurred. Please try again.");
-						reject(error);
+						resolve(error);
 					}
 				});
 			})
@@ -333,50 +369,66 @@
 			return name.replace(/[\W_]/g, "-");
 		}
 
-		function uploadImage(image, albumName) {
-			var fd = new FormData();
-			fd.append('image', image);
-			fd.append('albumName', albumName);
-			return $.ajax({
-				url: apiURL + '/uploadImageToStorage',
-				data: fd,
-				processData: false,
-				contentType: false,
-				type: 'POST'
+		function uploadImage(image, albumName, $imageField) {
+			return new Promise((resolve, reject) => {
+				var storageRef = firebase.storage().ref('media/' + albumName + '/' + removeSpecialCharacters(image.name) + '/image');
+				var task = storageRef.put(image);
+				task.on('state_changed',
+					function progress(snapshot) {
+						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+						var $progressBar = $imageField.parent().parent().find(".progress-bar");
+						$progressBar.css('width', percentage+'%').attr('aria-valuenow', percentage); 
+						console.log("Uploading Image " + image.name + ": " + percentage + "%");
+					},
+
+					function error(err) {
+						alert("Error occurred uploading image. " + err);
+						reject(err);
+					},
+
+					function complete() {
+						console.log("COMPLETED UPLOAD OF " + image.name);
+						resolve();
+					}
+				);
 			});
 		}
 
-		function uploadVideo(video, albumName) {
-			var fd = new FormData();
-			fd.append('video', video);
-			fd.append('albumName', albumName);
-			return $.ajax({
-				url: apiURL + '/uploadVideoToStorage',
-				data: fd,
-				processData: false,
-				contentType: false,
-				type: 'POST'
+		function uploadVideo(video, albumName, $videoField) {
+			return new Promise((resolve, reject) => {
+				var storageRef = firebase.storage().ref('media/' + albumName + '/' + removeSpecialCharacters(video.name) + '/video');
+				var task = storageRef.put(video);
+				task.on('state_changed',
+					function progress(snapshot) {
+						var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+						var $progressBar = $videoField.parent().parent().find(".progress-bar");
+						$progressBar.css('width', percentage+'%').attr('aria-valuenow', percentage); 
+						console.log("Uploading video " + video.name + ": " + percentage + "%");
+					},
+
+					function error(err) {
+						alert("Error occurred uploading video. " + err);
+						reject(err);
+					},
+
+					function complete() {
+						console.log("COMPLETED UPLOAD OF " + video.name);
+						resolve();
+					}
+				);
 			});
 		}
 
 		function uploadAlbumToDatabase(entries, bookName) {
-			return new Promise((resolve, reject) => {
-				let body = {
-					entries: entries,
-					bookName: bookName
-				}
-				$.ajax({
-					type: "POST",
-					url: apiURL + "addUrlsToDatabase",
-					dataType: 'json',
-					data: body,
-					success: function (result) {
-						resolve(null, result);
-					},
-					error: function (error) {
-						resolve(error, null);
-					}
-				});
+			let body = {
+				entries: entries,
+				bookName: bookName
+			}
+			return $.ajax({
+				type: "POST",
+				url: apiURL + "addUrlsToDatabase",
+				dataType: 'json',
+				data: body,
 			});
 		}
 
@@ -395,7 +447,7 @@
 						resolve(null, result);
 					},
 					error: function (error) {
-						reject(error, null);
+						resolve(error, null);
 					}
 				});
 			})
@@ -493,17 +545,30 @@
 		function addUploadContainer(numberOfCards) {
 			let html =
 				`<div class="row upload-card" id="cardTemplate_${numberOfCards}" style="margin-bottom: 15px;">
-					
-                    <div class="col-xs-12 col-md-6 col-lg-6 media-block imageBlock">
-                        <label for="imageUpload_${numberOfCards}">Image: </label> 
-                        <input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
-						<div class="text-error" id="errorImg_${numberOfCards}">Please input a valid file!</div>
-                    </div>
-                    <div class="col-xs-12 col-md-5 col-lg-5 media-block videoBlock">
-                        <label for="videoUpload_${numberOfCards}">Video: </label> 
-                        <input class="video-upload" id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
-						<div class="text-error" id="errorVid_${numberOfCards}">Please input a valid file!</div>
-                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-6">
+						<div class="row media-block imageBlock">
+							<label for="imageUpload_${numberOfCards}">Image: </label> 
+							<input class="image-upload" id="imageUpload_${numberOfCards}" type="file" accept="image/*" style="display: inline;">
+							<div class="text-error" id="errorImg_${numberOfCards}">Please input a valid file!</div>
+						</div>
+						<div class="row">
+							<div class="progress" style="display: none;">
+								<div class="progress-bar bg-purple" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-xs-12 col-md-5 col-lg-5">
+						<div class="row media-block videoBlock">
+							<label for="videoUpload_${numberOfCards}">Video: </label> 
+							<input class="video-upload" id="videoUpload_${numberOfCards}" type="file" accept="video/*" style="display: inline;">
+							<div class="text-error" id="errorVid_${numberOfCards}">Please input a valid file!</div>
+						</div>
+						<div class="row">
+							<div class="progress" style="display: none;">
+								<div class="progress-bar bg-purple" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
 					<div class="col-xs-12 col-md-1 col-lg-1 media-block">
 						<button id="deleteButton_${numberOfCards}" type="button" class="btn btn-block btn-secondary delete-button"><i class="fa fa-close"></i></button>
 					</div>
@@ -524,6 +589,24 @@
 				};
 				reader.onerror = error => reject(error);
 			});
+		}
+
+		function toggleLoading(isLoading) {
+			var $uploadButton = $('#uploadButton');
+			var $uploadButtonText = $('#uploadButtonText');
+			var $addCardButton = $('#addCardButton');
+			var $uploadIndicator = $('#uploadIndicator');
+			if (isLoading) {
+				$uploadIndicator.show();
+				$uploadButtonText.text("Uploading");
+				$uploadButton.attr("disabled", true);
+				$addCardButton.attr("disabled", true);
+			} else {
+				$uploadIndicator.hide();
+				$uploadButtonText.text("Upload");
+				$uploadButton.attr("disabled", false);
+				$addCardButton.attr("disabled", false);
+			}
 		}
 	</script>
 </head>
@@ -554,7 +637,7 @@
 		</div>
 		<div class="col-xs-12 col-md-2 col-lg-2">
 			<button id="uploadButton" type="button" class="btn btn-red btn-block btn-lg" style="margin-top:15px" disabled="disabled">
-				Upload Now!
+				<i id="uploadIndicator" class="fa fa-circle-o-notch fa-spin"></i> <span id="uploadButtonText">Upload</span>
 			</button>
 		</div>
 	</div>

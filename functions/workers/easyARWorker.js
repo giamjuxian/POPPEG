@@ -18,8 +18,8 @@ exports.uploadImageToEasyAR = function(req, res, next) {
         console.log("Uploaded: " + response.result.targetId);
         return res.status(200).json({ success: "Image is successfully uploaded to EasyAR" , response: response.result});
     }).fail(function(error) {
-        console.error("Error Uploading: " + error.message);
         var errorMsg = JSON.parse(error.message);
+        console.error("Error uploading image to  EasyAR - " + JSON.stringify(errorMsg));
         return res.status(400).json({ error: errorMsg });
     })
 }
