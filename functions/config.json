@@ -17,6 +17,11 @@
         "serverUrl": "http://a6101a9b33bf0cb079e1750cfd6674b1.cn1.crs.easyar.com:8888",
         "cloudSecret": "QyhEfhWbeq0koouMEnH5NatSNcvraqnM5d146kTQXWfHJcDV3jLKBsG3tBk9FaPPDyhDMYkgF1PbyRWMPovL9TEix4OdggL3eDDvqCURmfAGtkaZj4M0iTJ4ELlwfHgK",
         "cloudKey": "dad41869237bee4cd0fbce35749af301"
+    },
+    "easyar_new_config": {
+        "serverUrl": "http://9994407b6b2628618263c444ddee6a14.na1.crs.easyar.com:8888",
+        "cloudSecret": "THIl6O95dXkg9VRMlrgzeqytIDgpcR4lgYd6hGffPg03M91KFsi5iRXGOyhAprGUErQeswguuanz5DYp1a4e64xxTClpj0hjwQhIPvuCKljzdj591najMj7LD7P8Id04",
+        "cloudKey": "1387e9a52ac9ce2578086677da605161"
     }
 }
 
