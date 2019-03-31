@@ -134,3 +134,11 @@ body {
     color: white;
     font-size: 27px;
 }
+
+.slider-area-new {
+    display: flex;
+    align-items: center;
+    height: 800px;
+    background: red;
+    padding-top: 80px;
+}
