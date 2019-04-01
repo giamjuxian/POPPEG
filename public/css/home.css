@@ -120,3 +120,7 @@
 .footer-area-new p {
     color: #ffffff;
 }
+
+.about-left-new {
+    max-width: 500px;
+}

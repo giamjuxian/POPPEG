@@ -1,20 +1,20 @@
 body {
     background-color: #4f307e;
-    height:100%;
-    margin:0;
-    padding:0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .poppeg-logo {
     margin-top: 100px;
     margin-bottom: 30px;
-    float: left; 
+    float: left;
 }
 
 .footer {
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 10px;
-}       
+}
 
 .row {
     margin-left: 0px;
@@ -23,7 +23,7 @@ body {
 
 .btn-yellow {
     background-color: #f2d824;
-    color:#000000;
+    color: #000000;
     font-weight: bold;
     border-color: #f2d824;
     justify-content: center;
@@ -34,23 +34,23 @@ body {
 }
 
 .btn-red {
-    background-color: #ED3030;
-    color:#000000;
+    background-color: #ed3030;
+    color: #000000;
     font-weight: bold;
-    border-color: #ED3030;
+    border-color: #ed3030;
 }
 
 .btn-red:hover {
-    border-color: #ED3030;
+    border-color: #ed3030;
 }
 
 .text-white {
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .text-error {
     color: red;
-    display: none; 
+    display: none;
     padding-left: 0px;
 }
 
@@ -62,7 +62,7 @@ body {
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: bold;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 10px 10px 10px 10px;
 }
 
@@ -87,7 +87,7 @@ body {
     font-size: 20px;
 }
 
-.new-card{
+.new-card {
     border: solid black 2px;
     font-weight: bold;
     font-size: 20px;
@@ -103,8 +103,8 @@ body {
 
 .delete-btn {
     background-color: rgba(255, 0, 0, 0.623);
-    color: #FFFFFF;
-    border: #FFFFFF solid 1px; 
+    color: #ffffff;
+    border: #ffffff solid 1px;
     font-size: 18px;
     font-weight: bold;
     padding: 19.5px 10.5px;
@@ -124,7 +124,7 @@ body {
     }
 }
 
-.upload-card .media-block div{
+.upload-card .media-block div {
     color: red;
     display: none;
     font-size: 13px;
