@@ -4,8 +4,10 @@ labels:
 - gvh
 - gvh_manifest
 - gvh_version-1.2.98.0
+- gvh_version-5.4.4
+timeCreated: 1474401009
+licenseType: Pro
 TextScriptImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:

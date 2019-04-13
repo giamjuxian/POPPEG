@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Threading;
 using EasyAR;
+using UnityEngine;
+using UnityEngine.Video;
 
 public class EasyARCloudHandler : CloudRecognizerBehaviour
 {
@@ -56,7 +57,7 @@ public class EasyARCloudHandler : CloudRecognizerBehaviour
             var videoPlayer = Instantiate(videoPlayerPrefab);
             videoPlayer.transform.parent = target.transform;
             videoPlayer.transform.localPosition = Vector3.zero;
-            videoPlayer.transform.localScale = new Vector3(targetBehaviour.Size.x / Mathf.Max(targetBehaviour.Size.x, targetBehaviour.Size.y) * 1.2f , 0.675f , 1);
+            videoPlayer.transform.localScale = new Vector3(targetBehaviour.Size.x / Mathf.Max(targetBehaviour.Size.x, targetBehaviour.Size.y), 1f , 1f);
 
             if (SaveNewTarget)
             {

@@ -11,12 +11,12 @@ using System.Collections;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class DatabaseManager : MonoBehaviour
 {
     public GameObject downloadButton;
     public GameObject backButton;
-    public GameObject textField;
     public GameObject warningTextField;
     private List<Entry> allEntries;
     private FirebaseStorage storage;
@@ -126,7 +126,6 @@ public class DatabaseManager : MonoBehaviour
      */
     private void DownloadVideo()
     {
-        downloadButton.GetComponentInChildren<Text>().text = "Starting Download...";
         backButton.SetActive(false);
         foreach (Entry e in allEntries)
         {
@@ -152,11 +151,21 @@ public class DatabaseManager : MonoBehaviour
      */
     private IEnumerator DownloadVideoFromURL(string url, string videoName)
     {
+        Debug.Log("Starting Download for " + videoName);
         downloadsRunning++;
-        var www = new WWW(url);
-        yield return www;
-        File.WriteAllBytes(Application.persistentDataPath + "/" + videoName + ".mp4", www.bytes);
-        Debug.Log("File Saved: " + Application.persistentDataPath + "/" + videoName + ".mp4");
+        var uwr = new UnityWebRequest(url, UnityWebRequest.kHttpVerbGET);
+        var videoFileName = videoName + ".mp4";
+        string path = Path.Combine(Application.persistentDataPath, videoFileName);
+        uwr.downloadHandler = new DownloadHandlerFile(path);
+        yield return uwr.SendWebRequest();
+        if (uwr.isNetworkError || uwr.isHttpError)
+        {
+            Debug.LogError(uwr.error);
+        }
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path);
+        }
         downloadsRunning--;
     }
 

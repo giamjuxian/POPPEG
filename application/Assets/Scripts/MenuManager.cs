@@ -7,21 +7,40 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject mainPanel;
     public GameObject downloadPanel;
-    private bool isDownloadPanel;
+    public GameObject instructionsPanel;
+    private int panelNumber;
 
 
     private void Start()
     {
-        isDownloadPanel = false;
+        panelNumber = 0;
     }
 
     /*
      * Toggles between download and main menu panels
      */
-    public void ToggleDownloadPanel()
+    public void TogglePanel()
     {
-        isDownloadPanel = !isDownloadPanel;
-        mainPanel.SetActive(!isDownloadPanel);
-        downloadPanel.SetActive(isDownloadPanel);
+        mainPanel.SetActive(panelNumber == 0);
+        downloadPanel.SetActive(panelNumber == 1);
+        instructionsPanel.SetActive(panelNumber == 2);
+    }
+
+    public void switchToMainPanel()
+    {
+        panelNumber = 0;
+        TogglePanel();
+    }
+
+    public void switchToDownloadPanel()
+    {
+        panelNumber = 1;
+        TogglePanel();
+    }
+
+    public void switchToInstructionsPanel()
+    {
+        panelNumber = 2;
+        TogglePanel();
     }
 }
