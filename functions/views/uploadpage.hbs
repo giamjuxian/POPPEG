@@ -28,8 +28,8 @@
 		let numberOfCards = 0;
 		const validImages = [".jpg", ".jpeg"];
 		const validVideos = [".mp4", ".mov"];
-		// var apiURL = "http://localhost:5000/";
-		var apiURL = "https://www.poppeg.com/";
+		 var apiURL = "http://localhost:5000/";
+		//var apiURL = "https://www.poppeg.com/";
 
 		$(document).ready(() => {
 			const albumName = localStorage.getItem("albumName");
@@ -45,7 +45,7 @@
 			getPopCodeData(popCode).then(function (data) {
 				popCodeData = data;
 				availableImages = popCodeData.numberOfImages - popCodeData.numberOfImagesUsed;
-				console.log(popCodeData);
+				// console.log(popCodeData);
 				updateImageAvailableField(availableImages);
 			});
 
@@ -614,7 +614,20 @@
 <body>
 	<div class="row">
 		<div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-			<img src="media/poppeg_strip_vector.png" class="poppeg-logo img-fluid" alt="Responsive image" style="width: 100%" />
+			<a href="home"><img src="media/poppeg_strip_vector.png" class="poppeg-logo img-fluid" alt="Responsive image" style="width: 100%" /></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+			<div class="alert alert-info">
+				<strong><h4>Image:</h4></strong> 
+				<p>1) <strong>Less than</strong> 2MB size.</p>
+				<p>2) Filetype .JPG</p>
+				</br>
+				<strong><h4>Video:</h4></strong> 
+				<p>1) Preferably 30 Seconds.</p>
+				<p>2) Filetype .mp4</p>
+			</div>
 		</div>
 	</div>
 	<div class="row">

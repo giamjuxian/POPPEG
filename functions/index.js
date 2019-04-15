@@ -23,7 +23,7 @@ app.set("view engine", "hbs");
 /**
  * Web Views
  */
-app.get("/", function(req, res, next) {
+app.get("/login", function(req, res, next) {
     res.render("loginpage");
 });
 
