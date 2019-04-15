@@ -1,0 +1,41 @@
+[debug] [2019-04-15T06:51:00.948Z] ----------------------------------------------------------------------
+[debug] [2019-04-15T06:51:00.950Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions,hosting
+[debug] [2019-04-15T06:51:00.950Z] CLI Version:   6.6.0
+[debug] [2019-04-15T06:51:00.950Z] Platform:      darwin
+[debug] [2019-04-15T06:51:00.950Z] Node Version:  v10.14.1
+[debug] [2019-04-15T06:51:00.951Z] Time:          Mon Apr 15 2019 14:51:00 GMT+0800 (Singapore Standard Time)
+[debug] [2019-04-15T06:51:00.951Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-04-15T06:51:00.958Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-15T06:51:00.958Z] > authorizing via signed-in user
+[debug] [2019-04-15T06:51:00.959Z] [iam] checking project poppeg-95e96 for permissions ["firebase.projects.get"]
+[debug] [2019-04-15T06:51:00.960Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96:testIamPermissions  
+
+[debug] [2019-04-15T06:51:02.175Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-15T06:51:02.176Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-95e96  
+ 
+[debug] [2019-04-15T06:51:03.399Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/clarencekoh/Desktop/POPPEG_2/POPPEG'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-04-15T06:51:03.773Z] Fetching environment
+[debug] [2019-04-15T06:51:03.775Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254:getServerAppConfig  
+ 
+[debug] [2019-04-15T06:51:03.775Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/723639879254/clients/_:getWebAppConfig  
+ 
+[debug] [2019-04-15T06:51:04.117Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-15T06:51:04.117Z] Starting @google-cloud/functions-emulator
+[debug] [2019-04-15T06:51:04.133Z] <<< HTTP RESPONSE 200
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port...
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5010
+[debug] [2019-04-15T06:51:05.166Z] Parsing function triggers
+[debug] [2019-04-15T06:51:05.786Z] Error while deploying to emulator: Error: connect ECONNREFUSED 127.0.0.1:5002
+Error: connect ECONNREFUSED 127.0.0.1:5002
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1113:14)
+[warn] ⚠  functions: Failed to emulate app
+[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.
+[info] [hosting] Rewriting / to local function app
+[info] [hosting] Rewriting /favicon.ico to local function app
