@@ -277,7 +277,7 @@ END Header Area
     display: flex;
     align-items: center;
     height: 800px;
-    background: #5e4583;
+    background: #543483;
     margin-top: 60px;
 }
 /* .slider-area-new {
@@ -1170,7 +1170,7 @@ END Contact Area
 .footer-area {
     height: 80px;
     text-align: center;
-    background-color: #5a10fb;
+    background-color: #4f307e;
     display: flex;
     align-items: center;
     position: relative;
