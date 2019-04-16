@@ -156,7 +156,7 @@ textarea {
 }
 
 .logo a img {
-    max-height: 50%;
+    max-height: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -226,11 +226,7 @@ textarea {
 
 .slicknav_btn {
     background-color: transparent;
-    margin-top: -7em;
-    /* margin-top: 30px; */
-    /* position: relative; */
-    /* margin-top: -7rem; */
-    /* text-align: center; */
+    margin-top: -5em;
 }
 
 .slicknav_menu .slicknav_open .slicknav_icon-bar:nth-child(2) {
@@ -1171,16 +1167,17 @@ END Contact Area
 ===========================*/
 
 /*footer area*/
-/* .footer-area {
+.footer-area {
     height: 80px;
     text-align: center;
     background-color: #5a10fb;
     display: flex;
     align-items: center;
+    position: relative;
 }
 .footer-area p {
     color: #ffffff;
-} */
+}
 /*===========================
 3. Blog Details
 ===========================*/
