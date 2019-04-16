@@ -9,17 +9,20 @@
     <!-- Mobile Specific Meta  -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/assets/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/jquery-ui.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/magnificpopup.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/jquery.mb.YTPlayer.min.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/typography.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/assets/css/responsive.css" type="text/css">
-    <link rel="stylesheet" href="css/home.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous">
+    {{!-- <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css"> --}}
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnificpopup.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery.mb.YTPlayer.min.css" type="text/css">
+    <link rel="stylesheet" href="css/typography.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/responsive.css" type="text/css">
+    {{!-- <link rel="stylesheet" href="css/home.css" type="text/css" /> --}}
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,13 +43,14 @@
 
     <!-- header area start -->
     <header id="header">
-        <div class="header-area-new">
+        <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="menu-area">
                         <div class="col-md-3 col-sm-12 col-xs-12">
-                            <div class="logo-new">
-                                <a href=""><img src="css/assets/img/icon/poppeg_strip.png" alt="POPPEG"></a>
+                            <div class="logo">
+                                <a href=""><img src="css/assets/img/icon/poppeg_strip.png"
+                                        alt="POPPEG"></a>
                             </div>
                         </div>
                         <div class="col-md-9 hidden-xs hidden-sm">
@@ -77,9 +81,9 @@
 
 
     <!-- slider area start -->
-    <section class="slider-area-new" id="home">
+    <section class="slider-area" id="home">
         <div class="container">
-            <div class="col-md-6 col-sm-6 hidden-xs">
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="slider-img">
                         <img src="css/assets/img/mobile/POPPEG_Iphone.png" alt="slider image">
@@ -89,7 +93,7 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="slider-inner text-right">
-                        <h2>Make your images come to life!</h2>
+                        <h2>See images come alive!</h2>
                         <h5>With Singapore's first Augmented Reality photo application.</h5>
                         {{!-- <a class="expand-video" href="https://www.youtube.com/watch?v=8qs2dZO6wcc"><i class="fa fa-play"></i>Watch the video</a> --}}
                     </div>
@@ -158,28 +162,37 @@
     <!-- About App area start -->
     <section class="feature-area bg-gray ptb--100" id="feature">
         <div class="container">
-            <div class="section-title-new">
+            <div class="section-title">
                 <h2>About The App</h2>
                 <p>An Introduction to POPPEG</p>
             </div>
             <div class="row d-flex flex-center">
                 <div class="col-md-6 col-sm-6 hidden-xs">
                     <div>
-                        <img src="css/assets/img/about/app-about.png" alt="image" class="about-left-new">
+                        <img src="css/assets/img/about/app-about.png" alt="image"
+                            class="about-left-new">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 d-flex flex-center">
                     <div class="about-content">
-                        <p>We live in a digital world where many of our precious memories are stored in the digital
-                            space, often in the form of videos and images. As we accumulate more and more of these
-                            intangible assets, it becomes increasingly difficult for us to revisit these memories or
-                            share these moments with our friends and family, especially in a genuine and sincere manner.
-                            With that problem in mind, POPPEG was created as a platform that allows users to share their
+                        <p>We live in a digital world where many of our precious memories are stored
+                            in the digital
+                            space, often in the form of videos and images. As we accumulate more and
+                            more of these
+                            intangible assets, it becomes increasingly difficult for us to revisit
+                            these memories or
+                            share these moments with our friends and family, especially in a genuine
+                            and sincere manner.
+                            With that problem in mind, POPPEG was created as a platform that allows
+                            users to share their
                             precious memories with each other.</p>
-                        <p>POPPEG brings an image to life using image recognition and augmented reality. This is
-                            achieved by overlaying a video on top of the physical image. With POPPEG, we can add a new
-                            dimension into our everyday lives, creating an experience in which users can revisit clipped
+                        <p>POPPEG brings an image to life using image recognition and augmented
+                            reality. This is
+                            achieved by overlaying a video on top of the physical image. With
+                            POPPEG, we can add a new
+                            dimension into our everyday lives, creating an experience in which users
+                            can revisit clipped
                             memories even through physical photos.</p>
                     </div>
                 </div>
@@ -371,7 +384,7 @@
         <!-- team area start -->
         <section class="team-area bg-gray ptb--100" id="team">
             <div class="container">
-                <div class="section-title-new">
+                <div class="section-title">
                     <h2>The POPPEG Team</h2>
                     {{!-- <p>The brains behind POPPEG</p> --}}
                 </div>
@@ -385,8 +398,9 @@
                             <span>Co-Founder</span>
                             <ul class="tst-social">
                                 <li><a href="https://www.linkedin.com/in/ju-xian-giam-9a745716b/"><i
-                                            class="fa fa-linkedin"></i></a></li>
-                                <li><a href="https://www.instagram.com/giaamm/"><i class="fa fa-instagram"></i></a></li>
+                                            class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://www.instagram.com/giaamm/"><i
+                                            class="fab fa-instagram pr-1"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -399,8 +413,9 @@
                             <span>Co-Founder</span>
                             <ul class="tst-social">
                                 <li><a href="https://www.linkedin.com/in/leonardtan2812/"><i
-                                            class="fa fa-linkedin"></i></a></li>
-                                <li><a href="https://www.instagram.com/leeenut/"><i class="fa fa-instagram"></i></a>
+                                            class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://www.instagram.com/leeenut/"><i
+                                            class="fab fa-instagram pr-1"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -413,8 +428,10 @@
                             <h4>Jeffrey Halim</h4>
                             <span>Co-Founder</span>
                             <ul class="tst-social">
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="https://www.instagram.com/freynatic/"><i class="fa fa-instagram"></i></a>
+                                <li><a href="https://www.linkedin.com/in/jeffrey-halim-aa99b9121/"><i
+                                            class="fab fa-linkedin-in"></i></li>
+                                <li><a href="https://www.instagram.com/freynatic/"><i
+                                            class="fab fa-instagram pr-1"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -428,9 +445,9 @@
                             <span>Co-Founder</span>
                             <ul class="tst-social">
                                 <li><a href="https://www.linkedin.com/in/clarence-koh-705057153/"><i
-                                            class="fa fa-linkedin"></i></a></li>
+                                            class="fab fa-linkedin-in"></i></a></li>
                                 <li><a href="https://www.instagram.com/clarencekohl/"><i
-                                            class="fa fa-instagram"></i></a></li>
+                                            class="fab fa-instagram pr-1"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -528,7 +545,7 @@
         <!-- contact area start -->
         <section class="contact-area ptb--100" id="contact">
             <div class="container">
-                <div class="section-title-new">
+                <div class="section-title">
                     <h2>Contact Us</h2>
                     <p>For Enquiries</p>
                 </div>
@@ -553,7 +570,8 @@
                             </div>
                         </div> --}}
                             <div class="s-info">
-                                <a href="https://www.instagram.com/pop.peg/"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/pop.peg/"><i
+                                        class="fab fa-instagram pr-1"></i></a>
                                 <div class="meta-content">
                                     <span>@POP.PEG</span>
                                 </div>
@@ -587,7 +605,8 @@
                         Copyright &copy;
                         <script>document.write(new Date().getFullYear());
 
-                        </script> All rights reserved by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> All rights reserved by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

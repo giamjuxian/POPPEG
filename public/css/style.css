@@ -134,27 +134,31 @@ textarea {
 2.1 Header Area
 ===========================*/
 .header-area {
+    display: inline;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     z-index: 998;
-    background-color: #4c2b4c;
+    background-color: #4f307e;
 }
 
 .menu-area {
     display: flex;
     align-items: center;
+    /* text-align: center; */
 }
 
 /* .logo {} */
 
 .logo a {
-    display: inline-block;
+    display: inline;
 }
 
 .logo a img {
-    max-height: 100%;
+    max-height: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .main-menu {
@@ -174,7 +178,7 @@ textarea {
     font-weight: 400;
     color: #fff;
     letter-spacing: 0;
-    padding: 27px 36px;
+    padding: 10px 25px;
     position: relative;
     padding-left: 0;
 }
@@ -200,9 +204,11 @@ textarea {
 /*dropdown menu area start*/
 
 .mobile_menu {
+    display: inline;
 }
 .slicknav_menu .slicknav_menutxt {
     display: none;
+    text-align: center;
 }
 
 .slicknav_menu {
@@ -220,8 +226,11 @@ textarea {
 
 .slicknav_btn {
     background-color: transparent;
-    position: relative;
-    margin-top: -51px;
+    margin-top: -7em;
+    /* margin-top: 30px; */
+    /* position: relative; */
+    /* margin-top: -7rem; */
+    /* text-align: center; */
 }
 
 .slicknav_menu .slicknav_open .slicknav_icon-bar:nth-child(2) {
@@ -244,8 +253,8 @@ textarea {
 }
 
 .slicknav_nav {
-    background: #9c71d6;
-    margin: 10px;
+    background: #4f307e;
+    margin-top: 1rem;
     padding: 6px 0px;
 }
 
@@ -256,6 +265,7 @@ textarea {
 
 .slicknav_nav a {
     font-size: 14px;
+    color: white;
     letter-spacing: 0.01em;
 }
 
@@ -267,11 +277,18 @@ END Header Area
 2.2 Slider Area
 ===========================*/
 
-/* .slider-area {
+.slider-area {
     display: flex;
     align-items: center;
     height: 800px;
-    background: ;
+    background: #5e4583;
+    margin-top: 60px;
+}
+/* .slider-area-new {
+    display: flex;
+    align-items: center;
+    height: 800px;
+    background: #a390cf;
     padding-top: 80px;
 } */
 
@@ -290,6 +307,7 @@ END Header Area
     letter-spacing: 0;
     font-family: "Montserrat", sans-serif;
     line-height: 49px;
+    margin-bottom: 20px;
 }
 
 .slider-inner h5 {
@@ -298,8 +316,8 @@ END Header Area
     color: #fff;
     letter-spacing: 0;
     line-height: 39px;
-    margin-bottom: 50px;
-    margin-top: 5px;
+    /* margin-bottom: 50px; */
+    /* margin-top: 5px; */
 }
 
 .slider-inner a {
@@ -367,8 +385,8 @@ END Slider Area
 /*===========================
 2.3 Service Area
 ===========================*/
-/* 
-.service-area {
+
+/* .service-area {
     position: relative;
     margin-top: -100px;
     background-color: transparent;
@@ -412,7 +430,7 @@ END Service Area
 .about-area {
 }
 
-/* .section-title {
+.section-title {
     text-align: center;
     margin-bottom: 50px;
 }
@@ -428,27 +446,27 @@ END Service Area
     padding-bottom: 20px;
 }
 
-.section-title.text-white h2{
+.section-title.text-white h2 {
     color: #fff;
 }
 
 .section-title h2:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
     height: 2px;
-    width: 130px;
+    width: 180px;
     background-color: #5a10fb;
-    left: calc(50% - 65px);
+    left: calc(50% - 90px);
 }
 
-.section-title.text-white h2:before{
+.section-title.text-white h2:before {
     background-color: #fff;
 }
 
 .section-title h2:after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -3px;
@@ -462,7 +480,7 @@ END Service Area
     transform: rotate(45deg);
 }
 
-.section-title.text-white h2:after{
+.section-title.text-white h2:after {
     background-color: #fff;
 }
 
@@ -471,9 +489,9 @@ END Service Area
     font-weight: 500;
     color: #666666;
 }
-.section-title.text-white p{
+.section-title.text-white p {
     color: #fff;
-} */
+}
 .about-left-img {
 }
 
@@ -487,6 +505,7 @@ END Service Area
 .about-content p {
     color: #666666;
     margin-bottom: 25px;
+    text-align: justify;
 }
 
 /*===========================
