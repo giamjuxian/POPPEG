@@ -495,9 +495,6 @@ END Service Area
     max-width: 100%;
 }
 
-.about-content {
-}
-
 .about-content p {
     color: #666666;
     margin-bottom: 25px;
@@ -559,6 +556,9 @@ END About Area
     max-width: 100%;
 }
 
+.video-center {
+    margin: auto;
+}
 /*===========================
 END Feature Area
 ===========================*/
@@ -1081,18 +1081,18 @@ END Blog Post
 /*===========================
 END Contact Area
 ===========================*/
-.contact-area {
+.contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.contact-form {
-}
-.contact-form form {
-}
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
     height: 45px;
     margin-bottom: 20px;
-    padding-left: 15px;
+    /* padding-left: 15px; */
     border-radius: 3px;
     border: none;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
@@ -1114,9 +1114,6 @@ END Contact Area
 }
 .contact-form #send:hover {
     background-color: #444;
-}
-.contact_info {
-    padding-left: 40px;
 }
 .contact_info .s-info {
     margin-bottom: 14px;

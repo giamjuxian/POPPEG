@@ -66,9 +66,6 @@
     .about-area {
         padding: 90px 0px 70px;
     }
-    .feature-area {
-        padding: 90px 0px 40px;
-    }
     .ft-content {
         margin-top: 0;
     }
@@ -80,7 +77,7 @@
     .pricing-area,
     .clinet-area,
     .contact-area {
-        padding: 90px 0px;
+        padding: 30px 0px;
     }
     .screen-area img.screen-img {
         bottom: 137px;
@@ -112,6 +109,9 @@
         padding-bottom: 30px;
     }
 
+    video {
+        padding: 10px 5px;
+    }
     /*-----------------------
         Blog Page
     -----------------------*/
@@ -192,11 +192,13 @@
     .about-area {
         padding: 60px 0px 60px;
     }
+    .about-content {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
     .section-title p {
         font-size: 16px;
-    }
-    .feature-area {
-        padding: 80px 0px 40px;
     }
     .ft-content {
         margin-top: 0;
@@ -216,7 +218,8 @@
     .call-to-action,
     .clinet-area,
     .contact-area {
-        padding: 80px 0px;
+        padding: 0;
+        margin: auto;
     }
     .screen-slider {
         margin-top: 0;
@@ -229,7 +232,7 @@
     }
     .pricing-area,
     .team-area {
-        padding: 80px 0px 60px;
+        padding: 0px 60px;
     }
     .single-price,
     .single-team {
@@ -347,9 +350,6 @@
     .section-title p {
         font-size: 16px;
     }
-    .feature-area {
-        padding: 70px 0px 30px;
-    }
     .ft-content {
         margin-top: 0;
     }
@@ -368,7 +368,8 @@
     .call-to-action,
     .clinet-area,
     .contact-area {
-        padding: 70px 0px;
+        padding: 0;
+        margin: auto;
     }
     .screen-slider {
         margin-top: 0;
