@@ -142,12 +142,20 @@
 /* Max Size: 320px. */
 
 @media screen and (max-width: 991px) {
+    .video-fill {
+        width: 100%;
+        height: auto;
+    }
 }
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px) {
     .screen-area img.screen-img {
         display: none;
+    }
+    .video-fill {
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -230,6 +238,10 @@
     .video-area h2 {
         font-size: 25px;
     }
+    .video-fill {
+        width: 100%;
+        height: auto;
+    }
     .pricing-area,
     .team-area {
         padding: 0px 60px;
@@ -304,6 +316,10 @@
         float: left;
         width: 50%;
     }
+    .video-fill {
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* Wide Mobile Layout: 480px. */
@@ -365,6 +381,10 @@
     .screen-area,
     .testimonial-area,
     .video-area,
+    .video-fill {
+        width: 100%;
+        height: auto;
+    }
     .call-to-action,
     .clinet-area,
     .contact-area {
