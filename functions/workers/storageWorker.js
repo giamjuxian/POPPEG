@@ -35,8 +35,6 @@ exports.uploadImageToStorage = function (req, res, next) {
         });
 
         busboy.on('finish', function () {
-            console.log(uploadData);
-
             let options = {
                 uploadType: 'media',
                 destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/image',
@@ -47,7 +45,10 @@ exports.uploadImageToStorage = function (req, res, next) {
                 }
             };
             bucket.upload(uploadData.file, options, function (err, upload) {
-                if (err) return res.status(500).json({ error: err });
+                if (err) {
+                    console.error("Error Uploading Image - " + err);
+                    return res.status(500).json({ error: err });
+                }
                 return res.status(200).json({
                     message: "Image: " + uploadData.filename + " uploaded successfully!"
                 });
@@ -78,8 +79,6 @@ exports.uploadVideoToStorage = function (req, res, next) {
         });
 
         busboy.on('finish', function () {
-            console.log(uploadData);
-
             let options = {
                 uploadType: 'media',
                 destination: 'media/' + uploadData.albumName + '/' + removeSpecialCharacters(uploadData.filename) + '/video',
@@ -90,9 +89,12 @@ exports.uploadVideoToStorage = function (req, res, next) {
                 }
             };
             bucket.upload(uploadData.file, options, function (err, upload) {
-                if (err) return res.status(500).json({ error: err });
+                if (err) {
+                    console.error("Error Uploading Video - " + err);
+                    return res.status(500).json({ error: err });
+                }
                 return res.status(200).json({
-                    message: "Image: " + uploadData.filename + " uploaded successfully!"
+                    message: "Video: " + uploadData.filename + " uploaded successfully!"
                 });
             });
         });

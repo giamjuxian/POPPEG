@@ -1,24 +1,27 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
-  "scripts": {
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
-  },
-  "dependencies": {
-    "@google-cloud/storage": "^2.3.4",
-    "busboy": "^0.3.0",
-    "consolidate": "^0.15.1",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "firebase": "^5.8.0",
-    "firebase-admin": "~6.0.0",
-    "firebase-functions": "^2.1.0",
-    "handlebars": "^4.0.12",
-    "vuforiajs": "^0.2.5"
-  },
-  "private": true
+    "name": "functions",
+    "description": "Cloud Functions for Firebase",
+    "scripts": {
+        "serve": "firebase serve --only functions",
+        "shell": "firebase functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
+    },
+    "dependencies": {
+        "@google-cloud/storage": "^2.3.4",
+        "busboy": "^0.3.0",
+        "consolidate": "^0.15.1",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "easyar": "^1.0.0",
+        "express": "^4.16.4",
+        "firebase": "^5.8.1",
+        "firebase-admin": "~6.0.0",
+        "firebase-functions": "^2.1.0",
+        "handlebars": "^4.1.2",
+        "request": "^2.88.0",
+        "vuforiajs": "^0.2.5"
+    },
+    "private": true
 }

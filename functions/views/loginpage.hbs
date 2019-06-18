@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        // var apiURL = "http://localhost:5000/";
+        var apiURL = "https://www.poppeg.com/";
+
+        $(document).ready(() => {
+            $('#getAlbumButton').on('click', (event) => {
+                // check if input fields are empty, if yes, display error and 
+                // if any input is left empty,
+                // return haveInput false, prevent redirecting to upload
+                $(".error-text").each(function (index, errorText) {
+                    $(errorText).hide();
+                })
+                var albumName = $("#albumName").val();
+                var popCode = $("#popCode").val();
+                if (albumName == "" || albumName == undefined || albumName == null) {
+                    ($("#noAlbumError"))[0].style.display = "block";
+                    return;
+                }
+                if (popCode == "" || popCode == undefined || popCode == null) {
+                    ($("#noCodeError"))[0].style.display = "block";
+                    return;
+                }
+
+                $("#getAlbumButton").text("Loading");
+                $("#getAlbumButton").attr("disabled", true);
+                $.ajax({
+                    type: "GET",
+                    url: apiURL + "checkAlbumExist?albumName=" + albumName,
+                    success: function (result) {
+                        if (result && !result.containsDuplicate) {
+                            $.ajax({
+                                type: "GET",
+                                url: apiURL + "checkPopCodeExists?popCode=" + popCode,
+                                success: function (result) {
+                                    if (result && result.popCodeExists) {
+                                        $("#getAlbumButton").text("Get Album");
+                                        $("#getAlbumButton").attr("disabled", false);
+                                        localStorage.setItem("albumName", albumName);
+                                        localStorage.setItem("popCode", popCode);
+                                        window.location.href = apiURL + 'upload';
+                                    } else {
+                                        ($("#popCodeInvalidError"))[0].style.display = "block";
+                                        $("#getAlbumButton").text("Get Album");
+                                        $("#getAlbumButton").attr("disabled", false);
+                                        return;
+                                    }
+                                },
+                                error: function (err) {
+                                    alert("Error has occured. Please try again! " + err);
+                                    return;
+                                }
+                            });
+                        } else {
+                            ($("#duplicateAlbumError"))[0].style.display = "block";
+                            $("#getAlbumButton").text("Get Album");
+                            $("#getAlbumButton").attr("disabled", false);
+                            return;
+                        }
+
+                    },
+                    error: function (err) {
+                        alert("Error has occured. Please try again! " + err);
+                        return;
+                    }
+                });
+
+            });
+
+            $("#albumName").on('change', (event) => {
+                if (event.target.value == "") {
+                    ($("#noAlbumError"))[0].style.display = "block";
+                }
+            });
+
+            $("#popCode").on('change', (event) => {
+                if (event.target.value == "") {
+                    ($("#noCodeError"))[0].style.display = "block";
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+            <a href="/"><img src="media/poppeg_strip_vector.png" class="poppeg-logo img-fluid"
+                    alt="Responsive image" style="width: 100%"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4 album-col">
+            <form>
+                <div class="form-group album-form">
+                    <label for="albumName"><span class="text-white">Album Name</span></label>
+                    <input type="email" class="form-control input-lg" id="albumName"
+                        placeholder="Enter Album Name">
+                    <div id="noAlbumError" class="error-text text-error" style="display: none;">
+                        Please input your album
+                        name!</div>
+                    <div id="duplicateAlbumError" class="error-text text-error"
+                        style="display: none;">This album name
+                        already exists. Please input another name!</div>
+                </div>
+                <div class="form-group album-form">
+                    <label for="popCode"><span class="text-white">POPCode</span></label>
+                    <input type="password" class="form-control input-lg" id="popCode"
+                        placeholder="Enter POPCode">
+                    <div id="noCodeError" class="error-text text-error" style="display: none;">
+                        Please input valid
+                        POPCode!</div>
+                    <div id="popCodeInvalidError" class="error-text text-error"
+                        style="display: none;">This POPCode is
+                        not valid. Please input valid POPCode!</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
+            <button id="getAlbumButton" type="button" class="btn btn-yellow btn-block btn-lg"
+                style="margin-top:15px">Get
+                Album</button>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4"
+            style="margin-top: 30px">
+            <p><span class="text-white footer">A Project by POPPEG</span></p>
+        </div>
+    </div>
+</body>

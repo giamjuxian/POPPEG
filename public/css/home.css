@@ -1,0 +1,127 @@
+/* .slider-area-new {
+    display: flex;
+    align-items: center;
+    height: 800px;
+    background: #a390cf;
+    padding-top: 80px;
+}
+
+.header-area-new {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+    height: 66px;
+    background-color: #875cc1;
+}
+
+.logo-new a {
+    display: inline-block;
+}
+
+.logo-new a img {
+    max-width: 100%;
+    max-height: 34px;
+}
+
+.section-title-new {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title-new h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #232323;
+    letter-spacing: 0;
+    line-height: 37px;
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.section-title.text-white h2 {
+    color: #fff;
+}
+
+.section-title-new h2:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 180px;
+    background-color: #aebef2;
+    left: calc(50% - 90px);
+}
+
+.section-title.text-white h2:before {
+    background-color: #fff;
+}
+
+.section-title-new h2:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 8px;
+    width: 8px;
+    background-color: #aebef2;
+    left: calc(50% - 4px);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.section-title.text-white h2:after {
+    background-color: #fff;
+}
+
+.section-title-new p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #666666;
+}
+.section-title.text-white p {
+    color: #fff;
+}
+
+.single-team {
+    text-align: center;
+    overflow: hidden;
+    border-radius: 3px;
+    padding-bottom: 30px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.single-team:hover {
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.team-thumb-new {
+    margin: 40px 0px;
+}
+.team-thumb img {
+    max-width: 120px;
+    border-radius: 50%;
+}
+
+.footer-area-new {
+    height: 80px;
+    text-align: center;
+    background-color: #875cc1;
+    display: flex;
+    align-items: center;
+}
+.footer-area-new p {
+    color: #ffffff;
+}
+
+.about-left-new {
+    max-width: 500px;
+} 
+*/
