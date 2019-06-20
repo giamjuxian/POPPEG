@@ -8,5 +8,20 @@
 #howto-instructions {
     line-height: 23px;
     padding: 10px;
-    text-align: justify;
+}
+
+.pt--80 {
+    padding-top: 80px;
+}
+
+.mt--20 {
+    margin-top: 20px;
+}
+
+.ptb--60 {
+    padding-bottom: 60px;
+}
+
+.app-download {
+    text-align: center;
 }
