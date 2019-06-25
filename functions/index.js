@@ -11,11 +11,17 @@ const StorageWorker = require("./workers/storageWorker")
 const VuforiaWorker = require("./workers/vuforiaWorker")
 const EasyARWorker = require("./workers/easyARWorker")
 const SlackWorker = require("./workers/slackWorker")
-const database_config = config.database_config
-
 admin.initializeApp(functions.config().firebase)
-firebase.initializeApp(database_config)
 
+console.log("========= PROJECT: " + process.env.GCP_PROJECT + " =========")
+var database_config
+if (process.env.GCP_PROJECT == "poppeg-95e96") {
+    database_config = config.database_config
+} else if (process.env.GCP_PROJECT == "poppeg-staging") {
+    database_config = config.staging_database_config
+}
+
+firebase.initializeApp(database_config)
 const app = express()
 app.engine("hbs", engines.handlebars)
 app.set("views", "./views")
@@ -24,19 +30,19 @@ app.set("view engine", "hbs")
 /**
  * Web Views
  */
-app.get("/login", function(req, res, next) {
+app.get("/login", function (req, res, next) {
     res.render("loginpage")
 })
 
-app.get("/", function(req, res, next) {
+app.get("/", function (req, res, next) {
     res.render("homepage")
 })
 
-app.get("/upload", function(req, res, next) {
+app.get("/upload", function (req, res, next) {
     res.render("uploadpage")
 })
 
-app.get("/success", function(req, res, next) {
+app.get("/success", function (req, res, next) {
     res.render("successpage")
 })
 

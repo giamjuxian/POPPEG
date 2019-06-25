@@ -2,6 +2,9 @@
 
 const request = require('request');
 
+/**
+ * Send error onto slack channel "#server"
+ */
 exports.sendErrorToSlack = function (error) {
     let errorText = {
         "text": error

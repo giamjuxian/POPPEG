@@ -27,6 +27,12 @@
 	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/popper.min.js"></script>
 	<script>
+		if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+			apiURL = "http://" + location.host + "/"
+		} else {
+			apiURL = "https://" + location.host + "/"
+		}
+
 		let multiplesImgArr = [];
 		let multiplesVidArr = [];
 		const emptyHeader =
@@ -36,8 +42,6 @@
 		let numberOfCards = 0;
 		const validImages = [".jpg", ".jpeg"];
 		const validVideos = [".mp4", ".mov"];
-		var apiURL = "http://localhost:5000/";
-		// var apiURL = "https://www.poppeg.com/";
 
 		$(document).ready(() => {
 			const albumName = localStorage.getItem("albumName");

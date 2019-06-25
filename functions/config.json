@@ -7,6 +7,10 @@
         "storageBucket": "poppeg-95e96.appspot.com",
         "messagingSenderId": "237013132204"
     },
+    "storage_config": {
+        "projectId": "poppeg-95e96",
+        "keyFileName": "poppeg-95e96-firebase-adminsdk-eu7uh-d9fec6c314.json"
+    },
     "vuforia_config" : {
         "accessKey" : "96fc90be4ba8d32c31d9a613cab5dc46d54ba81d",
         "secretKey": "e389e18534680afd9bc9649dde032779b6e528b3",
@@ -14,14 +18,21 @@
         "clientSecretKey": "84ab566d52203a407d0cda6ed7d63db38d4275f8"
     },
     "easyar_config": {
-        "serverUrl": "http://a6101a9b33bf0cb079e1750cfd6674b1.cn1.crs.easyar.com:8888",
-        "cloudSecret": "QyhEfhWbeq0koouMEnH5NatSNcvraqnM5d146kTQXWfHJcDV3jLKBsG3tBk9FaPPDyhDMYkgF1PbyRWMPovL9TEix4OdggL3eDDvqCURmfAGtkaZj4M0iTJ4ELlwfHgK",
-        "cloudKey": "dad41869237bee4cd0fbce35749af301"
-    },
-    "easyar_new_config": {
         "serverUrl": "http://9994407b6b2628618263c444ddee6a14.na1.crs.easyar.com:8888",
         "cloudSecret": "THIl6O95dXkg9VRMlrgzeqytIDgpcR4lgYd6hGffPg03M91KFsi5iRXGOyhAprGUErQeswguuanz5DYp1a4e64xxTClpj0hjwQhIPvuCKljzdj591najMj7LD7P8Id04",
         "cloudKey": "1387e9a52ac9ce2578086677da605161"
+    },
+    "staging_database_config": {
+        "apiKey": "AIzaSyDIkI1Kbv1k7hlTjiKrZSypuDhRitFJKR0",
+        "authDomain": "poppeg-staging.firebaseapp.com",
+        "databaseURL": "https://poppeg-staging.firebaseio.com/",
+        "projectId": "poppeg-staging",
+        "storageBucket": "poppeg-staging.appspot.com"
+    },
+    "staging_easyar_config": {
+        "serverUrl": "staging",
+        "cloudSecret": "staging",
+        "cloudKey": "staging"
     }
 }
 

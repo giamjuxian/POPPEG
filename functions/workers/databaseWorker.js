@@ -3,6 +3,10 @@
 const firebase = require('firebase')
 const SlackWorker = require('./slackWorker')
 
+
+/**
+ * Upload all target entries to database
+ */
 exports.uploadEntryToDatabase = function (req, res, next) {
 	var entries = req.body.entries
 	var bookName = req.body.bookName
@@ -21,6 +25,9 @@ exports.uploadEntryToDatabase = function (req, res, next) {
 	})
 }
 
+/**
+ * Check if the target album already exists
+ */
 exports.checkAlbumExist = function (req, res, next) {
 	var albumName = req.query.albumName
 	var containsDuplicate = false
@@ -40,6 +47,9 @@ exports.checkAlbumExist = function (req, res, next) {
 	})
 }
 
+/**
+ * Check if popcode exists
+ */
 exports.checkPopCodeExists = function (req, res, next) {
 	var popCode = req.query.popCode
 	var popCodeExists = false
@@ -59,6 +69,9 @@ exports.checkPopCodeExists = function (req, res, next) {
 	})
 }
 
+/**
+ * Create a new popcode
+ */
 exports.addPopCode = function (req, res, next) {
 	var popCode = req.query.popCode
 	var numberOfImages = parseInt(req.query.numberOfImages)
@@ -80,6 +93,9 @@ exports.addPopCode = function (req, res, next) {
 	})
 }
 
+/**
+ * Update target popcode
+ */
 exports.updatePopCode = function (req, res, next) {
 	var popCode = req.body.popCode
 	var numberOfImagesUsed = req.body.numberOfImagesUsed
@@ -118,6 +134,9 @@ exports.updatePopCode = function (req, res, next) {
 	})
 }
 
+/**
+ * Retrieve the number of images available in the popcode
+ */
 exports.getPopCodeData = function (req, res, next) {
 	var popCode = req.params.popCode
 	var ref = firebase.app().database().ref("popCode/" + popCode)

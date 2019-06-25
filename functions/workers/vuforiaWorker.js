@@ -7,6 +7,9 @@ const vuforia_config = config.vuforia_config;
 var client = vuforia.client(vuforia_config);
 var util = vuforia.util();
 
+/**
+ * Upload image to vuforia cloud recognition server
+ */
 exports.uploadImageToVuforia = function (req, res, next) {
 	var targetName = req.body.name;
 	var width = 10;
