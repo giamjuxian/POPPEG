@@ -135,8 +135,8 @@
 				// Validation to check for too large images
 				for (let i = 0; i < uploads.length; i++) {
 					var image = uploads[i].image;
-					if (image.size > 2000000) {
-						alert("Image " + image.name + " is too big. Please provide an image that is less than 2MB.");
+					if (image.size > 1000000) {
+						alert("Image " + image.name + " is too big. Please provide an image that is less than 1MB.");
 						toggleLoading(false);
 						return;
 					}
