@@ -1,0 +1,129 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>POPPEG Login</title>
+    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            console.log("123");
+            $("#signupForm").on('submit', (event) => {
+
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="brand">
+            POPPEG Sign Up
+        </h1>
+        <div class="wrapper">
+            <!-- TO DO: COMPLETE COMPANY INFO -->
+            <div class="company-info"></div>
+            <div class="signup">
+                <form id="signupForm">
+                    <p>
+                        <label>Username</label>
+                        <input type="text" name="username" id="username">
+                    </p>
+                    <p>
+                        <label>Email Address</label>
+                        <input type="text" name="email" id="email">
+                    </p>
+                    <p>
+                        <label>Password</label>
+                        <input type="password" name="password" id="password">
+                    </p>
+                    <p>
+                        <label>Confirm Password</label>
+                        <input type="password" name="confirm-password" id="confirm-password">
+                    </p>
+                    <p class="signup-submit">
+                        <button type="submit" id="submitButton">Submit</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+</body>
+
+</html> --}}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up on POPPEG</title>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/signup.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
+    <script>
+        $(document).ready(() => {
+            $('#password-field, #confirm-password').on('keyup', () => {
+                if ($('#password-field').val() == $('#confirm-password').val()) {
+                    ($(".password-mismatch"))[0].style.display = "none";
+                } else {
+                    ($(".password-mismatch"))[0].style.display = "block";
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="right-column text-center">
+                    <img src="media/poppeg_strip_vector.png" alt="poppeg-logo" class="poppeg-logo">
+                    <p class="signup-info">Sign up now!</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password-field"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="confirm-password"
+                                placeholder="Confirm Password">
+                        </div>
+                        <p class="password-mismatch">Passwords do not match!</p>
+                        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                    </form>
+                </div>
+                <div class="right-column-login text-center">
+                    <p>Have an account? <a href="#">Login</a></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <div style="margin-top: 30px;">
+                <p><span class="footer">A Project by POPPEG</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

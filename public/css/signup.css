@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.phone-slider {
+    padding-top: 70px;
+    height: 650px;
+    float: right;
+    margin: 10px;
+}
+
+body {
+    background-color: #4f307e !important;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.poppeg-logo {
+    height: 9%;
+    width: 85%;
+    min-height: 72px;
+    min-width: 285px;
+    margin: 15px auto;
+}
+
+.right-column {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    margin: auto;
+    padding: 40px;
+    width: 350px;
+}
+
+.signup-info {
+    font-weight: 600px;
+    line-height: 20px;
+    font-size: 17px;
+    color: #999;
+}
+
+.form-group {
+    margin-bottom: 6px !important;
+}
+
+.form-control {
+    border: 1px solid #efefef !important;
+    background: #fafafa !important;
+    font-size: 12px !important;
+}
+
+::placeholder {
+    color: #999 !important;
+}
+
+.password-mismatch {
+    color: #f11212;
+    display: none;
+    font-size: 12px;
+}
+
+.btn {
+    margin: 12px auto;
+    padding: 2px !important;
+    font-weight: 600 !important;
+}
+
+.btn-primary {
+    background-color: #3897f0 !important;
+    border: 1px solid #3897f0 !important;
+}
+
+.right-column-login {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    width: 350px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+@media (max-width: 767px) {
+    .phone-slider {
+        display: none;
+    }
+}
+
+.footer {
+    color: #ffffff;
+    font-size: 10px;
+}
