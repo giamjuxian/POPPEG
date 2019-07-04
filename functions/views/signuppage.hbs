@@ -65,18 +65,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up on POPPEG</title>
+    <title>Sign up on POPPEG</title>
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/signup.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script
+        src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
     <script>
         $(document).ready(() => {
-            $('#password-field, #confirm-password').on('keyup', () => {
-                if ($('#password-field').val() == $('#confirm-password').val()) {
+            $.validator.setDefaults({
+                errorClass: 'invalid-feedback',
+                highlight: (element) => {
+                    $(element).closest('.form-control').addClass('is-invalid');
+                },
+                unhighlight: (element) => {
+                    $(element).closest('.form-control').removeClass('is-invalid');
+                }
+            });
+
+            $('#signup-form').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    username: "required",
+                    password: "required",
+                    confirm_password: "required"
+                },
+                messages: {
+                    email: {
+                        required: "Please enter a valid email address."
+                    },
+                    username: {
+                        required: "Please provide a username."
+                    },
+                    password: {
+                        required: "Please provide a password."
+                    },
+                    confirm_password: {
+                        required: "Please confirm your password."
+                    }
+                }
+            });
+
+            $('#password-field, #confirm_password').on('keyup', () => {
+                if ($('#password-field').val() == $('#confirm_password').val()) {
                     ($(".password-mismatch"))[0].style.display = "none";
                 } else {
                     ($(".password-mismatch"))[0].style.display = "block";
@@ -91,22 +138,25 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="right-column text-center">
-                    <img src="media/poppeg_strip_vector.png" alt="poppeg-logo" class="poppeg-logo">
+                    <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
+                            class="poppeg-logo"></a>
                     <p class="signup-info">Sign up now!</p>
-                    <form>
+                    <form id="signup-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Email Address">
+                            <input type="text" class="form-control" name="email"
+                                placeholder="Email Address">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input type="text" class="form-control" name="username"
+                                placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password-field"
-                                placeholder="Password">
+                            <input type="password" class="form-control" name="password"
+                                id="password-field" placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="confirm-password"
-                                placeholder="Confirm Password">
+                            <input type="password" class="form-control" name="confirm_password"
+                                id="confirm_password" placeholder="Confirm Password">
                         </div>
                         <p class="password-mismatch">Passwords do not match!</p>
                         <button type="submit" class="btn btn-primary btn-block">Sign up</button>
