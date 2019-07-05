@@ -10,11 +10,14 @@ const fs = require('fs');
 
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage({
-    projectId: config.projectId,
-    keyFilename: "poppeg-95e96-firebase-adminsdk-eu7uh-d9fec6c314.json"
+    projectId: config.storage_config.projectId,
+    keyFilename: config.storage_config.keyFilename
 });
 const bucket = storage.bucket(config.database_config.storageBucket)
 
+/**
+ * Upload image to firebase storage
+ */
 exports.uploadImageToStorage = function (req, res, next) {
     cors(req, res, function () {
         const busboy = new Busboy({ headers: req.headers });
@@ -59,6 +62,10 @@ exports.uploadImageToStorage = function (req, res, next) {
     })
 }
 
+
+/**
+ * Upload video to firebase storage
+ */
 exports.uploadVideoToStorage = function (req, res, next) {
     cors(req, res, function () {
         const busboy = new Busboy({ headers: req.headers });
@@ -103,6 +110,10 @@ exports.uploadVideoToStorage = function (req, res, next) {
     })
 }
 
+/**
+ * Remove all special characters from name
+ * @param {String} name 
+ */
 function removeSpecialCharacters(name) {
     return name.replace(/[\W_]/g, "-");
 }
