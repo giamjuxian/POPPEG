@@ -87,7 +87,13 @@ body {
     }
 }
 
-.footer {
+.project-footer {
     color: #ffffff;
     font-size: 10px;
+}
+
+/* UNIQUE LOGIN STYLES */
+
+.login-logo {
+    margin-bottom: 40px;
 }

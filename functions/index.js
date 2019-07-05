@@ -44,6 +44,10 @@ app.get("/signup", function(req, res, next) {
     res.render("signuppage");
 });
 
+app.get("/newlogin", function(req, res, next) {
+    res.render("accountlogin");
+})
+
 /**
  * APIs
  */
