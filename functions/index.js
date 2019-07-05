@@ -65,6 +65,13 @@ app.get("/success", function (req, res, next) {
     res.render("successpage")
 })
 
+app.get("/signup", function (req, res, next) {
+    res.render("signuppage")
+})
+
+app.get("/login", function (req, res, next) {
+    res.render("loginpage")
+})
 
 /**
  * APIs
@@ -95,6 +102,5 @@ app.post("/uploadVideoToStorage", StorageWorker.uploadVideoToStorage)
 
 // Authentication
 app.get("/createNewUser", AuthenticationWorker.createUserWithEmail)
-
 
 exports.app = functions.https.onRequest(app)

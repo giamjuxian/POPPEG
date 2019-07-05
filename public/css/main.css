@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .instruction-logo {
     max-height: 70px;
     max-width: 70px;
@@ -39,6 +44,15 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
 }
 
 .poppeg-logo {

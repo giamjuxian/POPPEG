@@ -1,0 +1,120 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login - POPPEG</title>
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/signup.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script
+        src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
+    <script>
+        $(document).ready(() => {
+            // Password Toggle
+            $('#passwordEye').on('click', (event) => {
+                $('#passwordEye').toggleClass("fa fa-eye-slash").toggleClass("fa fa-eye");
+                if ($('#passwordField').attr('type') == 'password') {
+                    $('#passwordField').get(0).setAttribute('type', 'text');
+                } else {
+                    $('#passwordField').get(0).setAttribute('type', 'password');
+                }
+            });
+
+            // Uses bootstrap 4 classes to toggle box shadow during form submission
+            $.validator.setDefaults({
+                errorClass: 'invalid-feedback',
+                highlight: (element) => {
+                    $(element).closest('.form-control').addClass('is-invalid');
+                },
+                unhighlight: (element) => {
+                    $(element).closest('.form-control').removeClass('is-invalid');
+                }
+            });
+
+            // Validation for empty fields.
+            $('#loginForm').validate({
+                rules: {
+                    username: "required",
+                    password: "required"
+                },
+                messages: {
+                    username: {
+                        required: "Please provide a username."
+                    },
+                    password: {
+                        required: "Please provide a password."
+                    }
+                },
+                errorPlacement: (error, element) => {
+                    if (error.text() == "Please provide a password.") {
+                        error.insertAfter($('.input-group-append'));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="right-column text-center">
+                    <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
+                            class="poppeg-logo login-logo"></a>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username"
+                                placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password"
+                                    id="passwordField" placeholder="Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i id="passwordEye"
+                                            class="fa fa-eye"></i>
+                                    </div>
+                                </div>
+                                </input>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </form>
+                </div>
+                <div class="right-column-login text-center">
+                    <p>Don't have an account? <a href="signup">Sign up</a></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <div style="margin-top: 30px;">
+                <p><span class="project-footer">A Project by POPPEG</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
