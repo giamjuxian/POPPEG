@@ -101,6 +101,6 @@ app.post("/uploadImageToStorage", StorageWorker.uploadImageToStorage);
 app.post("/uploadVideoToStorage", StorageWorker.uploadVideoToStorage);
 
 // Authentication
-app.get("/createNewUser", AuthenticationWorker.createUserWithEmail);
+app.post("/createNewUser", AuthenticationWorker.createUserWithEmail);
 
 exports.app = functions.https.onRequest(app);
