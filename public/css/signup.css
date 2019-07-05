@@ -1,13 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-.phone-slider {
-    padding-top: 70px;
-    height: 650px;
-    float: right;
-    margin: 10px;
 }
 
 body {
@@ -63,7 +56,6 @@ body {
 
 .btn {
     margin: 12px auto;
-    padding: 2px !important;
     font-weight: 600 !important;
 }
 
@@ -80,13 +72,6 @@ body {
     margin-top: 20px;
     padding: 20px;
 }
-
-@media (max-width: 767px) {
-    .phone-slider {
-        display: none;
-    }
-}
-
 .project-footer {
     color: #ffffff;
     font-size: 10px;
