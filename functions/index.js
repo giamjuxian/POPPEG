@@ -68,10 +68,16 @@ app.get("/signup", function(req, res, next) {
     res.render("signuppage");
 });
 
+<<<<<<< Updated upstream
 /* REMEMBER TO CHANGE THIS to /login FOR ACTUAL STAGIN */
 app.get("/newlogin", function(req, res, next) {
     res.render("accountlogin");
 });
+=======
+app.get("/login", function (req, res, next) {
+    res.render("accountlogin")
+})
+>>>>>>> Stashed changes
 
 /**
  * APIs
