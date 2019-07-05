@@ -29,12 +29,47 @@
     <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
     <script>
         $(document).ready(() => {
+            // Password Toggle
             $('#passwordEye').on('click', (event) => {
                 $('#passwordEye').toggleClass("fa fa-eye-slash").toggleClass("fa fa-eye");
                 if ($('#passwordField').attr('type') == 'password') {
                     $('#passwordField').get(0).setAttribute('type', 'text');
                 } else {
                     $('#passwordField').get(0).setAttribute('type', 'password');
+                }
+            });
+
+            // Uses bootstrap 4 classes to toggle box shadow during form submission
+            $.validator.setDefaults({
+                errorClass: 'invalid-feedback',
+                highlight: (element) => {
+                    $(element).closest('.form-control').addClass('is-invalid');
+                },
+                unhighlight: (element) => {
+                    $(element).closest('.form-control').removeClass('is-invalid');
+                }
+            });
+
+            // Validation for empty fields.
+            $('#loginForm').validate({
+                rules: {
+                    username: "required",
+                    password: "required"
+                },
+                messages: {
+                    username: {
+                        required: "Please provide a username."
+                    },
+                    password: {
+                        required: "Please provide a password."
+                    }
+                },
+                errorPlacement: (error, element) => {
+                    if (error.text() == "Please provide a password.") {
+                        error.insertAfter($('.input-group-append'));
+                    } else {
+                        error.insertAfter(element);
+                    }
                 }
             })
         });
@@ -48,7 +83,7 @@
                 <div class="right-column text-center">
                     <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
                             class="poppeg-logo login-logo"></a>
-                    <form id="signup-form">
+                    <form id="loginForm">
                         <div class="form-group">
                             <input type="text" class="form-control" name="username"
                                 placeholder="Username">
@@ -56,11 +91,13 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="password" class="form-control" name="password"
-                                    id="passwordField" placeholder="Password" />
+                                    id="passwordField" placeholder="Password">
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i id="passwordEye"
-                                            class="fa fa-eye"></i></div>
+                                            class="fa fa-eye"></i>
+                                    </div>
                                 </div>
+                                </input>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Log In</button>
