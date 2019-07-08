@@ -19,8 +19,7 @@ exports.createUserWithEmail = function (req, res, next) {
         displayName: username,
     })
         .then(function (userRecord) {
-            // See the UserRecord reference doc for the contents of userRecord.
-            console.log('Successfully created new user:', userRecord.uid);
+            console.log('Successfully created new user:', userRecord.uid)
             return res.status(200).json({
                 message: "Successfully created user " + username + ".",
                 username: username,
@@ -28,10 +27,9 @@ exports.createUserWithEmail = function (req, res, next) {
             })
         })
         .catch(function (error) {
-            console.log(error);
-            return res.status(400).json({ 
+            return res.status(400).json({
                 message: error.errorInfo.message,
-                error: error 
+                error: error
             })
-        });
+        })
 }

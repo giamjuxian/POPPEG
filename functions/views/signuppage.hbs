@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id"
+        content="311278800366-alal3iav8m0s69aeu8tg44dgf2bmdnh2.apps.googleusercontent.com">
+    <meta name="google-signin-cookiepolicy" content="single_host_origin">
+    <meta name="google-signin-scope" content="profile email">
     <title>Sign up on POPPEG</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/signup.css" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -19,7 +24,10 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
+    <script src="/__/firebase/6.2.4/firebase-app.js"></script>
+    <script src="/__/firebase/6.2.4/firebase-auth.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="js/signupPage.js"></script>
 </head>
 
@@ -38,8 +46,8 @@
                             <input type="text" class="form-control" name="username" placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input type="password" data-minlength="6" class="form-control" name="password" id="password-field"
-                                placeholder="Password">
+                            <input type="password" data-minlength="6" class="form-control" name="password"
+                                id="password-field" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="confirm_password" id="confirm_password"
@@ -47,6 +55,8 @@
                         </div>
                         <p class="password-mismatch">Passwords do not match!</p>
                         <button id="signupButton" type="button" class="btn btn-primary btn-block">Sign up</button>
+                        <div class="g-signin2" data-width="268" data-height="38" data-longtitle="true"
+                            data-onsuccess="onSignIn" data-theme="white "></div>
                     </form>
                 </div>
                 <div class="right-column-login text-center">
