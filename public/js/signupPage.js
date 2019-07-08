@@ -17,26 +17,40 @@ $(document).ready(() => {
     })
     validateFormFields()
     validatePasswordMatch()
-
     $('#signupButton').on('click', function() {
-        if (!$('#signup-form').valid() || $('#password-field').val() != $('#confirm_password').val() ) {
-            console.log("Boo")
+        if (!$('#signup-form').valid()) {
             return
-        } 
+        } else if ($('#password-field').val() != $('#confirm_password').val()) {
+            alert("Password does not match")
+            return
+        }
         var email = $("[name='email']").val()
         var username = $("[name='username']").val()
         var password = $("[name='password']").val()
-        
+
+        signupUser(apiURL, email, username, password)
     })
 })
 
-function signupUser(email, username, password, callback) {
+
+function signupUser(apiURL, email, username, password, callback) {
+    let body = {
+        email: email,
+        username: username,
+        password: password
+    }
     $.ajax({
         type: "POST",
         url: apiURL + "createNewUser",
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(body),
         success: function (result) {
+            alert(result.message)
+            window.location.replace(apiURL);
         },
-        error: function (err) {
+        error: function (error) {
+            alert(error.responseJSON.message)
         }
     })
 }
@@ -50,7 +64,10 @@ function validateFormFields() {
                 email: true,
             },
             username: "required",
-            password: "required",
+            password: {
+                required: true,
+                minlength: 6
+            },
             confirm_password: "required"
         },
         messages: {
@@ -58,7 +75,8 @@ function validateFormFields() {
                 required: "Please enter a valid email address."
             },
             username: {
-                required: "Please provide a username."
+                required: "Please provide a username.",
+                minlength: "Password needs to be at least 6 characters."
             },
             password: {
                 required: "Please provide a password."
