@@ -73,6 +73,11 @@ app.get("/newlogin", function(req, res, next) {
     res.render("accountlogin");
 });
 
+/** Dashboard */
+app.get("/dashboard", function(req, res, next) {
+    res.render("dashboard");
+});
+
 /**
  * APIs
  */

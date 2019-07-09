@@ -1,0 +1,104 @@
+.navbar-custom {
+    background-color: #4f307e;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 65px auto auto;
+    width: 200px;
+    transition-timing-function: ease-in-out;
+    transition: 0.5s;
+    transform: translateX(-100%);
+    z-index: 2000;
+}
+
+.content {
+    width: 100%;
+    margin-left: 0px;
+    transition-timing-function: ease-in-out;
+    transition: 0.5s;
+}
+
+@media (min-width: 992px) {
+    .side-menu {
+        transform: translateX(0);
+    }
+    .content {
+        margin-top: 10px;
+        margin-left: 200px;
+    }
+
+    .active .side-menu {
+        width: 80px;
+    }
+    .active .content {
+        margin-left: 80px;
+    }
+    .active .nav-link {
+        text-align: center;
+    }
+    .active .nav-link .icon {
+        margin-right: 0;
+    }
+    .active .nav-link .text {
+        display: none;
+    }
+}
+
+.nav-link {
+    display: block;
+    white-space: nowrap;
+    padding: 12px 0;
+}
+.material-icons {
+    margin-right: 8px;
+    margin-left: 16px;
+    font-size: 30px;
+    height: 10px;
+    width: 28px;
+    color: rgb(223, 219, 219);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    font-size: 18px;
+    color: rgb(223, 219, 219);
+}
+
+.nav-item:hover {
+    background-color: rgba(209, 208, 208, 0.253);
+}
+
+.arrow-right {
+    display: none;
+}
+
+.show-item {
+    display: block;
+}
+
+.hide-item {
+    display: none;
+}
+
+.poppeg-logo {
+    height: 35px;
+    width: 180px;
+}
+
+#addCardButton {
+    margin-top: 20px;
+    color: rgba(90, 89, 89, 0.459) !important;
+}
+
+#addCardButton:hover {
+    color: rgb(80, 79, 79) !important;
+    cursor: pointer;
+}
