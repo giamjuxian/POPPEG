@@ -18,6 +18,7 @@ public class DatabaseManager : MonoBehaviour
     public GameObject downloadButton;
     public GameObject backButton;
     public GameObject warningTextField;
+    private Dictionary<string, string> videoURLs;
     private List<Entry> allEntries;
     private FirebaseStorage storage;
     private StorageReference storage_ref;
@@ -93,7 +94,7 @@ public class DatabaseManager : MonoBehaviour
                             string entryURL = entry.Child("url").Value.ToString();
                             allEntries.Add(new Entry(entryName, entryURL));
                         }
-                        DownloadVideo();
+                        DownloadVideos();
                         warningTextField.SetActive(false);
                     }
                     else
@@ -124,9 +125,16 @@ public class DatabaseManager : MonoBehaviour
     /* 
      * Retrieves download url from firebase and downloads the video from the url received 
      */
-    private void DownloadVideo()
+    private async void DownloadVideos()
     {
         backButton.SetActive(false);
+        downloadsRunning = allEntries.Count;
+        await GetVideoUrls();
+        StartCoroutine(NewDownloadVideoFromURL(0));
+    }
+
+    private async Task GetVideoUrls() {
+        videoURLs = new Dictionary<string, string>();
         foreach (Entry e in allEntries)
         {
             Debug.Log("NAME: " + e.GetName() + " URL: " + e.GetUrl());
@@ -135,13 +143,15 @@ public class DatabaseManager : MonoBehaviour
             StorageReference gs_reference =
                 storage.GetReferenceFromUrl("gs://poppeg-95e96.appspot.com/" + entryUrl);
 
-            gs_reference.GetDownloadUrlAsync().ContinueWith((Task<Uri> task) =>
+            await gs_reference.GetDownloadUrlAsync().ContinueWith((Task<Uri> task) =>
             {
                 if (!task.IsFaulted && !task.IsCanceled)
                 {
                     Debug.Log("Download URL: " + task.Result);
-                    StartCoroutine(DownloadVideoFromURL(task.Result.ToString(), entryName));
+                    videoURLs.Add(entryName, task.Result.ToString());
+                    return;
                 }
+                return;
             });
         }
     }
@@ -152,7 +162,7 @@ public class DatabaseManager : MonoBehaviour
     private IEnumerator DownloadVideoFromURL(string url, string videoName)
     {
         Debug.Log("Starting Download for " + videoName);
-        downloadsRunning++;
+
         var uwr = new UnityWebRequest(url, UnityWebRequest.kHttpVerbGET);
         var videoFileName = videoName + ".mp4";
         string path = Path.Combine(Application.persistentDataPath, videoFileName);
@@ -167,6 +177,38 @@ public class DatabaseManager : MonoBehaviour
             Debug.Log("File successfully downloaded and saved to " + path);
         }
         downloadsRunning--;
+    }
+
+    private IEnumerator NewDownloadVideoFromURL(int index)
+    {
+        var videoName = allEntries[index].GetName();
+        var url = videoURLs[videoName];
+        Debug.Log("Starting Download for " + videoName);
+        var videoFileName = videoName + ".mp4";
+        string savePath = Path.Combine(Application.persistentDataPath, videoFileName);
+        using (UnityWebRequest webRequest = new UnityWebRequest(url))
+        {
+            webRequest.downloadHandler = new ToFileDownloadHandler(new byte[64 * 1024], savePath);
+            webRequest.SendWebRequest();
+            while (!webRequest.isDone)
+            {
+                yield return null;
+            }
+            if (string.IsNullOrEmpty(webRequest.error))
+            {
+                Debug.Log("Download Completed for " + videoName);
+                downloadsRunning--;
+                int nextIndex = index + 1;
+                if (nextIndex < allEntries.Count)
+                {
+                    StartCoroutine(NewDownloadVideoFromURL(nextIndex));
+                }
+            }
+            else
+            {
+                Debug.Log("error! message: " + webRequest.error);
+            }
+        }
     }
 
     /*

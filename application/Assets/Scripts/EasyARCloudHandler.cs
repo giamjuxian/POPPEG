@@ -58,7 +58,6 @@ public class EasyARCloudHandler : CloudRecognizerBehaviour
             videoPlayer.transform.parent = target.transform;
             videoPlayer.transform.localPosition = Vector3.zero;
             videoPlayer.transform.localScale = new Vector3(targetBehaviour.Size.x / Mathf.Max(targetBehaviour.Size.x, targetBehaviour.Size.y), 1f , 1f);
-
             if (SaveNewTarget)
             {
                 var thread = new Thread(SaveRunner) { Priority = System.Threading.ThreadPriority.BelowNormal };
