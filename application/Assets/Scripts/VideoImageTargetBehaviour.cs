@@ -20,6 +20,7 @@ public class VideoImageTargetBehaviour : ImageTargetBehaviour
         TargetLost += OnTargetLost;
         TargetLoad += OnTargetLoad;
         TargetUnload += OnTargetUnload;
+        timeStamps = new Dictionary<string, double>();
     }
 
     protected override void Update()

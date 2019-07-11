@@ -128,6 +128,7 @@ public class DatabaseManager : MonoBehaviour
     private async void DownloadVideos()
     {
         backButton.SetActive(false);
+        downloadButton.GetComponent<Button>().interactable = false;
         downloadsRunning = allEntries.Count;
         await GetVideoUrls();
         StartCoroutine(NewDownloadVideoFromURL(0));
@@ -222,6 +223,7 @@ public class DatabaseManager : MonoBehaviour
         warningTextField.SetActive(true);
 
         downloadButton.GetComponentInChildren<Text>().text = "Download";
+        downloadButton.GetComponent<Button>().interactable = true;
         backButton.SetActive(true);
         isDownloading = false;
         allEntries.Clear();
