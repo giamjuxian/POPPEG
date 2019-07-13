@@ -1,3 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* .navbar-nav {
+    display: table;
+    width: 100%;
+    margin: 0;
+} */
 .navbar-custom {
     background-color: #4f307e;
     padding-top: 16px;
@@ -11,17 +20,18 @@
     left: 0;
     margin: 65px auto auto;
     width: 200px;
-    transition-timing-function: ease-in-out;
-    transition: 0.5s;
+    transition: all ease 0.5s;
     transform: translateX(-100%);
-    z-index: 2000;
 }
 
 .content {
+    transition: all ease 0.5s;
     width: 100%;
-    margin-left: 0px;
-    transition-timing-function: ease-in-out;
-    transition: 0.5s;
+    margin-top: 10px;
+}
+
+.wrapper {
+    margin-top: 65px;
 }
 
 @media (min-width: 992px) {
@@ -29,15 +39,16 @@
         transform: translateX(0);
     }
     .content {
-        margin-top: 10px;
-        margin-left: 200px;
+        margin-left: 210px;
+        margin-right: 10px;
+        width: 100%;
     }
 
     .active .side-menu {
         width: 80px;
     }
     .active .content {
-        margin-left: 80px;
+        margin-left: 90px;
     }
     .active .nav-link {
         text-align: center;
@@ -48,14 +59,20 @@
     .active .nav-link .text {
         display: none;
     }
+    .header-nav {
+        display: none;
+    }
 }
-
+.poppeg-logo {
+    height: 35px;
+    width: 140px;
+}
 .nav-link {
     display: block;
     white-space: nowrap;
     padding: 12px 0;
 }
-.material-icons {
+.dashboard-icons {
     margin-right: 8px;
     margin-left: 16px;
     font-size: 30px;
@@ -66,7 +83,9 @@
     justify-content: center;
     align-items: center;
 }
-
+.add-button {
+    font-size: 80px;
+}
 .text {
     font-size: 18px;
     color: rgb(223, 219, 219);
@@ -88,17 +107,54 @@
     display: none;
 }
 
-.poppeg-logo {
-    height: 35px;
-    width: 180px;
-}
-
 #addCardButton {
-    margin-top: 20px;
     color: rgba(90, 89, 89, 0.459) !important;
 }
 
 #addCardButton:hover {
     color: rgb(80, 79, 79) !important;
     cursor: pointer;
+}
+
+.header-nav {
+    margin-top: 20px;
+}
+.header-nav .text {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.card-wrapper > div {
+    border: 2px solid #35322f;
+    border-radius: 5px;
+    padding: 1em;
+    color: #d9480f;
+}
+
+.display-card {
+    display: grid;
+    grid-template-areas: "image content";
+    grid-template-columns: 220px auto;
+    grid-gap: 1px;
+}
+
+.display-card > img {
+    grid-area: image;
+    border: 3px black solid;
+}
+
+.display-card > div {
+    grid-area: content;
+    border: pink 2px solid;
+}
+
+img {
+    width: 200px;
+    height: 200px;
 }
