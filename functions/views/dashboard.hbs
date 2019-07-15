@@ -10,7 +10,7 @@
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/dashboard.css" type="text/css" />
     <title>Dashboard - POPPEG</title>
     <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
@@ -72,13 +72,20 @@
             </div>
         </div>
         <div class="content">
+            <div class="alert alert-success" id="successAlert" style="display: none;">
+                <strong>Success!</strong>
+                Your upload has been completed.
+            </div>
             <!-- Main Card Areas -->
             <div class="card-wrapper">
                 <div class="display-card">
                     <img src="/media/stock_image_1.jpg" alt="Display Image 1">
                     <div></div>
                 </div>
-                <div>Two</div>
+                <div class="display-card">
+                    <img src="/media/stock_image_2.jpg" alt="Display Image 1">
+                    <div></div>
+                </div>
                 <div>Three</div>
             </div>
 
@@ -107,7 +114,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-warning">Upload
+                            <button type="button" class="btn btn-warning" id="uploadButton">Upload
                                 now</button>
                         </div>
                     </div>
