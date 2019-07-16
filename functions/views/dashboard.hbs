@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
                 class="poppeg-logo"></a>
@@ -35,6 +36,8 @@
         </div>
 
     </nav>
+
+    <!-- Sidebar -->
     <div class="wrapper d-flex">
         <div class="side-menu" style="background-color: #4f307e;">
             <div class="sidebar">
@@ -71,12 +74,26 @@
                 </ul>
             </div>
         </div>
+
+        <!-- Main Content Area -->
         <div class="content">
+
+            <!-- Instructions -->
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Welcome to POPPEG!</strong>
+                <p>Click on <i class="material-icons">add_circle_outline</i> to upload images and
+                    videos!</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Success Message -->
             <div class="alert alert-success" id="successAlert" style="display: none;">
                 <strong>Success!</strong>
                 Your upload has been completed.
             </div>
-            <!-- Main Card Areas -->
+
+            <!-- Main Card Area -->
             <div class="card-wrapper">
                 <div class="display-card">
                     <img src="/media/stock_image_1.jpg" alt="Display Image 1">
@@ -86,7 +103,10 @@
                     <img src="/media/stock_image_2.jpg" alt="Display Image 1">
                     <div></div>
                 </div>
-                <div>Three</div>
+                <div class="display-card">
+                    <img src="/media/stock_image_3.jpeg" alt="Display Image 1">
+                    <div></div>
+                </div>
             </div>
 
             <!-- Button Area -->
@@ -94,6 +114,8 @@
                 data-target="#addCardModal">
                 <i class="material-icons add-button">add_circle_outline</i>
             </button>
+
+
             <!-- Add Card Modal -->
             <div class="modal fade" id="addCardModal">
                 <div class="modal-dialog modal-dialog-centered">
@@ -107,15 +129,29 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            Modal body..
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label for="imageUpload">Image: </label>
+                                        <input type="file" class="image-upload" accept="image/*"
+                                            id="imageUploadBlock">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label for="videoUpload">Video: </label>
+                                        <input type="file" class="video-upload" accept="video/*"
+                                            id="videoUploadBlock">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" id="uploadButton"
+                                disabled="disabled">Upload
+                                now</button>
                             <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-warning" id="uploadButton">Upload
-                                now</button>
                         </div>
                     </div>
                 </div>
