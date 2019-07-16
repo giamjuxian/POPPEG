@@ -5,6 +5,10 @@ $(document).ready(() => {
         $(".arrow-left").toggleClass("hide-item");
     });
 
+    $("#instructionsClose").on("click", () => {
+        $("#uploadRemaining").show();
+    });
+
     // Events after upload button clicked.
     $("#uploadButton").on("click", () => {
         /** SUCCESS UPLOAD EVENTS - to be completed with backend */
@@ -18,6 +22,9 @@ $(document).ready(() => {
         setTimeout(() => {
             $("#successAlert").hide();
         }, 2500);
+
+        // On Success of upload new card, delete demo cards
+        $(".demo-card").remove();
     });
 
     // Fetch values from imageUploadBlock.

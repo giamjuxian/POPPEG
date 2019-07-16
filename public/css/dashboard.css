@@ -162,11 +162,13 @@
     grid-gap: 20px;
 }
 
+/* Image area - BORDER to be removed during production */
 .display-card > img {
     grid-area: image;
     border: 3px black solid;
 }
 
+/* Content area - border to be removed in production */
 .display-card > div {
     grid-area: content;
     border: pink 2px solid;

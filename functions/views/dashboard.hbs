@@ -79,31 +79,46 @@
         <div class="content">
 
             <!-- Instructions -->
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <strong>Welcome to POPPEG!</strong>
-                <p>Click on <i class="material-icons">add_circle_outline</i> to upload images and
-                    videos!</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-primary" role="alert">
+                <div class="alert-dismissible fade show">
+                    <strong>Welcome to POPPEG!</strong>
+                    <p>Click on <i class="material-icons">add_circle_outline</i> to upload images
+                        and
+                        videos!</p>
+                    <button id="instructionsClose" type="button" class="close" data-dismiss="alert"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <hr>
+                <p>You have <span id="numberOfUploads"><strong><u>8</u></strong></span> uploads
+                    remaining!
+                </p>
             </div>
+
+            <!-- Uploads Remaining -->
+            <div class="alert alert-primary" id="uploadRemaining" style="display: none;">
+                You have <span id="numberOfUploads"><strong><u>8</u></strong></span> uploads
+                remaining!
+            </div>
+
             <!-- Success Message -->
-            <div class="alert alert-success" id="successAlert" style="display: none;">
+            <div class="alert alert-success fade show" id="successAlert" style="display: none;">
                 <strong>Success!</strong>
                 Your upload has been completed.
             </div>
 
             <!-- Main Card Area -->
             <div class="card-wrapper">
-                <div class="display-card">
+                <div class="display-card demo-card">
                     <img src="/media/stock_image_1.jpg" alt="Display Image 1">
                     <div></div>
                 </div>
-                <div class="display-card">
+                <div class="display-card demo-card">
                     <img src="/media/stock_image_2.jpg" alt="Display Image 1">
                     <div></div>
                 </div>
-                <div class="display-card">
+                <div class="display-card demo-card">
                     <img src="/media/stock_image_3.jpeg" alt="Display Image 1">
                     <div></div>
                 </div>
