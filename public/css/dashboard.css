@@ -35,12 +35,21 @@
     .card-wrapper {
         display: grid;
         grid-template-columns: 1fr;
+        grid-column-gap: 0;
         grid-row-gap: 10px;
     }
     .display-card > img {
         /* width: 100%; */
         height: 10vh;
         object-fit: contain;
+    }
+    .button-area {
+        width: 100%;
+    }
+    #addCardButton {
+        width: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 .poppeg-logo {
@@ -57,15 +66,6 @@
 
 .nav-item:hover {
     background-color: rgba(209, 208, 208, 0.253);
-}
-
-#addCardButton {
-    color: rgba(90, 89, 89, 0.459) !important;
-}
-
-#addCardButton:hover {
-    color: rgb(80, 79, 79) !important;
-    cursor: pointer;
 }
 
 .header-nav {
@@ -241,4 +241,31 @@
     font-size: 14px;
     color: white;
     letter-spacing: 0.01em;
+}
+
+#addCardButton {
+    margin-top: 10px;
+    font-weight: 600;
+    border-color: #b084eb69;
+    background-color: #aa7ae9;
+    color: white;
+    border-radius: 25px;
+    font-size: 18px;
+    height: 48px;
+    padding-left: 35px;
+    padding-right: 35px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#addCardButton:hover {
+    background-color: #523974;
+}
+
+.button-area {
+    margin: auto;
+}
+
+.row {
+    margin: 0;
 }
