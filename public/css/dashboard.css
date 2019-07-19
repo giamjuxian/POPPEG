@@ -359,8 +359,16 @@ textarea {
 .sidebar-close .nav-link .text {
     display: none;
 }
+.sidebar-close .nav-link .dashboard-icon {
+    margin-left: 5px;
+    transition: all ease 0.5s;
+}
 
 .sidebar-close #sidebar {
     min-width: 50px;
     max-width: 50px;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, 0.568);
 }
