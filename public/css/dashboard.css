@@ -313,10 +313,7 @@ textarea {
     max-width: 200px;
     background-color: #4f307e;
     height: 100%;
-}
-
-#sidebar.active {
-    margin-left: -250px;
+    transition: all ease 0.5s;
 }
 
 .nav-link {
@@ -332,6 +329,7 @@ textarea {
 .text {
     font-size: 20px;
     padding-left: 10px;
+    font-family: "Open Sans", sans-serif;
 }
 
 .dashboard-icon {
@@ -356,4 +354,13 @@ textarea {
 
 .navbar-nav {
     width: 100%;
+}
+
+.sidebar-close .nav-link .text {
+    display: none;
+}
+
+.sidebar-close #sidebar {
+    min-width: 50px;
+    max-width: 50px;
 }

@@ -1,6 +1,6 @@
 $(document).ready(() => {
     $(".sideMenuToggler").on("click", () => {
-        // $(".wrapper").toggleClass("active");
+        $(".wrapper").toggleClass("sidebar-close");
         $(".arrow-right").toggleClass("show-item");
         $(".arrow-left").toggleClass("hide-item");
     });
