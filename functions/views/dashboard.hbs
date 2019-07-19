@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<!-- original dashboard start -->
+
+{{!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,24 +20,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
-                class="poppeg-logo"></a>
-        <button class="navbar-toggler sideMenuToggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav header-nav">
-                <li class="nav-item text">Dashboard</li>
-                <li class="nav-item text">Setting</li>
-                <li class="nav-item text">Demo</li>
-            </ul>
-        </div>
-
-    </nav>
 
     <!-- Sidebar -->
     <div class="wrapper d-flex">
@@ -166,6 +150,130 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+</body>
+
+</html> --}}
+
+
+<!-- original dashboard end -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--- Basic Page Needs  -->
+    <meta charset="utf-8">
+    <title>Dashboard - POPPEG</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/dashboardPage.js"></script>
+    <link rel="stylesheet" href="css/material-icons/css/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous">
+    <!-- Flaticon -->
+    <link rel="stylesheet" href="css/dashboard.css" type="text/css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="css/assets/img/icon/poppeg_square.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+
+<body class="bg--none">
+
+    <!-- header area start -->
+    <div class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="menu-area">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href=""><img src="css/assets/img/icon/poppeg_strip.png"
+                                    alt="POPPEG"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header area end -->
+
+    <!-- Sidebar -->
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            {{!-- <div id="navbarSupportedContent"> --}}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons dashboard-icon">dashboard</i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons dashboard-icon">settings</i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons dashboard-icon">computer</i>
+                        <span class="text">Demo</span>
+                    </a>
+                </li>
+                <li class="nav-item arrow-left">
+                    <a href="#" class="nav-link sideMenuToggler">
+                        <i class="material-icons dashboard-icon">keyboard_arrow_left</i>
+                        <span class="text">Hide</span>
+                    </a>
+                </li>
+                <li class="nav-item arrow-right">
+                    <a href="#" class="nav-link sideMenuToggler">
+                        <i class="material-icons dashboard-icon">keyboard_arrow_right</i>
+                    </a>
+                </li>
+            </ul>
+            {{!-- </div> --}}
+        </nav>
+
+    </div>
+
+    <!-- Page Content -->
+    <div id="content">
+        <!-- We'll fill this with dummy content -->
+    </div>
+
+
+    <!-- footer area start -->
+    <footer>
+        <div class="fixed-bottom">
+            <div class="footer-area">
+                <div class="container">
+                    <p>
+                        &copy; POPPEG 2019
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
