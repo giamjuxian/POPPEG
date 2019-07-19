@@ -18,28 +18,72 @@
 </head>
 
 <body>
-
-    <div class="header-area">
-        <div class="container">
-            <div class="row">
-                <div class="menu-area">
-                    <div class="logo">
-                        <a href=""><img src="css/assets/img/icon/poppeg_strip.png" alt="POPPEG"></a>
-                    </div>
-                    <div class="col-sm-12 col-xs-12 visible-sm visible-xs">
-                        <div class="mobile_menu"></div>
-                    </div>
-                </div>
-            </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <a href="/"><img src="media/poppeg_strip_vector.png" alt="poppeg-logo"
+                class="poppeg-logo"></a>
+        <button class="navbar-toggler sideMenuToggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav header-nav">
+                <li class="nav-item text">Dashboard</li>
+                <li class="nav-item text">Setting</li>
+                <li class="nav-item text">Demo</li>
+            </ul>
         </div>
-    </div>
+
+    </nav>
 
     <!-- Sidebar -->
     <div class="wrapper d-flex">
+        <div class="side-menu" style="background-color: #4f307e;">
+            <div class="sidebar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="material-icons dashboard-icons">dashboard</i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="material-icons dashboard-icons">settings</i>
+                            <span class="text">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="material-icons dashboard-icons">computer</i>
+                            <span class="text">Demo</span>
+                        </a>
+                    </li>
+                    <li class="nav-item arrow-left">
+                        <a href="#" class="nav-link sideMenuToggler">
+                            <i class="material-icons dashboard-icons">keyboard_arrow_left</i>
+                            <span class="text">Hide</span>
+                        </a>
+                    </li>
+                    <li class="nav-item arrow-right">
+                        <a href="#" class="nav-link sideMenuToggler">
+                            <i class="material-icons dashboard-icons">keyboard_arrow_right</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Main Content Area -->
         <div class="content">
 
+
+            <!-- Uploads Remaining -->
+            <div class="alert alert-primary" id="uploadRemaining" style="display: none;">
+                You have <span id="numberOfUploads"><strong><u>8</u></strong></span> uploads
+                remaining!
+            </div>
 
             <!-- Success Message -->
             <div class="alert alert-success fade show" id="successAlert" style="display: none;">
@@ -64,14 +108,10 @@
             </div>
 
             <!-- Button Area -->
-            <div class="row">
-                <div class="button-area">
-                    <button type="button" class="btn" id="addCardButton" data-toggle="modal"
-                        data-target="#addCardModal">
-                        Upload items
-                    </button>
-                </div>
-            </div>
+            <button type="button" class="btn" id="addCardButton" data-toggle="modal"
+                data-target="#addCardModal">
+                <i class="material-icons add-button">add_circle_outline</i>
+            </button>
 
 
             <!-- Add Card Modal -->
@@ -105,7 +145,7 @@
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success" id="uploadButton"
+                            <button type="button" class="btn btn-warning" id="uploadButton"
                                 disabled="disabled">Upload
                                 now</button>
                             <button type="button" class="btn btn-secondary"

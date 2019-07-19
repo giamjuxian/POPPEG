@@ -1,7 +1,8 @@
 $(document).ready(() => {
-
-    $("#instructionsClose").on("click", () => {
-        $("#uploadRemaining").show();
+    $(".sideMenuToggler").on("click", () => {
+        $(".wrapper").toggleClass("active");
+        $(".arrow-right").toggleClass("show-item");
+        $(".arrow-left").toggleClass("hide-item");
     });
 
     // Events after upload button clicked.
