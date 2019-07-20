@@ -309,8 +309,8 @@ textarea {
 
 #sidebar {
     position: absolute;
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 150px;
+    max-width: 150px;
     background-color: #4f307e;
     height: 100%;
     transition: all ease 0.5s;
@@ -327,13 +327,13 @@ textarea {
 }
 
 .text {
-    font-size: 20px;
+    font-size: 14px;
     padding-left: 10px;
     font-family: "Open Sans", sans-serif;
 }
 
 .dashboard-icon {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .arrow-right {
@@ -371,4 +371,67 @@ textarea {
 
 .nav-link:hover {
     color: rgba(255, 255, 255, 0.568);
+}
+
+#content {
+    margin-left: 150px;
+    transition: all ease 0.5s;
+    /* margin-right: 10px; */
+    margin-top: 10px;
+    /* display: flex;
+    justify-content: space-evenly;
+    align-items: center; */
+    /* text-align: justify; */
+    /* -ms-text-justify: distribute-all-lines; */
+    /* text-justify: distribute-all-lines; */
+}
+
+.sidebar-close #content {
+    margin-left: 60px;
+}
+
+.card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-gap: 2rem; */
+}
+
+.display-card .img-wrap {
+    border-radius: 0.2rem 0.2rem 0 0;
+    overflow: hidden;
+    /* position: relative; */
+    height: 190px;
+    width: 270px;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-card .img-wrap img {
+    height: auto;
+    /* max-width: 100%; */
+    width: auto;
+    display: inline-block;
+    /* -o-object-fit: cover; */
+    /* object-fit: cover; */
+}
+
+.display-card {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.card-area {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.display-card .info-wrap {
+    overflow: hidden;
+    padding: 15px;
+    border-top: 1px solid #eee;
 }
