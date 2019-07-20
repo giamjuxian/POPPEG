@@ -247,50 +247,35 @@ textarea {
 .card-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    /* grid-gap: 2rem; */
 }
-/* 
+
 .display-card .img-wrap {
     border-radius: 0.2rem 0.2rem 0 0;
     overflow: hidden;
-    position: relative;
-    margin: 0;
+    /* position: relative; */
     height: 190px;
     width: 270px;
+    /* text-align: center; */
     display: flex;
     justify-content: center;
     align-items: center;
-} */
-.display-card {
-    display: grid;
-    grid-template-areas:
-        "image"
-        "text";
-    grid-template-rows: 2fr 1fr;
 }
-.display-card img {
-    grid-area: image;
-    /* height: auto; */
-    min-width: 100%;
-    /* width: auto; */
-    border-radius: 0.2rem 0.2rem 0 0;
-    overflow: hidden;
-    position: relative;
-    margin: 0;
-    height: 20rem;
-    width: 25rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* display: inline-block; */
-    object-fit: cover;
+
+.display-card .img-wrap img {
+    height: auto;
+    /* max-width: 100%; */
+    width: auto;
+    display: inline-block;
+    /* -o-object-fit: cover; */
     /* object-fit: cover; */
 }
 
 .display-card {
     background-color: #fff;
     background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
-    margin: 10px;
 }
 
 .card-area {
@@ -300,156 +285,7 @@ textarea {
 }
 
 .display-card .info-wrap {
-    grid-area: text;
     overflow: hidden;
     padding: 15px;
-}
-/* @media (min-width: 950px) {
-    #mobileMenu {
-        display: none;
-    }
-} */
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-@media (min-width: 950px) and (max-width: 1024px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (min-width: 950px) and (max-width: 1024px) and (orientation: landscape) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .display-card img {
-        height: 20rem;
-    }
-}
-
-@media (max-width: 950px) {
-    #content {
-        margin-left: 0;
-        transition: 0s;
-    }
-    #sidebar {
-        min-width: 0;
-        max-width: 0;
-        transition: 0s;
-    }
-    #mobileNavButton {
-        display: inline;
-    }
-    #addCardButton {
-        width: 50%;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-}
-
-@media (min-width: 750px) and (max-width: 950px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 768px) and (max-width: 950px) and (orientation: landscape) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .display-card img {
-        height: 15rem;
-    }
-    .display-card .info-wrap {
-        padding-top: 0;
-    }
-}
-
-@media (max-width: 750px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .display-card img {
-        height: 20vh;
-        min-width: 200px;
-    }
-    .display-card .info-wrap {
-        padding-top: 0;
-    }
-}
-@media (min-width: 600px) and (max-width: 768px) {
-    .display-card img {
-        height: 180px;
-        min-width: 200px;
-    }
-    .display-card .info-wrap {
-        padding-top: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .display-card img {
-        width: 100%;
-    }
-    .display-card .info-wrap {
-        padding-top: 5px;
-        padding-bottom: 0;
-    }
-    .header-area {
-        padding: 5px;
-    }
-    .menu-item {
-        margin-left: 10px;
-    }
-}
-
-#addCardButton {
-    margin-top: 10px;
-    font-weight: 600;
-    border-color: #b084eb69;
-    background-color: #aa7ae9;
-    color: white;
-    border-radius: 25px;
-    font-size: 16px;
-    height: 48px;
-    padding-left: 35px;
-    padding-right: 35px;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-#addCardButton:hover {
-    background-color: #523974;
-}
-
-.button-area {
-    width: 100%;
-    margin: auto;
-}
-
-.button-area > button {
-    width: 30%;
-}
-
-#successAlert {
-    border-radius: 10px;
-    margin: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.btn {
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 10px;
+    border-top: 1px solid #eee;
 }
