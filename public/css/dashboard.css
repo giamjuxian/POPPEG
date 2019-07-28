@@ -1,167 +1,3 @@
-/* * {
-    margin: 0;
-    padding: 0;
-}
-
-.side-menu {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    margin: 65px auto auto;
-    width: 200px;
-    transition: all ease 0.5s;
-    transform: translateX(-100%);
-}
-
-.content {
-    transition: all ease 0.5s;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.wrapper {
-    margin-top: 65px;
-}
-
-@media (min-width: 992px) {
-    .side-menu {
-        transform: translateX(0);
-    }
-    .content {
-        margin-left: 210px;
-        margin-right: 10px;
-        width: 100%;
-    }
-
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 10px;
-    }
-
-    .active .side-menu {
-        width: 80px;
-    }
-    .active .content {
-        margin-left: 90px;
-    }
-    .active .nav-link {
-        text-align: center;
-    }
-    .active .nav-link .icon {
-        margin-right: 0;
-    }
-    .active .nav-link .text {
-        display: none;
-    }
-    .header-nav {
-        display: none;
-    }
-    img {
-        width: 100%;
-        height: 20vh;
-        object-fit: contain;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-row-gap: 10px;
-    }
-    img {
-        width: 100%;
-        height: 10vh;
-        object-fit: contain;
-    }
-}
-.poppeg-logo {
-    height: 35px;
-    width: 140px;
-}
-.nav-link {
-    display: block;
-    white-space: nowrap;
-    padding: 12px 0;
-}
-.dashboard-icons {
-    margin-right: 8px;
-    margin-left: 16px;
-    font-size: 30px;
-    height: 10px;
-    width: 28px;
-    color: rgb(223, 219, 219);
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-.add-button {
-    font-size: 80px;
-}
-.text {
-    font-size: 18px;
-    color: rgb(223, 219, 219);
-}
-
-.nav-item:hover {
-    background-color: rgba(209, 208, 208, 0.253);
-}
-
-.arrow-right {
-    display: none;
-}
-
-.show-item {
-    display: block;
-}
-
-.hide-item {
-    display: none;
-}
-
-#addCardButton {
-    color: rgba(90, 89, 89, 0.459) !important;
-}
-
-#addCardButton:hover {
-    color: rgb(80, 79, 79) !important;
-    cursor: pointer;
-}
-
-.header-nav {
-    margin-top: 20px;
-}
-.header-nav .text {
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
-.card-wrapper > div {
-    border: 2px solid #35322f;
-    border-radius: 5px;
-    padding: 1em;
-    color: #d9480f;
-}
-
-.display-card {
-    display: grid;
-    grid-template-areas: "image content";
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
-}
-
-.display-card > img {
-    grid-area: image;
-    border: 3px black solid;
-}
-
-.display-card > div {
-    grid-area: content;
-    border: pink 2px solid;
-} */
-
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900");
 
 .clear {
@@ -260,11 +96,24 @@ textarea {
     z-index: 998;
     background-color: #4f307e;
 }
+#mobileNavButton {
+    transition: all linear 0.5s;
+}
+.main-menu {
+    text-align: right;
+}
 
+.main0-menu nav ul {
+    display: inline-block;
+}
 .menu-area {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     /* text-align: center; */
+}
+
+#mobileNavButton {
+    display: none;
 }
 
 .logo {
@@ -288,7 +137,8 @@ textarea {
 }
 
 .wrapper {
-    padding-top: 70px;
+    /* padding-top: 70px; */
+    height: 100%;
 }
 
 .footer-area {
@@ -344,6 +194,10 @@ textarea {
     display: block;
 }
 
+#mobileNavBar {
+    display: none;
+    opacity: 0;
+}
 .hide-item {
     display: none;
 }
@@ -450,7 +304,11 @@ textarea {
     overflow: hidden;
     padding: 15px;
 }
-
+/* @media (min-width: 950px) {
+    #mobileMenu {
+        display: none;
+    }
+} */
 @media (min-width: 1025px) and (max-width: 1280px) {
     .card-wrapper {
         display: grid;
@@ -483,7 +341,11 @@ textarea {
         max-width: 0;
         transition: 0s;
     }
+    #mobileNavButton {
+        display: inline;
+    }
 }
+
 @media (min-width: 750px) and (max-width: 950px) {
     .card-wrapper {
         display: grid;

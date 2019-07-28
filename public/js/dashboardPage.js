@@ -42,6 +42,22 @@ $(document).ready(() => {
         // after values are cleared, reset upload button to disabled
         enableUploadButton();
     });
+
+    // Navbar button
+    $("#mobileNavButton").on("click", () => {
+        if ($("#mobileNavBar").css("display") == "none") {
+            $("#mobileNavBar").show();
+            $("#mobileNavBar").css("opacity", 1);
+        } else {
+            $("#mobileNavBar").css("opacity", 0);
+            $("#mobileNavBar").css("display", "none");
+        }
+    });
+
+    hideMobileNav();
+    $(window).on("resize", () => {
+        hideMobileNav();
+    });
 });
 
 // Display card
@@ -63,5 +79,11 @@ function enableUploadButton() {
     } else {
         // enable upload button
         $("#uploadButton").removeAttr("disabled");
+    }
+}
+
+function hideMobileNav() {
+    if ($(window).width() >= 950) {
+        $("#mobileNavBar").css("display", "none");
     }
 }
