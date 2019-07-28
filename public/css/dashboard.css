@@ -304,7 +304,11 @@ textarea {
     overflow: hidden;
     padding: 15px;
 }
-
+/* @media (min-width: 950px) {
+    #mobileMenu {
+        display: none;
+    }
+} */
 @media (min-width: 1025px) and (max-width: 1280px) {
     .card-wrapper {
         display: grid;
@@ -337,7 +341,11 @@ textarea {
         max-width: 0;
         transition: 0s;
     }
+    #mobileNavButton {
+        display: inline;
+    }
 }
+
 @media (min-width: 750px) and (max-width: 950px) {
     .card-wrapper {
         display: grid;
