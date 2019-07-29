@@ -228,13 +228,13 @@
                 <div class="row">
                     <div id="mobileNavBar">
                         <div>
-                            <div class="row">
+                            <div class="row menu-item">
                                 <a class="nav-link" href="#">Dashboard</a>
                             </div>
-                            <div class="row">
+                            <div class="row menu-item">
                                 <a class="nav-link" href="#">Settings</a>
                             </div>
-                            <div class="row">
+                            <div class="row menu-item">
                                 <a class="nav-link" href="#">Demo</a>
                             </div>
                         </div>
@@ -286,6 +286,10 @@
 
         <!-- Page Content -->
         <div id="content">
+            <div class="alert alert-success" id="successAlert" style="display: none;">
+                <strong>Success!</strong>
+                Your upload has been completed.
+            </div>
             <!-- Main Card Area -->
             <div class="card-wrapper card-area">
                 <div class="display-card demo-card">
@@ -313,25 +317,19 @@
                     <div class="info-wrap">description and button area</div>
                 </div>
             </div>
-
-        </div>
-
-
-
-        {{!-- <!-- footer area start -->
-    <footer>
-        <div class="fixed-bottom">
-            <div class="footer-area">
-                <div class="container">
-                    <p>
-                        &copy; POPPEG 2019
-                    </p>
+            <div class="row">
+                <div class="button-area d-flex justify-content-center">
+                    <button type="button" class="btn" id="addCardButton" data-toggle="modal"
+                        data-target="#addCardModal">
+                        Upload items
+                    </button>
                 </div>
             </div>
 
         </div>
-    </footer>
-    <!-- footer area end --> --}}
+
+
+
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
