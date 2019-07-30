@@ -441,3 +441,10 @@ textarea {
 .button-area > button {
     width: 30%;
 }
+
+#successAlert {
+    border-radius: 10px;
+    margin: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
