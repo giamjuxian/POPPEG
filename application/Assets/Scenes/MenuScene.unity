@@ -361,8 +361,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 681795581}
-        m_MethodName: switchToInstructionsPanel
+      - m_Target: {fileID: 739404517}
+        m_MethodName: LoadOnboardScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1472,6 +1472,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98dee05cecefd413090390d8f57f8f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneID: 1
+  firstTime: 0
+  MenuScene:
+    m_Handle: 0
+  OnboardScene:
+    m_Handle: 0
 --- !u!4 &739404518
 Transform:
   m_ObjectHideFlags: 0
