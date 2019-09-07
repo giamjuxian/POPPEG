@@ -1,6 +1,6 @@
 {
   "projects": {
-    "staging": "refreshar-c9d2f",
+    "staging": "poppeg-staging",
     "default": "poppeg-95e96",
     "poppeg": "poppeg-95e96"
   }

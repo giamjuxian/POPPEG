@@ -1,0 +1,30 @@
+[debug] [2019-09-07T18:16:50.604Z] ----------------------------------------------------------------------
+[debug] [2019-09-07T18:16:50.606Z] Command:       /Users/giam/.nvm/versions/node/v10.16.1/bin/node /Users/giam/.nvm/versions/node/v10.16.1/bin/firebase serve --only hosting,functions
+[debug] [2019-09-07T18:16:50.606Z] CLI Version:   7.3.1
+[debug] [2019-09-07T18:16:50.606Z] Platform:      darwin
+[debug] [2019-09-07T18:16:50.606Z] Node Version:  v10.16.1
+[debug] [2019-09-07T18:16:50.607Z] Time:          Sat Sep 07 2019 11:16:50 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-09-07T18:16:50.607Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-07T18:16:50.615Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-07T18:16:50.616Z] > authorizing via signed-in user
+[debug] [2019-09-07T18:16:50.616Z] [iam] checking project poppeg-staging for permissions ["firebase.projects.get"]
+[debug] [2019-09-07T18:16:50.617Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/poppeg-staging:testIamPermissions  
+
+[debug] [2019-09-07T18:16:50.870Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-07T18:16:50.873Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/poppeg-staging  
+ 
+[debug] [2019-09-07T18:16:51.095Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-07T18:16:51.100Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/poppeg-staging/webApps/-/config  
+ 
+[warn] ⚠  Your functions directory does not specify a Node version.
+   - Learn more at https://firebase.google.com/docs/functions/manage-functions#set_runtime_options
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-09-07T18:16:51.636Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/giam/Desktop/POPPEG/functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-09-07T18:16:51.938Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/giam/Desktop/POPPEG/functions","node_version":"10.16.1"}
+[debug] [2019-09-07T18:16:51.938Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[warn] ⚠  The Cloud Functions emulator requires the module "firebase-admin" to be installed. This package is in your package.json, but it's not available. You probably need to run "npm install" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
